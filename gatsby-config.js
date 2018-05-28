@@ -20,6 +20,7 @@ module.exports = {
       options: {
         modulePath: `${__dirname}/src/cms/index.js`
       }
-    }
+    },
+    'gatsby-plugin-sass'
   ]
 }
