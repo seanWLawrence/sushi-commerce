@@ -1,0 +1,8 @@
+menuItems:
+  - page: Products
+    to: /products
+  - page: Posts
+    to: /posts
+paypalViewCartButtonCode: 097oilsdof87s9d8f7sudf
+hideFooter: false
+  

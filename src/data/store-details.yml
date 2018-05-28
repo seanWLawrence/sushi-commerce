@@ -1,0 +1,15 @@
+title: Sushi Commerce
+description: The best e-commerce on the planet.
+keywords: 
+  - e-commerce
+  - static site
+  - paypal
+  - coinbase
+  - react.js
+logo: null
+socialMedia:
+  - site: instagram
+    href: https://instagram.com/sushi-commerce
+googleAnalytics: 09182ilj1lk2j3
+customCSS: /* CSS goes here */
+customJS: /* JavaScript goes here */

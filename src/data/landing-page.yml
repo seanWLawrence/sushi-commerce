@@ -1,0 +1,38 @@
+banner: 
+  heading: The world's best sushi
+  subheading: Try it out yourself and see what everyone is talking about
+  backgroundImage: null
+  height: medium
+  primaryButton: 
+    text: Order now
+    to: /products
+    color: primary
+about:
+  heading: About us
+  text: We make sushi right. With the freshest ingredients around, world-remowned chefs and over 100 years of experience, we provide the best sushi experience that you can find anywhere. 
+features:
+  - heading: Fresh
+    text: Fresh seafood caught daily on our local pier
+    icon: leaf
+  - heading: Made with love
+    text: Our world-class chefs love what they do
+    icon: heart
+  - heading: Award-winning
+    text: Our kitchen has won over 100 awards
+    icon: star
+  - heading: Worldwide locations
+    text: We have over 1000 locations worldwide
+    icon: map 
+testimonials:
+  - name: Satoshi Nakamoto - Famous Chef
+    text: The best sushi that I have ever tasted.
+  - name: Tim Wheeler - Best-selling Author
+    text: I eat here every day... and I can't stop raving about how fresh this sushi is.
+  - name: Alejandra Gomez - Food Crtic
+    text: Can it get any better than Yum Yum Sushi? Seriosuly... I don;t think it can
+
+
+
+
+
+

@@ -1,150 +1,107 @@
-import * as R from 'rambda'
+// @flow
 
-let addSelector = ({ selector, value }) =>
-  value.map(val => selector.concat(`-${val}`))
-
-let reduceStrings = R.reduce((str, nextStr) => R.concat(str)(` ${nextStr}`), '')
-
-let createClassname = styleObject => R.join('-', R.values(styleObject))
-
-let createClassnames = ({ selector, value, other }) => {
-  let formattedClassnames = R.compose(
-    R.trim,
-    reduceStrings,
-    addSelector({ selector })
-  )(value)
-
-  let result = R.ifElse(
-    R.isNil(other),
-    ({ formattedClassnames }) => formattedClassnames,
-    ({ other, formattedClassnames }) =>
-      R.concat(`${other} `)(formattedClassnames)
-  )({ other, formattedClassnames })
-  return result
+let formatString = (selector : string, value : string) => {
+  switch (selector) {
+    case 'backgroundColor':
+      return `has-background-color-${value}`
+    case 'textColor':
+      return `has-text-${value}`;
+    case 'textSize':
+      return `is-size-${value}`;
+    case 'textWeight':
+      return `has-text-weight-${value}`;
+    case 'textTransformation':
+      return `is-${value}`;
+    case 'textAlign':
+      return `has-text-${value}`;
+    case 'color':
+      return `is-color-${value}`;
+    case 'raw':
+      return value
+    default:
+      console.warn('An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
+          'ossible keys and values.');
+      return ''
+  }
 }
 
-let formatStyle = ({ selector, value, other }) =>
-  R.ifElse(
-    R.is(Array, value),
-    ({ selector, value, other }) =>
-      createClassnames({ selector, value, other }),
-    ({ selector, value }) => createClassname({ selector, value })
-  )({ selector, value, other })
+let formatArray = (selector : string, value : string[]) : string => {
+  let addPrefixToAllValues = (prefix : string) : string => {
+    return value.reduce((acc, next) => acc.concat(` ${prefix}-${next}`).trim(), "")
+  };
 
-export let createStyle = ({ selector, value, other }) =>
-  R.ifElse(
-    ({ value }) => R.isNil(value),
-    () => '',
-    ({ selector, value, other }) => formatStyle({ selector, value, other })
-  )({ selector, value, other })
+  switch (selector) {
+    case 'column':
+      return addPrefixToAllValues('is');
+    case 'offset':
+      return addPrefixToAllValues('is-offset');
+    case 'flex':
+      return addPrefixToAllValues('is-flex');
+    case 'inlineFlex':
+      return addPrefixToAllValues('is-inline-flex');
+    case 'block':
+      return addPrefixToAllValues('is-block');
+    case 'inline-block':
+      return addPrefixToAllValues('is-inline-block');
+    case 'inline':
+      return addPrefixToAllValues('is-offset');
+    case 'is':
+      return addPrefixToAllValues('is');
+    case 'has':
+      return addPrefixToAllValues('has');
+    default:
+      console.warn('An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
+          'ossible keys and values.');
+      return ''
+  }
+}
 
-let addStyle = ({ selector, value, other }, nextValue) =>
-  R.concat(createStyle({ selector, value, other }))(nextValue)
+let formatClassname = (selector : string, value : $FlowFixMe) : string => {
+  if (typeof value === 'string') {
+    return formatString(selector, value)
+  }
+  if (Array.isArray(value) && value.map(entry => typeof entry === 'string')) {
+    return formatArray(selector, value)
+  } else {
+    console.warn('Invalid value has been passed to bulmaClassnames. Values can only be a string or' +
+        ' array')
+    return ''
+  }
+}
+
+type Classnames = {
+  is?: string | string[],
+  has?: string | string[],
+  backgroundColor?: string,
+  textColor?: string,
+  textSize?: string,
+  textWeight?: string,
+  textTransformation?: string,
+  textAlign?: string,
+  color?: string,
+  column?: string | string[],
+  offset?: string | string[],
+  flex?: string | string[],
+  inlineFlex?: string | string[],
+  block?: string | string[],
+  inlineBlock?: string | string[],
+  inline?: string | string[],
+  raw?: string
+}
 
 let bulmaClassnames = ({
-  color,
-  column,
-  offset,
-  flex,
-  inlineFlex,
-  block,
-  inlineBlock,
-  inline,
-  textColor,
-  textSize,
-  textWeight,
-  textTransformation,
-  textAlign,
-  backgroundColor,
-  is,
-  has,
-  raw,
-} = {}) => {
-  let bulmaStyles = [
-    {
-      selector: 'is-color',
-      value: color,
-    },
-    {
-      selector: 'column',
-      value: column,
-      other: 'column',
-    },
-    {
-      selector: 'is-offset',
-      value: offset,
-    },
-    {
-      selector: 'is-flex',
-      value: flex,
-    },
-    {
-      selector: 'is-inline-flex',
-      value: inlineFlex,
-    },
-    {
-      selector: 'is-block',
-      value: block,
-    },
-    {
-      selector: 'is-inline-block',
-      value: inlineBlock,
-    },
-    {
-      selector: 'is-inline',
-      value: inline,
-    },
-    {
-      selector: 'has-text',
-      value: textColor,
-    },
-    {
-      selector: 'is',
-      value: textSize,
-    },
-    {
-      selector: 'has-background',
-      value: backgroundColor,
-    },
-    {
-      selector: 'has-text-weight',
-      value: textWeight,
-    },
-    {
-      selector: 'is',
-      value: textTransformation,
-    },
-    {
-      selector: 'has-text',
-      value: textAlign,
-    },
-    {
-      selector: 'is',
-      value: is,
-    },
-    {
-      selector: 'has',
-      value: has,
-    },
-  ]
-
-  let formattedBulmaStyles = R.compose(
-    R.replace(/^\s+|\s+$|\s+(?=\s)/g, ''),
-    R.join(' '),
-    R.map(style =>
-      createStyle({ selector: style.selector, value: style.value })
-    )
-  )(bulmaStyles)
-
-  if (raw) {
-    let rawStyle = createStyle({
-      selector: '',
-      value: raw,
-    }).slice(1, 1000)
-    return formattedBulmaStyles.concat(' ' + rawStyle)
-  }
-
-  return formattedBulmaStyles
+  ...classNames
+} : Classnames) : string => {
+  return Object
+    .entries(classNames)
+    .map(entry => {
+      let [selector,
+        value] = entry;
+      return formatClassname(selector, value)
+    })
+    .reduce((acc, next) => {
+      return acc.concat(` ${next}`)
+    })
 }
 
 export default bulmaClassnames

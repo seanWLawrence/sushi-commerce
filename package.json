@@ -4,10 +4,19 @@
   "version": "1.0.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@types/react-fontawesome": "^1.6.3",
+    "@types/react-helmet": "^5.0.6",
+    "bulma": "^0.7.1",
+    "font-awesome": "^4.7.0",
     "gatsby": "^1.9.247",
     "gatsby-link": "^1.6.44",
-    "gatsby-plugin-react-helmet": "^2.0.10",
-    "rambda": "^1.1.2",
+    "gatsby-plugin-netlify-cms": "^2.0.1",
+    "gatsby-plugin-react-helmet": "^2.0.11",
+    "gatsby-source-filesystem": "^1.5.36",
+    "gatsby-transformer-remark": "^1.7.41",
+    "gatsby-transformer-yaml": "^1.5.17",
+    "netlify-cms": "^1.8.4",
+    "react-fontawesome": "^1.6.1",
     "react-helmet": "^5.2.0"
   },
   "keywords": [
@@ -17,7 +26,9 @@
   "scripts": {
     "build": "gatsby build",
     "prepublish": "flow",
-    "develop": "flow-watch && gatsby develop",
+    "flow:watch": "flow-watch",
+    "build:serve": "gatsby build && gatsby serve",
+    "develop": "gatsby develop",
     "format": "prettier --write 'src/**/*.js'",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

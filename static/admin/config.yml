@@ -1,0 +1,445 @@
+backend:
+  name: github
+  repo: seanwlawrence/sushi-commerce
+  branch: chore/add-cms
+media_folder: src/images
+collections:
+  - name: settings
+    label: Settings
+    files:
+      - name: storeDetails
+        label: Store details
+        file: /src/data/store-details.yml
+        fields: 
+          - name: title
+            label: Title
+            widget: string
+            required: false
+          - name: description
+            label: Description
+            widget: text
+            required: false
+          - name: keywords
+            label: Keywords
+            widget: list
+            required: false
+          - name: logo
+            label: Logo
+            widget: image
+            required: false
+          - name: socialMedia
+            label: Social media
+            widget: list
+            required: false
+            fields:
+              - name: site
+                label: Site
+                widget: select
+                required: true
+                options: 
+                  - label: Instagram
+                    value: instagram
+                  - label: Facebook
+                    value: facebook
+                  - label: Twitter
+                    value: twitter
+                  - label: YouTube
+                    value: youtube
+              - name: href
+                label: Url
+                widget: string
+                required: true
+          - name: googleAnalytics
+            label: Google Analytics snippet
+            widget: text
+            required: false
+          - name: customCSS
+            label: Custom CSS
+            widget: text
+            required: false
+          - name: customJS
+            label: Custom JavaScript
+            widget: text
+            required: false
+      - name: styles
+        label: Styles
+        file: src/data/styles.yml
+        fields: 
+          - name: colors
+            label: Colors
+            widget: object
+            required: false
+            fields: 
+              - name: primary
+                label: Primary
+                widget: string
+                required: false
+              - name: info
+                label: Info
+                widget: string
+                required: false
+                default: 
+              - name: link
+                label: Link
+                widget: string
+                required: false
+              - name: success
+                label: Success
+                widget: string
+                required: false
+              - name: warning
+                label: Warning
+                widget: string
+                required: false
+              - name: danger
+                label: Danger
+                widget: string
+                required: false
+          - name: fonts
+            label: Fonts
+            widget: object
+            required: false
+            fields: 
+              - name: family
+                label: Family
+                widget: string
+                required: false
+              - name: sizes
+                label: Sizes
+                widget: object
+                required: false
+                fields: 
+                  - name: heading1
+                    label: Heading 1
+                    widget: string
+                    required: false
+                  - name: heading2
+                    label: Heading 2
+                    widget: string
+                    required: false
+                  - name: heading3
+                    label: Heading 3
+                    widget: string
+                    required: false
+                  - name: heading4
+                    label: Heading 4
+                    widget: string
+                    required: false
+                  - name: heading5
+                    label: Heading 5
+                    widget: string
+                    required: false
+                  - name: heading6
+                    label: Heading 6
+                    widget: string
+                    required: false
+                  - name: body
+                    label: Body
+                    widget: string
+                    required: false
+              - name: weights
+                label: Weights
+                widget: object
+                required: false
+                fields:
+                  - name: headings
+                    label: Headings
+                    widget: string
+                    required: false
+                  - name: body
+                    label: Body
+                    widget: string
+                    required: false
+          - name: buttonStyle
+            label: Button style
+            widget: select
+            required: false
+            default: squared
+            options: 
+              - label: Squared
+                value: squared
+              - label: Rounded
+                value: rounded
+      - name: navigation
+        label: Navigation
+        file: src/data/navigation.yml
+        fields:
+          - name: menuItems
+            label: Menu items
+            widget: list
+            required: true
+            fields: 
+              - name: page
+                label: Page
+                widget: string
+                required: true
+              - name: to
+                label: Url
+                widget: string
+                required: true
+          - name: paypalViewCartButtonCode
+            label: PayPal View Cart button code
+            widget: text
+            required: false
+          - name: hideFooter
+            label: Hide footer?
+            widget: boolean
+            required: false
+      - name: landingPage
+        label: Landing page
+        file: src/data/landing-page.yml
+        fields:
+          - name: banner
+            label: Banner
+            widget: object
+            required: false
+            fields:
+              - name: heading
+                label: Heading
+                widget: string
+                required: false
+              - name: subheading
+                label: Subheading
+                widget: string
+                required: false
+              - name: backgroundImage
+                label: Background image
+                widget: image
+                required: false
+              - name: height
+                label: Height
+                widget: select
+                required: false
+                options:
+                  - label: Medium
+                    value: medium
+                  - label: Large
+                    value: large
+                  - label: Full height
+                    value: fullHeight
+              - name: primaryButton
+                label: Primary button
+                widget: object
+                required: false
+                fields:
+                  - name: text
+                    label: Text
+                    widget: string
+                    required: false
+                    default: View products
+                  - name: to
+                    label: Url
+                    widget: string
+                    required: false
+                    default: /products 
+                  - name: color
+                    label: Color
+                    widget: select
+                    required: false
+                    default: whiteOutline
+                    options: 
+                      - label: Primary
+                        value: primary
+                      - label: Info
+                        value: info
+                      - label: Link
+                        value: link
+                      - label: White
+                        value: white
+          - name: about
+            label: About
+            widget: object
+            required: false
+            fields: 
+              - name: heading
+                label: Heading
+                widget: string
+                required: false
+              - name: text
+                label: Text
+                widget: text
+                required: false
+          - name: features
+            label: Features
+            widget: list
+            required: false
+            fields: 
+              - name: heading
+                label: Heading
+                widget: string
+                required: false
+              - name: text
+                label: Text
+                widget: string
+                required: false
+              - name: icon
+                label: Icon
+                widget: select
+                options:
+                  - label: Calendar
+                    value: calendar-check
+                  - label: Chart
+                    value: chart-bar
+                  - label: Checkmark round
+                    value: check-circle
+                  - label: Checkmark square
+                    value: check-square
+                  - label: Clock
+                    value: clock
+                  - label: Copy
+                    value: copy
+                  - label: Comment
+                    value: comment-dots
+                  - label: Compass
+                    value: compass
+                  - label: Credit card
+                    value: credit-card
+                  - label: Edit
+                    value: edit
+                  - label: Eye
+                    value: eye
+                  - label: File
+                    value: file
+                  - label: Folder
+                    value: folder-open
+                  - label: Gem
+                    value: gem
+                  - label: Handshake
+                    value: handshake
+                  - label: Heart
+                    value: heart
+                  - label: ID
+                    value: id-card
+                  - label: Images
+                    value: images
+                  - label: Keyboard
+                    value: keyboard
+                  - label: Leaf
+                    value: leaf
+                  - label: Lightbulb
+                    value: lightbulb
+                  - label: Map
+                    value: map
+                  - label: Money
+                    value: money-bill-alt
+                  - label: Paper airplane
+                    value: paper-plane
+                  - label: Add
+                    value: plus-square
+                  - label: Save
+                    value: save
+                  - label: Share
+                    value: share-square
+                  - label: Star
+                    value: star
+                  - label: Sticky note
+                    value: sticky-note
+                  - label: Thumbs up
+                    value: thumbs-up
+                  - label: User
+                    value: user
+          - name: testimonials
+            label: Testimonials
+            widget: list
+            required: false
+            fields:
+              - name: name
+                label: name
+                widget: string
+                required: true
+              - name: text
+                label: Text
+                widget: text
+                required: true
+
+  - name: products
+    label: Products
+    folder: src/pages/products
+    create: true
+    fields: 
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: price
+        label: Price
+        widget: number
+        required: true
+      - name: images
+        label: Images
+        widget: list
+        required: true
+        fields: 
+          - name: src
+            label: Select image...
+            widget: image
+            required: true
+          - name: alt
+            label: Description
+            widget: string
+            required: false
+            default: Product image
+      - name: features
+        label: Features
+        widget: list
+        required: true
+        field:
+          - name: feature
+            label: Feature
+            widget: string
+            required: true
+      - name: paypalAddToCartButtonCode
+        label: PayPal Add to Cart Button code
+        widget: text
+        required: false
+      - name: paypalBuyNowButtonCode
+        label: PayPal Buy Now Button code
+        widget: text
+        required: false
+      - name: coinbaseCommerceButtonCode
+        label: Coinbase Commerce Button code
+        widget: text
+        required: false
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+      - name: description
+        label: Description
+        widget: markdown
+        required: false
+  - name: posts
+    label: Posts
+    folder: src/pages/posts
+    create: true
+    fields: 
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: date
+        label: Date
+        widget: date
+        required: true
+      - name: body
+        label: Body
+        widget: markdown
+        required: true
+      - name: featuredImage
+        label: Featured image
+        widget: image
+        required: false
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+
+      
+        
+
+
+
+
+              
+
+              
