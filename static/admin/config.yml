@@ -1,7 +1,7 @@
 backend:
   name: github
   repo: seanwlawrence/sushi-commerce
-  branch: chore/add-cms
+  branch: master
 media_folder: src/images
 collections:
   - name: settings
@@ -427,8 +427,18 @@ collections:
         required: true
       - name: featuredImage
         label: Featured image
-        widget: image
+        widget: object
         required: false
+        fields: 
+          - name: src
+            label: Select image...
+            widget: image
+            required: true
+          - name: alt
+            label: Description
+            widget: string
+            required: false
+            default: Featured image
       - name: tags
         label: Tags
         widget: list
