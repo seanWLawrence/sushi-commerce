@@ -79,10 +79,10 @@ type Props = {
     title: string,
     date: string,
     featuredImage: {
-      src: string,
-      alt: string
+      src?: string,
+      alt?: string
     },
-    tags: string[]
+    tags?: string[]
   },
   html: string
 }
@@ -130,7 +130,7 @@ export default class Post extends React.Component < Props > {
   }
 }
 
-/* let query = graphql `
+let query = graphql ` 
   query PostQuery($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug}}) {
       fields {
@@ -138,15 +138,14 @@ export default class Post extends React.Component < Props > {
       }
       frontmatter {
         title
+        date
         featuredImage {
           src
           alt
         }
-        date
         tags
       }
       html
     }
   }
 `
-*/
