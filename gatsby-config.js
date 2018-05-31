@@ -14,9 +14,18 @@ module.exports = {
     'gatsby-transformer-yaml', {
       resolve: 'gatsby-source-filesystem',
       options: {
-        path: `${__dirname}/src/data/`
+        path: `${__dirname}/src/data/`,
+        name: 'data'
       }
     }, {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/src/images/`,
+        name: 'images'
+      }
+    },
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp', {
       resolve: `gatsby-plugin-netlify-cms`,
       options: {
         modulePath: `${__dirname}/src/cms/index.js`

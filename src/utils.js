@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react'
 
 let formatString = (selector : string, value : string) => {
   switch (selector) {
@@ -32,7 +33,7 @@ let formatArray = (selector : string, value : string[]) : string => {
 
   switch (selector) {
     case 'column':
-      return addPrefixToAllValues('is');
+      return `column ${addPrefixToAllValues('is')}`;
     case 'offset':
       return addPrefixToAllValues('is-offset');
     case 'flex':
@@ -104,4 +105,17 @@ let bulmaClassnames = ({
     })
 }
 
-export default bulmaClassnames
+type Props = {
+  prop: *,
+  children: React.Node | () => React.Node
+}
+class ConditionalRender extends React.Component < Props > {
+  render() {
+    let {prop, children} = this.props
+    return prop
+      ? children
+      : null
+  }
+}
+
+export {ConditionalRender, bulmaClassnames as default}

@@ -1,151 +1,170 @@
 // @flow
 import * as React from 'react'
-// $FlowFixMe
 import FontAwesome from 'react-fontawesome'
-// $FlowFixMe
 import Link from 'gatsby-link'
-import bulmaClassnames from '../utils'
-
-let BackButton = (
-  <Link
-    to="/posts"
-    title="posts"
-    className="button"
-    style={{
-    marginBottom: '30px'
-  }}>
-    <FontAwesome name="arrow-left" style={{
-      marginRight: '10px'
-    }}/>
-    All posts
-  </Link>
-)
-
-let FeaturedImage = ({image}) => {
-  if (image) {
-    let {src, alt} = image
-    return (
-      <figure className="image is-3by2">
-        <img src={src} alt={alt}/>
-      </figure>
-    )
-  }
-  return null
-}
-
-let Tags = ({tags}) => {
-  if (tags) {
-    let displayTags = tags.map(tag => {
-      return (
-        <span className="tag is-info" key={tag}>
-          {tag}
-        </span>
-      )
-    })
-    return <section className="tags">{displayTags}</section>
-  }
-  return null
-}
-
-let PostDate = ({date}) => {
-  if (date) {
-    return (
-      <p
-        className={bulmaClassnames({size: '5', textColor: 'gray', textTransformation: 'italic'})}
-        style={{
-        margin: '-10px 0 20px 0'
-      }}>
-        <date>{date}</date>
-      </p>
-    )
-  }
-  return null
-}
-
-let Html = ({html}) => {
-  if (html) {
-    return <div dangerouslySetInnerHTML={{
-      __html: html
-    }}/>
-  }
-  return null
-}
+import bulmaClassnames, {ConditionalRender} from '../utils'
+import Img from 'gatsby-image'
 
 type Props = {
-  fields: {
-    slug: string
-  },
-  frontmatter: {
-    title: string,
-    date: string,
-    featuredImage: {
-      src?: string,
-      alt?: string
-    },
-    tags?: string[]
-  },
-  html: string
-}
-
-export default class Post extends React.Component < Props > {
-  render() {
-    let {
+  data: {
+    markdownRemark: {
       fields: {
-        slug
+        slug: string
       },
       frontmatter: {
-        title,
-        date,
+        title: string,
+        date: string,
         featuredImage: {
-          src,
-          alt
+          alt: string
         },
-        tags
+        tags?: string[]
       },
-      html
-    } = this.props
+      html: string
+    },
+    featuredImage: {
+      sizes: string[]
+    }
+  }
+}
+
+type Falsy = "" | 'undefined' | 0 | false
+
+export default class Post extends React.Component < Props > {
+  backButton() {
     return (
-      <section
-        className='columns is-mobile is-centered'
+      <Link
+        to="/posts"
+        title="posts"
+        className="button"
         style={{
-        marginTop: '100px',
-        marginBottom: '50px'
+        marginBottom: '30px'
       }}>
+        <FontAwesome
+          name="arrow-left"
+          style={{
+          marginRight: '10px'
+        }}/>
+        All posts
+      </Link>
+    )
+  }
+
+  featuredImage(sizes : string[], alt : string) {
+    return (<Img sizes={sizes} alt={alt}/>)
+  }
+
+  title(title : string) {
+    return (
+      <h1
+        className={bulmaClassnames({raw: 'title', textAlign: 'left'})}
+        style={{
+        marginTop: '30px',
+        display: 'flex'
+      }}>
+        {title}
+      </h1>
+    )
+  }
+
+  date(date : string | Falsy) {
+    return (
+      <ConditionalRender prop={date}>
+        <p
+          className={bulmaClassnames({textColor: 'gray', textTransformation: 'italic'})}
+          style={{
+          margin: '-10px 0 20px 0',
+          display: 'flex'
+        }}>
+          <date>{date}</date>
+        </p>
+      </ConditionalRender>
+    )
+  }
+
+  html(html : string) {
+    return (<div className="content" dangerouslySetInnerHTML={{
+      __html: html
+    }}/>)
+  }
+
+  tags(tags : string[] | Falsy) {
+    return (
+      <ConditionalRender prop={tags}>
+        <section className="tags">
+          {/* $FlowFixMe */}
+          {tags.map(tag => {
+            return (
+              <span className="tag is-info" key={tag}>
+                {tag}
+              </span>
+            )
+          })}
+        </section>
+      </ConditionalRender>
+    )
+  }
+
+  render() {
+    let {
+      markdownRemark: {
+        fields: {
+          slug
+        },
+        frontmatter: {
+          title,
+          date,
+          featuredImage: {
+            alt
+          },
+          tags
+        },
+        html
+      },
+      featuredImage: {
+        sizes
+      }
+    } = this.props.data
+    return (
+      <section className='columns is-mobile is-centered'>
         <div
           className={bulmaClassnames({
           column: ['11-mobile', '8-tablet', '6-desktop']
         })}>
-          <BackButton/>
-          <FeaturedImage image={featuredImage}/>
-          <h1 className={bulmaClassnames({raw: 'title', textAlign: 'left'})}>
-            {title}
-          </h1>
-          <PostDate date={date}/>
-          <Tags tags={tags}/>
-          <Html html={body} marginTop="25px"/>
-          <BackButton/>
+          {this.backButton()}
+          {this.featuredImage(sizes, alt)}
+          {this.title(title)}
+          {this.date(date)}
+          {this.html(html)}
+          {/* $FlowFixMe */}
+          {this.tags(tags)}
+          {this.backButton()}
         </div>
       </section>
     )
   }
 }
 
-let query = graphql ` 
-  query PostQuery($slug: String!) {
-    markdownRemark(fields: { slug: { eq: $slug}}) {
-      fields {
-        slug
-      }
-      frontmatter {
-        title
-        date
-        featuredImage {
-          src
-          alt
-        }
-        tags
-      }
-      html
+// $FlowFixMe
+export let query = graphql ` query PostQuery($slug: String!,
+$featuredImage : String) {
+  markdownRemark(fields : {
+    slug: {
+      eq: $slug
+    }
+  }) {
+    fields {slug}
+    frontmatter {
+      title date(formatString : "MMMM DD, YYYY")featuredImage {alt}
+      tags
+    }
+    html
+  }
+  featuredImage: imageSharp(id : {
+    regex: $featuredImage
+  }) {
+    sizes(maxWidth : 700, quality : 65) {
+      ...GatsbyImageSharpSizes_withWebp_tracedSVG
     }
   }
+}
 `
