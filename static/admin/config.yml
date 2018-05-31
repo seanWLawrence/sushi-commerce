@@ -357,6 +357,9 @@ collections:
     folder: src/pages/products
     create: true
     fields: 
+      - name: template
+        widget: hidden
+        default: product
       - name: title
         label: Title
         widget: string
@@ -413,6 +416,9 @@ collections:
     folder: src/pages/posts
     create: true
     fields: 
+      - name: template
+        widget: hidden
+        default: post
       - name: title
         label: Title
         widget: string
@@ -439,6 +445,30 @@ collections:
             widget: string
             required: false
             default: Featured image
+      - name: tags
+        label: Tags
+        widget: list
+        required: false
+  - name: pages
+    label: Pages
+    folder: src/pages/
+    create: true
+    fields: 
+      - name: template
+        widget: hidden
+        default: page
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: date
+        label: Date
+        widget: date
+        required: true
+      - name: body
+        label: Body
+        widget: markdown
+        required: true
       - name: tags
         label: Tags
         widget: list

@@ -1,6 +1,7 @@
 ---
 title: How to make sashimi
 date: '2018-05-28'
+template: post
 featuredImage:
   alt: Plate of sashimi
   src: /src/images/sashimi.jpg
