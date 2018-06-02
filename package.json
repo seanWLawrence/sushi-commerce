@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-default",
-  "description": "Gatsby default starter",
-  "version": "1.0.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "name": "sushi-commerce",
+  "description": "Sushi Commerce e-commerce website generator and CMS",
+  "version": "0.1.0",
+  "author": "Sean Lawrence <sean.w.lawrence@gmail.com>",
   "dependencies": {
     "@fortawesome/fontawesome": "^1.1.8",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
@@ -31,7 +31,15 @@
     "react-helmet": "^5.2.0"
   },
   "keywords": [
-    "gatsby"
+    "generator",
+    "static",
+    "ecommerce",
+    "cms",
+    "netlify",
+    "react",
+    "gatsby",
+    "jekyll",
+    "hugo"
   ],
   "license": "MIT",
   "scripts": {
