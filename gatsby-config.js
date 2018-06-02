@@ -31,6 +31,7 @@ module.exports = {
         modulePath: `${__dirname}/src/cms/index.js`
       }
     },
+    'gatsby-plugin-emotion',
     'gatsby-plugin-sass'
   ]
 }

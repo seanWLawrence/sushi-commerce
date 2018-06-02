@@ -52,13 +52,41 @@ exports.createPages = ({boundActionCreators, graphql}) => {
                   }
                   frontmatter {
                     title 
-                    template 
                     date 
                     tags
                     featuredImage {
                       src
                       alt
                     }
+                  }
+                  html
+                }
+              }
+            }
+            products: allMarkdownRemark(filter: {
+              frontmatter: {
+                template: {
+                  eq: "product"
+                }
+              }
+            }) {
+              edges {
+                node {
+                  fields {
+                    slug
+                  }
+                  frontmatter {
+                    title 
+                    price
+                    image {
+                      src
+                      alt
+                    }
+                    features
+                    paypalAddToCartButtonCode
+                    paypalBuyNowButtonCode
+                    coinbaseCommerceButtonCode
+                    tags
                   }
                   html
                 }
@@ -124,6 +152,38 @@ exports.createPages = ({boundActionCreators, graphql}) => {
             }
           })
         })
+
+      // create product pages
+      result
+        .data
+        .products
+        .edges
+        .forEach(({node}) => {
+          // map over all products and get the url/slug and the first images "src" value
+
+          let {
+            fields: {
+              slug
+            },
+            frontmatter: {
+              image: {
+                src
+              }
+            }
+          } = node
+          // create page with the post.js template and pass the slug and first image's
+          // "src" value as a regEx as context so it can be queried in the template
+          createPage({
+            path: slug,
+            component: path.resolve('src/templates/product.js'),
+            layout: 'index',
+            context: {
+              slug,
+              featuredImage: `/${src}/`
+            }
+          })
+        })
+
     }))
   })
 }

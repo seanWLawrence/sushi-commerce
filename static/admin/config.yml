@@ -368,10 +368,10 @@ collections:
         label: Price
         widget: number
         required: true
-      - name: images
-        label: Images
-        widget: list
-        required: true
+      - name: image
+        label: Image
+        widget: object
+        required: false
         fields: 
           - name: src
             label: Select image...
@@ -407,7 +407,7 @@ collections:
         label: Tags
         widget: list
         required: false
-      - name: description
+      - name: body
         label: Description
         widget: markdown
         required: false

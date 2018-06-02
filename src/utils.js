@@ -17,6 +17,28 @@ let formatString = (selector : string, value : string) => {
       return `has-text-${value}`;
     case 'color':
       return `is-color-${value}`;
+    case 'flex':
+      return `is-flex-${value}`;
+    case 'inlineFlex':
+      return `is-inline-flex-${value}`;
+    case 'block':
+      return `is-block-${value}`;
+    case 'inlineBlock':
+      return `is-inline-block-${value}`;
+    case 'inline':
+      return `is-inline-${value}`;
+    case 'columns':
+      return `columns ${value}`;
+    case 'column':
+      return `column is-${value}`;
+    case 'offset':
+      return `is-offset-${value}`;
+    case 'image':
+      return `image is-${value}`;
+    case 'is':
+      return `is-${value}`;
+    case 'has':
+      return `has-${value}`;
     case 'raw':
       return value
     default:
@@ -32,6 +54,8 @@ let formatArray = (selector : string, value : string[]) : string => {
   };
 
   switch (selector) {
+    case 'columns':
+      return `columns ${addPrefixToAllValues('is')}`;
     case 'column':
       return `column ${addPrefixToAllValues('is')}`;
     case 'offset':
@@ -46,6 +70,8 @@ let formatArray = (selector : string, value : string[]) : string => {
       return addPrefixToAllValues('is-inline-block');
     case 'inline':
       return addPrefixToAllValues('is-offset');
+    case 'image':
+      return `image ${addPrefixToAllValues('is')}`;
     case 'is':
       return addPrefixToAllValues('is');
     case 'has':
@@ -80,6 +106,7 @@ type Classnames = {
   textTransformation?: string,
   textAlign?: string,
   color?: string,
+  columns?: string | string[],
   column?: string | string[],
   offset?: string | string[],
   flex?: string | string[],
@@ -87,6 +114,7 @@ type Classnames = {
   block?: string | string[],
   inlineBlock?: string | string[],
   inline?: string | string[],
+  image?: string | string[],
   raw?: string
 }
 
