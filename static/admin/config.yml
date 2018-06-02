@@ -177,8 +177,8 @@ collections:
                 label: Url
                 widget: string
                 required: true
-          - name: paypalViewCartButtonCode
-            label: PayPal View Cart button code
+          - name: paypalCartButtonCode
+            label: PayPal Cart button code
             widget: text
             required: false
           - name: hideFooter

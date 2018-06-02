@@ -1,3 +1,4 @@
+name: styles
 colors: 
   primary: hsl(171, 100%, 41%)
   info: hsl(204, 86%, 53%)

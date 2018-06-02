@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import FontAwesome from 'react-fontawesome'
-import {css} from 'emotion'
+import {css, cx} from 'emotion'
 import {ConditionalRender} from '../utils';
 import bulmaClassnames from '../utils'
 
@@ -12,7 +12,9 @@ type Props = {
   coinbaseCommerceButtonCode: string
 }
 
-export class CoinbaseCommerceButton extends React.Component < Props > {
+export class CoinbaseCommerceButton extends React.Component < {
+  code : string
+} > {
   Icon() {
     return (
       <span className="icon">
@@ -22,8 +24,9 @@ export class CoinbaseCommerceButton extends React.Component < Props > {
     )
   }
 
-  Button(code : string) {
+  renderButtonWithCode(code : string) {
     let buttonStyles = {
+      display: 'flex',
       marginRight: '10px',
       backgroundColor: '#065FBF'
     }
@@ -31,10 +34,12 @@ export class CoinbaseCommerceButton extends React.Component < Props > {
     let href = `https://commerce.coinbase.com/checkout/${code}`
 
     return (
-      <a style={buttonStyles} className="buy-with-crypto button" href={href}>
-        {this.Icon()}
-        <span className={textStyles}>Buy now with crypto</span>
-      </a>
+      <ConditionalRender prop={code}>
+        <a style={buttonStyles} className="buy-with-crypto button" href={href}>
+          {this.Icon()}
+          <span className={textStyles}>Buy now with crypto</span>
+        </a>
+      </ConditionalRender>
     )
   }
 
@@ -45,14 +50,16 @@ export class CoinbaseCommerceButton extends React.Component < Props > {
       <div style={{
         display: 'flex'
       }}>
-        {this.Button(code)}
+        {this.renderButtonWithCode(code)}
         <script src="https://commerce.coinbase.com/v1/checkout.js"/>
       </div>
     )
   }
 }
 
-export class PaypalBuyNowButton extends React.Component < Props > {
+export class PaypalBuyNowButton extends React.Component < {
+  code : string
+} > {
   Button() {
     return (
       <button className="button" style={{
@@ -105,7 +112,9 @@ export class PaypalBuyNowButton extends React.Component < Props > {
   }
 }
 
-export class PaypalAddToCartButton extends React.Component < Props > {
+export class PaypalAddToCartButton extends React.Component < {
+  code : string
+} > {
   // button that takes in the PayPal 'add to cart' button value and when clicke,
   // adds the product to the cart
 
@@ -161,11 +170,7 @@ export class PaypalAddToCartButton extends React.Component < Props > {
   }
 }
 
-export class Buttons extends React.Component < {
-  paypalBuyNowButton : string,
-  paypalAddToCartButton : string,
-  coinbaseCommerceButton : string
-} > {
+export class Buttons extends React.Component < Props > {
   render() {
     let {paypalBuyNowButtonCode, paypalAddToCartButtonCode, coinbaseCommerceButtonCode} = this.props;
     let styles = css({
@@ -184,6 +189,7 @@ export class Buttons extends React.Component < {
         justifyContent: 'flex-start'
       }
     })
+
     return (
       <div className={styles}>
         <PaypalBuyNowButton code={paypalBuyNowButtonCode}/>

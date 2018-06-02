@@ -19,10 +19,10 @@ type Props = {
         image: {
           alt: string
         },
-        tags?: string[],
-        paypalAddToCartButtonCode?: string,
-        paypalBuyNowButtonCode?: string,
-        coinbaseCommerceButtonCode?: string
+        tags: string[],
+        paypalAddToCartButtonCode: string,
+        paypalBuyNowButtonCode: string,
+        coinbaseCommerceButtonCode: string
       },
       html: string
     },
@@ -32,7 +32,7 @@ type Props = {
   }
 }
 
-type Falsy = "" | 'undefined' | 0 | false
+type Falsy = "" | typeof undefined | 0 | false
 
 export default class Post extends React.Component < Props > {
 
@@ -100,12 +100,11 @@ export default class Post extends React.Component < Props > {
     )
   }
 
-  tags(tags : string[] | Falsy) {
+  tags(tags : string[]) {
     let styles = cx(css({marginTop: '20px'}), "tags")
     return (
       <ConditionalRender prop={tags}>
         <section className={styles}>
-          {/* $FlowFixMe */}
           {tags.map(tag => {
             return (
               <span className="tag is-info" key={tag}>
@@ -149,14 +148,18 @@ export default class Post extends React.Component < Props > {
     }), css({marginBottom: '60px'}));
 
     return (
-      <section className='columns is-mobile is-centered'>
+      <section
+        className='columns is-mobile is-centered'
+        style={{
+        maxWidth: '100vw',
+        margin: 0
+      }}>
         <div className={styles}>
           {this.featuredImage(sizes, alt)}
           {this.title(title)}
           {this.price(price)}
           {this.features(features)}
           {this.html(html)}
-          {/* $FlowFixMe */}
           {this.tags(tags)}
         </div>
         <Buttons

@@ -1,3 +1,4 @@
+name: store-details
 title: Sushi Commerce
 description: The best e-commerce on the planet.
 keywords: 
@@ -6,7 +7,7 @@ keywords:
   - paypal
   - coinbase
   - react.js
-logo: null
+logo: ''
 socialMedia:
   - site: instagram
     href: https://instagram.com/sushi-commerce

@@ -11,7 +11,7 @@ type Props = {
       frontmatter: {
         title: string,
         date: string,
-        tags?: string[]
+        tags: string[]
       },
       html: string
     }
@@ -56,11 +56,10 @@ export default class Page extends React.Component < Props > {
     }}/>)
   }
 
-  tags(tags : string[] | Falsy) {
+  tags(tags : string[]) {
     return (
       <ConditionalRender prop={tags}>
         <section className="tags">
-          {/* $FlowFixMe */}
           {tags.map(tag => {
             return (
               <span className="tag is-info" key={tag}>
@@ -89,7 +88,12 @@ export default class Page extends React.Component < Props > {
     } = this.props.data;
 
     return (
-      <section className='columns is-mobile is-centered'>
+      <section
+        className='columns is-mobile is-centered'
+        style={{
+        maxWidth: '100vw',
+        margin: 0
+      }}>
         <div
           className={bulmaClassnames({
           column: ['11-mobile', '8-tablet', '6-desktop']
@@ -97,7 +101,6 @@ export default class Page extends React.Component < Props > {
           {this.title(title)}
           {this.date(date)}
           {this.html(html)}
-          {/* $FlowFixMe */}
           {this.tags(tags)}
         </div>
       </section>
