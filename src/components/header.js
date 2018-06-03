@@ -4,10 +4,13 @@ import Link from 'gatsby-link'
 import {cx, css} from 'emotion'
 import {ConditionalRender} from '../utils'
 
-let Logo = ({src}) => {
+let Logo = ({sizes}) => {
   return (
-    <ConditionalRender prop={src}>
-      <img src={src.src} alt="site logo" style={{
+    <ConditionalRender prop={sizes}>
+      <img
+        src={sizes.src}
+        alt="site logo"
+        style={{
         maxHeight: '60px'
       }}/>
     </ConditionalRender>
@@ -24,7 +27,7 @@ let NavbarBrand = ({logo, onClick, isActive}) => {
   return (
     <section className="navbar-brand">
       <Link className="navbar-item" to="/">
-        <Logo src={logo}/>
+        <Logo sizes={logo}/>
       </Link>
       <button
         onClick={onClick}
@@ -114,15 +117,13 @@ type MenuItem = {
 
 type Props = {
   logo: {
-    sizes: {
-      aspectRatio: string,
-      sizes: string,
-      src: string,
-      srcSet: string,
-      srcSetWebp: string,
-      srcSetWebp: string,
-      tracedSVG: string
-    }
+    aspectRatio: string,
+    sizes: string,
+    src: string,
+    srcSet: string,
+    srcSetWebp: string,
+    srcSetWebp: string,
+    tracedSVG: string
   },
   menuItems: Array < MenuItem >,
   paypalCartButtonCode: string
