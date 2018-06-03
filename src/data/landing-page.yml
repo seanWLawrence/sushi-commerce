@@ -4,7 +4,7 @@ banner:
   subheading: Try it out yourself and see what everyone is talking about
   backgroundImage: null
   height: medium
-  primaryButton: 
+  button: 
     text: Order now
     to: /products
     color: primary

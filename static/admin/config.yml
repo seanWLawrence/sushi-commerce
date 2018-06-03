@@ -217,8 +217,8 @@ collections:
                     value: large
                   - label: Full height
                     value: fullHeight
-              - name: primaryButton
-                label: Primary button
+              - name: button
+                label: Button
                 widget: object
                 required: false
                 fields:
