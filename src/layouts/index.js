@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react'
 import Header from '../components/header'
+import Footer from '../components/footer'
 import './index.scss'
 import 'font-awesome/scss/font-awesome.scss'
 
@@ -11,7 +12,15 @@ type Props = {
         page: string,
         to: string
       } >,
-      paypalCartButtonCode: string
+      paypalCartButtonCode: string,
+      hideFooter: boolean
+    },
+    siteDetails: {
+      title: string,
+      socialMedia: Array < {
+        site: string,
+        href: string
+      } >
     },
     logo: {
       sizes: {
@@ -35,7 +44,12 @@ export default class Layout extends React.Component < Props > {
       data: {
         navigation: {
           menuItems,
-          paypalCartButtonCode
+          paypalCartButtonCode,
+          hideFooter
+        },
+        siteDetails: {
+          title,
+          socialMedia
         },
         logo: {
           sizes
@@ -51,6 +65,7 @@ export default class Layout extends React.Component < Props > {
           logo={sizes}
           paypalCartButtonCode={paypalCartButtonCode}
           menuItems={menuItems}/> {children()}
+        <Footer hideFooter={hideFooter} title={title} socialMedia={socialMedia}/>
       </div>
     )
   }
@@ -60,16 +75,25 @@ export default class Layout extends React.Component < Props > {
 export const query = graphql `
   query RootQuery {
     navigation: dataYaml(id: { regex: "/navigation/"}) {
-      paypalCartButtonCode 
-      menuItems {
+      paypalCartButtonCode menuItems {
         page
         to
       }
+      hideFooter
     }
-    logo: imageSharp(id: {regex: "/logo/"}) {
-        sizes(quality : 65) {
+    siteDetails: dataYaml(id: { regex: "/details/"}) {
+      title
+      socialMedia {
+        site
+        href
+      }
+    }
+    logo : imageSharp(id : {
+      regex: "/logo/"
+    }) {
+      sizes(quality : 65) {
         ...GatsbyImageSharpSizes_withWebp_tracedSVG
       }
     }
   }
-`
+  `
