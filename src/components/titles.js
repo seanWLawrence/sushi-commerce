@@ -4,11 +4,14 @@ import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 
 type Props = {
-  title: string
+  title: string,
+  extraClassname: string | {}
 }
 
-export let PageTitle = ({title} : Props) => {
-  let textStyles = cx(css({marginTop: '30px', display: 'flex'}), bulmaClassnames({raw: 'title', textAlign: 'left'}))
+let extraClassname = ''
+
+export let PageTitle = ({title, extraClassname} : Props) => {
+  let textStyles = cx(css({marginTop: '30px', display: 'flex'}), bulmaClassnames({raw: 'title', textAlign: 'left'}), extraClassname)
 
   return (
     <h1 className={textStyles}>
@@ -17,8 +20,8 @@ export let PageTitle = ({title} : Props) => {
   )
 }
 
-export let GridTitle = ({title} : Props) => {
-  let textStyles = cx(css({margin: '20px auto'}), bulmaClassnames({raw: 'title', textSize: '3', textAlign: 'left'}))
+export let GridTitle = ({title, extraClassname} : Props) => {
+  let textStyles = cx(css({margin: '20px auto'}), bulmaClassnames({raw: 'title', textSize: '3', textAlign: 'left'}), extraClassname)
 
   return (
     <h2 className={textStyles}>

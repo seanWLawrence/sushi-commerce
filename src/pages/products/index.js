@@ -5,15 +5,16 @@ import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../../utils'
 import {GridTitle} from '../../components/titles'
 import {GridImage} from '../../components/images'
+import Price from '../../components/price'
 
-type Post = {
+type Product = {
   node: {
     fields: {
       slug: string
     },
-    excerpt: string,
     frontmatter: {
       title: string,
+      price: number,
       featuredImage: {
         src: string,
         alt: string
@@ -26,36 +27,22 @@ type Post = {
 type Props = {
   data: {
     allMarkdownRemark: {
-      edges: Post[]
+      edges: Product[]
     }
   }
 }
 
-let Excerpt = ({excerpt}) => {
-  let sectionStyles = css({margin: '10px auto'})
+export default class Products extends React.Component < Props > {
 
-  return (
-    <p className={sectionStyles}>{excerpt}</p>
-  )
-}
-
-let To = ({to}) => {
-  return (
-    <Link to={to}>Read more...</Link>
-  )
-}
-
-export default class Posts extends React.Component < Props > {
-
-  displayPosts(posts : Post[]) {
-    return posts.map(post => {
+  displayProducts(products : Product[]) {
+    return products.map(product => {
       let {
         node: {
-          excerpt,
           fields: {
             slug
           },
           frontmatter: {
+            price,
             featuredImage: {
               src,
               alt
@@ -63,18 +50,19 @@ export default class Posts extends React.Component < Props > {
             title
           }
         }
-      } = post
+      } = product
 
       let sectionStyles = cx(bulmaClassnames({
         column: ['4-desktop', '6-tablet', '11-mobile']
       }))
 
+      let titleStyles = css({marginBottom: '0 !important'})
+
       return (
-        <div className={sectionStyles} key ={title}>
+        <div className={sectionStyles} key={title}>
           <GridImage src={src} alt={alt}/>
-          <GridTitle title={title}/>
-          <Excerpt excerpt={excerpt}/>
-          <To to={slug}/>
+          <GridTitle title={title} extraClassname={titleStyles}/>
+          <Price price={price}/>
         </div>
       )
     })
@@ -83,7 +71,7 @@ export default class Posts extends React.Component < Props > {
   render() {
     let {
       allMarkdownRemark: {
-        edges: posts
+        edges: products
       }
     } = this.props.data;
 
@@ -94,24 +82,23 @@ export default class Posts extends React.Component < Props > {
 
     return (
       <section className={sectionStyles}>
-        {this.displayPosts(posts)}
+        {this.displayProducts(products)}
       </section>
     )
   }
 }
 
 // $FlowFixMe
-export let query = graphql ` query PostsQuery {
-  allMarkdownRemark(filter: {frontmatter: {template: {eq: "post"}}}) {
+export let query = graphql ` query ProductsQuery {
+  allMarkdownRemark(filter: {frontmatter: {template: {eq: "product"}}}) {
     edges {
       node {
-        excerpt
         fields { 
           slug
         }
         frontmatter {
           title
-          tags
+          price
           featuredImage {
             src
             alt
