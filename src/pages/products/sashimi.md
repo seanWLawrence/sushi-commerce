@@ -2,9 +2,9 @@
 title: Sashimi
 template: product
 price: 20
-image:
+featuredImage:
   alt: Plate of sashimi
-  src: /src/images/sashimi.jpg
+  src: /static/images/sashimi.jpg
 features:
   - Made with the freshest fish, caught daily
   - World-class chefs carve each slice by hand

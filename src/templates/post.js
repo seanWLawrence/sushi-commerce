@@ -1,16 +1,16 @@
 // @flow
-import * as React from 'react'
-import FontAwesome from 'react-fontawesome'
-import Link from 'gatsby-link'
-import bulmaClassnames, {ConditionalRender} from '../utils'
-import Img from 'gatsby-image'
+import React from 'react'
+import {cx, css} from 'emotion'
+import bulmaClassnames from '../utils'
+import {FeaturedImage} from '../components/images'
+import {PageTitle} from '../components/titles'
+import Date from '../components/date'
+import Html from '../components/html'
+import Tags from '../components/tags'
 
 type Props = {
   data: {
     markdownRemark: {
-      fields: {
-        slug: string
-      },
       frontmatter: {
         title: string,
         date: string,
@@ -22,129 +22,57 @@ type Props = {
       html: string
     },
     featuredImage: {
-      sizes: string[]
+      sizes: {
+        aspectRatio: string,
+        sizes: string,
+        src: string,
+        srcSet: string,
+        srcSetWebp: string,
+        srcSetWebp: string
+      }
     }
   }
 }
 
-type Falsy = "" | 'undefined' | 0 | false
+let Post = ({data} : Props) => {
 
-export default class Post extends React.Component < Props > {
-  backButton() {
-    return (
-      <Link
-        to="/posts"
-        title="posts"
-        className="button"
-        style={{
-        marginBottom: '30px'
-      }}>
-        <FontAwesome
-          name="arrow-left"
-          style={{
-          marginRight: '10px'
-        }}/>
-        All posts
-      </Link>
-    )
-  }
-
-  featuredImage(sizes : string[], alt : string) {
-    return (<Img sizes={sizes} alt={alt}/>)
-  }
-
-  title(title : string) {
-    return (
-      <h1
-        className={bulmaClassnames({raw: 'title', textAlign: 'left'})}
-        style={{
-        marginTop: '30px',
-        display: 'flex'
-      }}>
-        {title}
-      </h1>
-    )
-  }
-
-  date(date : string | Falsy) {
-    return (
-      <ConditionalRender prop={date}>
-        <p
-          className={bulmaClassnames({textColor: 'gray', textTransformation: 'italic'})}
-          style={{
-          margin: '-10px 0 20px 0',
-          display: 'flex'
-        }}>
-          <date>{date}</date>
-        </p>
-      </ConditionalRender>
-    )
-  }
-
-  html(html : string) {
-    return (<div className="content" dangerouslySetInnerHTML={{
-      __html: html
-    }}/>)
-  }
-
-  tags(tags : string[]) {
-    return (
-      <ConditionalRender prop={tags}>
-        <section className="tags">
-          {tags.map(tag => {
-            return (
-              <span className="tag is-info" key={tag}>
-                {tag}
-              </span>
-            )
-          })}
-        </section>
-      </ConditionalRender>
-    )
-  }
-
-  render() {
-    let {
-      markdownRemark: {
-        fields: {
-          slug
+  let {
+    markdownRemark: {
+      frontmatter: {
+        title,
+        date,
+        featuredImage: {
+          alt
         },
-        frontmatter: {
-          title,
-          date,
-          featuredImage: {
-            alt
-          },
-          tags
-        },
-        html
+        tags
       },
-      featuredImage: {
-        sizes
-      }
-    } = this.props.data
-    return (
-      <section
-        className='columns is-mobile is-centered'
-        style={{
-        maxWidth: '100vw',
-        margin: 0
-      }}>
-        <div
-          className={bulmaClassnames({
-          column: ['11-mobile', '8-tablet', '6-desktop']
-        })}>
-          {this.featuredImage(sizes, alt)}
-          {this.title(title)}
-          {this.date(date)}
-          {this.html(html)}
-          {this.tags(tags)}
-          {this.backButton()}
-        </div>
-      </section>
-    )
-  }
+      html
+    },
+    featuredImage: {
+      sizes
+    }
+  } = data
+
+  let sectionStyles = cx(css({maxWidth: '100vw', margin: 0}), 'columns is-mobile is-centered')
+
+  let innerSectionStyles = bulmaClassnames({
+    column: ['11-mobile', '8-tablet', '6-desktop']
+  })
+
+  return (
+    <section className={sectionStyles}>
+      <div className={innerSectionStyles}>
+        <FeaturedImage sizes={sizes} alt={alt}/>
+        <PageTitle title={title}/>
+        <Date date={date}/>
+        <Html html={html}/>
+        <Tags tags={tags}/>
+      </div>
+    </section>
+  )
 }
+
+export default Post
 
 // $FlowFixMe
 export let query = graphql ` query PostQuery($slug: String!,
@@ -154,9 +82,14 @@ $featuredImage : String) {
       eq: $slug
     }
   }) {
-    fields {slug}
+    fields {
+      slug
+    }
     frontmatter {
-      title date(formatString : "MMMM DD, YYYY")featuredImage {alt}
+      title date(formatString : "MMMM DD, YYYY")
+      featuredImage {
+        alt
+      }
       tags
     }
     html
@@ -165,7 +98,7 @@ $featuredImage : String) {
     regex: $featuredImage
   }) {
     sizes(maxWidth : 700, quality : 65) {
-      ...GatsbyImageSharpSizes_withWebp_tracedSVG
+      ...GatsbyImageSharpSizes_withWebp
     }
   }
 }

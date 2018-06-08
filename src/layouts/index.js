@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import {css} from 'emotion'
 import Header from '../components/header'
 import Footer from '../components/footer'
 import './index.scss'
@@ -56,11 +57,11 @@ export default class Layout extends React.Component < Props > {
         }
       }
     } = this.props
+
+    let sectionStyles = css({marginTop: '120px'})
+
     return (
-      <div style={{
-        marginTop: '120px'
-      }}>
-        {/* $FlowFixMe */}
+      <div className={sectionStyles}>
         <Header
           logo={sizes}
           paypalCartButtonCode={paypalCartButtonCode}
@@ -92,7 +93,7 @@ export const query = graphql `
       regex: "/logo/"
     }) {
       sizes(quality : 65) {
-        ...GatsbyImageSharpSizes_withWebp_tracedSVG
+        ...GatsbyImageSharpSizes_withWebp
       }
     }
   }

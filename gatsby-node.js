@@ -78,7 +78,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
                   frontmatter {
                     title 
                     price
-                    image {
+                    featuredImage {
                       src
                       alt
                     }
@@ -166,7 +166,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
               slug
             },
             frontmatter: {
-              image: {
+              featuredImage: {
                 src
               }
             }
@@ -183,7 +183,6 @@ exports.createPages = ({boundActionCreators, graphql}) => {
             }
           })
         })
-
     }))
   })
 }

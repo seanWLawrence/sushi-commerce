@@ -4,7 +4,7 @@ date: '2018-05-28'
 template: post
 featuredImage:
   alt: Plate of sashimi
-  src: /src/images/sashimi.jpg
+  src: /static/images/sashimi.jpg
 tags:
   - sushi
   - sashimi

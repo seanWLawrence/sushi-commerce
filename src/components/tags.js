@@ -1,0 +1,35 @@
+// @flow
+import * as React from 'react'
+
+type Props = {
+  tags: string[]
+}
+
+let Tag = ({tag} : {
+  tag: string
+}) => (
+  <span className="tag is-info" key={tag}>
+    {tag}
+  </span>
+)
+
+export default class Tags extends React.Component < Props > {
+
+  displayTags(tags : string[]) {
+    return tags.map(tag => {
+      return (<Tag tag={tag} key={tag}/>)
+    })
+  }
+
+  render() {
+
+    let {tags} = this.props;
+
+    return (
+      <section className="tags">
+        {this.displayTags(tags)}
+      </section>
+
+    )
+  }
+}

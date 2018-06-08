@@ -1,10 +1,11 @@
 // @flow
 
 import * as React from 'react'
-import FontAwesome from 'react-fontawesome'
 import {css, cx} from 'emotion'
 import {ConditionalRender} from '../utils';
 import bulmaClassnames from '../utils'
+import FontAwesome from 'react-fontawesome'
+import Link from 'gatsby-link'
 
 type Props = {
   paypalBuyNowButtonCode: string,
@@ -170,7 +171,7 @@ export class PaypalAddToCartButton extends React.Component < {
   }
 }
 
-export class Buttons extends React.Component < Props > {
+export class BuyButtons extends React.Component < Props > {
   render() {
     let {paypalBuyNowButtonCode, paypalAddToCartButtonCode, coinbaseCommerceButtonCode} = this.props;
     let styles = css({
@@ -199,3 +200,19 @@ export class Buttons extends React.Component < Props > {
     )
   }
 }
+
+export let BackButton = ({text} : {
+  text: string
+}) => (
+  <Link
+    to="/posts"
+    title="posts"
+    className="button"
+    style={{
+    marginBottom: '30px'
+  }}>
+    <FontAwesome name="arrow-left" style={{
+      marginRight: '10px'
+    }}/> {text}
+  </Link>
+)
