@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import {cx, css} from 'emotion'
 import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../../utils'
@@ -34,7 +34,7 @@ type Props = {
 
 export default class Products extends React.Component < Props > {
 
-  displayProducts(products : Product[]) {
+  displayProducts(products : Product[]) : React.Node[] {
     return products.map(product => {
       let {
         node: {
@@ -75,15 +75,22 @@ export default class Products extends React.Component < Props > {
       }
     } = this.props.data;
 
-    let sectionStyles = cx(css({maxWidth: '100vw', margin: 0}), bulmaClassnames({
+    let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '200px'})
+
+    let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
+
+    let innerSectionStyles = cx(css({maxWidth: '100vw', margin: 0}), bulmaClassnames({
       raw: 'columns',
       is: ['mobile', 'centered']
     }))
 
     return (
-      <section className={sectionStyles}>
-        {this.displayProducts(products)}
-      </section>
+      <div className={outerSectionStyles}>
+        <h1 className={textStyles}>Products</h1>
+        <section className={innerSectionStyles}>
+          {this.displayProducts(products)}
+        </section>
+      </div>
     )
   }
 }

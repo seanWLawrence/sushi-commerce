@@ -33,7 +33,7 @@ let Page = ({data} : Props) => {
     }
   } = data
 
-  let sectionStyles = cx(css({maxWidth: '100vw', margin: 0}), 'columns is-mobile is-centered')
+  let sectionStyles = cx(css({minHeight: '300px', maxWidth: '100vw', margin: 0}), 'columns is-mobile is-centered')
 
   let innerSectionStyles = bulmaClassnames({
     column: ['11-mobile', '8-tablet', '6-desktop']
@@ -54,7 +54,7 @@ export default Page
 
 // $FlowFixMe
 export let query = graphql ` 
-query PageQuery($slug: String!, $featuredImage: String) {
+query PageQuery($slug: String! ) {
   markdownRemark(fields : {
     slug: {
       eq: $slug
@@ -65,13 +65,6 @@ query PageQuery($slug: String!, $featuredImage: String) {
       tags
     }
     html
-  }
-  featuredImage: imageSharp(id : {
-    regex: $featuredImage
-  }) {
-    sizes(maxWidth : 700, quality : 65) {
-      ...GatsbyImageSharpSizes_withWebp
-    }
   }
 }
 `

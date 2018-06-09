@@ -5,7 +5,7 @@ import bulmaClassnames from '../utils'
 
 type Props = {
   title: string,
-  extraClassname: string | {}
+  extraClassname?: string | {}
 }
 
 let extraClassname = ''

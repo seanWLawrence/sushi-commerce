@@ -5,7 +5,7 @@ import {cx} from 'emotion'
 
 let Price = ({price, extraClassname} : {
   price: number,
-  extraClassname: string | {}
+  extraClassname?: string | {}
 }) => {
 
   let priceStyles = cx(bulmaClassnames({textColor: 'gray', textSize: '4'}), extraClassname = {})

@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import {cx, css} from 'emotion'
 import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../../utils'
@@ -17,8 +17,7 @@ type Post = {
       featuredImage: {
         src: string,
         alt: string
-      },
-      tags: string[]
+      }
     }
   }
 }
@@ -47,7 +46,7 @@ let To = ({to}) => {
 
 export default class Posts extends React.Component < Props > {
 
-  displayPosts(posts : Post[]) {
+  displayPosts(posts : Post[]) : React.Node[] {
     return posts.map(post => {
       let {
         node: {
@@ -65,16 +64,23 @@ export default class Posts extends React.Component < Props > {
         }
       } = post
 
-      let sectionStyles = cx(bulmaClassnames({
+      let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '200px'})
+
+      let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
+
+      let innerSectionStyles = cx(bulmaClassnames({
         column: ['4-desktop', '6-tablet', '11-mobile']
       }))
 
       return (
-        <div className={sectionStyles} key ={title}>
-          <GridImage src={src} alt={alt}/>
-          <GridTitle title={title}/>
-          <Excerpt excerpt={excerpt}/>
-          <To to={slug}/>
+        <div className={outerSectionStyles}>
+          <h1 className={textStyles}>Posts</h1>
+          <div className={innerSectionStyles} key ={title}>
+            <GridImage src={src} alt={alt}/>
+            <GridTitle title={title}/>
+            <Excerpt excerpt={excerpt}/>
+            <To to={slug}/>
+          </div>
         </div>
       )
     })
