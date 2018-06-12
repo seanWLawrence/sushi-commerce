@@ -1,6 +1,5 @@
 ---
 title: Thanks!
-date: '2018-05-28'
 template: page
 tags:
   - "Success"

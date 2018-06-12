@@ -2,7 +2,7 @@ backend:
   name: github
   repo: seanwlawrence/sushi-commerce
   branch: master
-media_folder: src/images
+media_folder: static/images
 collections:
   - name: settings
     label: Settings
@@ -14,23 +14,32 @@ collections:
           - name: title
             label: Title
             widget: string
-            required: false
+            required: true
+            default: Sushi Commerce
           - name: description
             label: Description
             widget: text
-            required: false
+            required: true
+            default: The best sushi on the planet.
           - name: keywords
             label: Keywords
             widget: list
-            required: false
+            required: true
+            default: 
+              - sushi
+              - sashimi
           - name: logo
             label: Logo
             widget: image
-            required: false
+            required: true
+            default: /static/images/logo.jpg
           - name: socialMedia
             label: Social media
             widget: list
-            required: false
+            required: true
+            default: 
+            - site: instagram
+              href: https://instagram.com/sushi-commerce
             fields:
               - name: site
                 label: Site
@@ -53,113 +62,117 @@ collections:
             label: Google Analytics snippet
             widget: text
             required: false
+            default: UA-XXXXX-Y
           - name: customCSS
             label: Custom CSS
             widget: text
             required: false
+            default: /* CSS goes here */
           - name: customJS
             label: Custom JavaScript
             widget: text
             required: false
-      - name: styles
-        label: Styles
-        file: src/data/styles.yml
-        fields: 
-          - name: colors
-            label: Colors
-            widget: object
-            required: false
-            fields: 
-              - name: primary
-                label: Primary
-                widget: string
-                required: false
-              - name: info
-                label: Info
-                widget: string
-                required: false
-                default: 
-              - name: link
-                label: Link
-                widget: string
-                required: false
-              - name: success
-                label: Success
-                widget: string
-                required: false
-              - name: warning
-                label: Warning
-                widget: string
-                required: false
-              - name: danger
-                label: Danger
-                widget: string
-                required: false
-          - name: fonts
-            label: Fonts
-            widget: object
-            required: false
-            fields: 
-              - name: family
-                label: Family
-                widget: string
-                required: false
-              - name: sizes
-                label: Sizes
-                widget: object
-                required: false
-                fields: 
-                  - name: heading1
-                    label: Heading 1
-                    widget: string
-                    required: false
-                  - name: heading2
-                    label: Heading 2
-                    widget: string
-                    required: false
-                  - name: heading3
-                    label: Heading 3
-                    widget: string
-                    required: false
-                  - name: heading4
-                    label: Heading 4
-                    widget: string
-                    required: false
-                  - name: heading5
-                    label: Heading 5
-                    widget: string
-                    required: false
-                  - name: heading6
-                    label: Heading 6
-                    widget: string
-                    required: false
-                  - name: body
-                    label: Body
-                    widget: string
-                    required: false
-              - name: weights
-                label: Weights
-                widget: object
-                required: false
-                fields:
-                  - name: headings
-                    label: Headings
-                    widget: string
-                    required: false
-                  - name: body
-                    label: Body
-                    widget: string
-                    required: false
-          - name: buttonStyle
-            label: Button style
-            widget: select
-            required: false
-            default: squared
-            options: 
-              - label: Squared
-                value: squared
-              - label: Rounded
-                value: rounded
+            default: /* JavaScript goes here */
+      # TODO: add theming support via Netlify CMS, so styling can be done without touching the index.scss file
+      # - name: styles
+      #   label: Styles
+      #   file: src/data/styles.yml
+      #   fields: 
+      #     - name: colors
+      #       label: Colors
+      #       widget: object
+      #       required: false
+      #       fields: 
+      #         - name: primary
+      #           label: Primary
+      #           widget: string
+      #           required: false
+      #         - name: info
+      #           label: Info
+      #           widget: string
+      #           required: false
+      #           default: 
+      #         - name: link
+      #           label: Link
+      #           widget: string
+      #           required: false
+      #         - name: success
+      #           label: Success
+      #           widget: string
+      #           required: false
+      #         - name: warning
+      #           label: Warning
+      #           widget: string
+      #           required: false
+      #         - name: danger
+      #           label: Danger
+      #           widget: string
+      #           required: false
+      #     - name: fonts
+      #       label: Fonts
+      #       widget: object
+      #       required: false
+      #       fields: 
+      #         - name: family
+      #           label: Family
+      #           widget: string
+      #           required: false
+      #         - name: sizes
+      #           label: Sizes
+      #           widget: object
+      #           required: false
+      #           fields: 
+      #             - name: heading1
+      #               label: Heading 1
+      #               widget: string
+      #               required: false
+      #             - name: heading2
+      #               label: Heading 2
+      #               widget: string
+      #               required: false
+      #             - name: heading3
+      #               label: Heading 3
+      #               widget: string
+      #               required: false
+      #             - name: heading4
+      #               label: Heading 4
+      #               widget: string
+      #               required: false
+      #             - name: heading5
+      #               label: Heading 5
+      #               widget: string
+      #               required: false
+      #             - name: heading6
+      #               label: Heading 6
+      #               widget: string
+      #               required: false
+      #             - name: body
+      #               label: Body
+      #               widget: string
+      #               required: false
+      #         - name: weights
+      #           label: Weights
+      #           widget: object
+      #           required: false
+      #           fields:
+      #             - name: headings
+      #               label: Headings
+      #               widget: string
+      #               required: false
+      #             - name: body
+      #               label: Body
+      #               widget: string
+      #               required: false
+      #     - name: buttonStyle
+      #       label: Button style
+      #       widget: select
+      #       required: false
+      #       default: squared
+      #       options: 
+      #         - label: Squared
+      #           value: squared
+      #         - label: Rounded
+      #           value: rounded
       - name: navigation
         label: Navigation
         file: src/data/navigation.yml
@@ -168,6 +181,13 @@ collections:
             label: Menu items
             widget: list
             required: true
+            default: 
+              - page: Products
+                to: /products
+              - page: Posts
+                to: /posts
+              - page: Contact
+                to: /contact
             fields: 
               - name: page
                 label: Page
@@ -181,10 +201,12 @@ collections:
             label: PayPal Cart button code
             widget: text
             required: false
+            default: -----BEGIN PKCS7-----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-----END PKCS7----
           - name: hideFooter
             label: Hide footer?
             widget: boolean
             required: false
+            default: false
       - name: landingPage
         label: Landing page
         file: src/data/landing-page.yml
@@ -198,25 +220,49 @@ collections:
                 label: Heading
                 widget: string
                 required: false
+                default: The world's best sushi
               - name: subheading
                 label: Subheading
                 widget: string
                 required: false
+                default: Try it out yourself and see what everyone is talking about
               - name: backgroundImage
                 label: Background image
                 widget: image
                 required: false
-              - name: height
-                label: Height
+                default: /static/images/banner.jpg
+              - name: overlayColor
+                label: Overlay color
                 widget: select
                 required: false
+                default: mojito
                 options:
-                  - label: Medium
-                    value: medium
-                  - label: Large
-                    value: large
-                  - label: Full height
-                    value: fullHeight
+                  - label: Moon purple
+                    value: moonPurple
+                  - label: Shifter
+                    value: shifter
+                  - label: Quepal
+                    value: quepal
+                  - label: Pink flavour
+                    value: pinkFlavour
+                  - label: Orange fun
+                    value: orangeFun
+                  - label: Digital water
+                    value: digitalWater
+                  - label: Purpink
+                    value: purpink
+                  - label: Blue skies
+                    value: blueSkies
+                  - label: Nelson
+                    value: nelson
+                  - label: Aqualicious
+                    value: aqualicious
+                  - label: Kyoto
+                    value: kyoto
+                  - label: Mojito
+                    value: mojito
+                  - label: Lush
+                    value: lush
               - name: button
                 label: Button
                 widget: object
@@ -226,7 +272,7 @@ collections:
                     label: Text
                     widget: string
                     required: false
-                    default: View products
+                    default: Order now 
                   - name: to
                     label: Url
                     widget: string
@@ -236,7 +282,7 @@ collections:
                     label: Color
                     widget: select
                     required: false
-                    default: whiteOutline
+                    default: primary
                     options: 
                       - label: Primary
                         value: primary
@@ -255,23 +301,38 @@ collections:
                 label: Heading
                 widget: string
                 required: false
+                default: About us 
               - name: text
                 label: Text
                 widget: text
                 required: false
+                default: We make sushi right. With the freshest ingredients around, world-remowned chefs and over 100 years of experience, we provide the best sushi experience that you can find anywhere. 
           - name: features
             label: Features
             widget: list
             required: false
+            default: 
+              - heading: Fresh
+                text: Fresh seafood caught daily on our local pier
+                icon: leaf
+              - heading: Made with love
+                text: Our world-class chefs love what they do
+                icon: heart
+              - heading: Award-winning
+                text: Our kitchen has won over 100 awards
+                icon: star
+              - heading: Worldwide locations
+                text: We have over 1000 locations worldwide
+                icon: map 
             fields: 
               - name: heading
                 label: Heading
                 widget: string
-                required: false
+                required: true
               - name: text
                 label: Text
                 widget: string
-                required: false
+                required: true
               - name: icon
                 label: Icon
                 widget: select
@@ -342,6 +403,13 @@ collections:
             label: Testimonials
             widget: list
             required: false
+            default: 
+            - name: Satoshi Nakamoto - Famous Chef
+              text: The best sushi that I have ever tasted.
+            - name: Tim Wheeler - Best-selling Author
+              text: I eat here every day... and I can't stop raving about how fresh this sushi is.
+            - name: Alejandra Gomez - Food Crtic
+              text: Can it get any better than Sushi Commerce? Seriously... I don't think it can.
             fields:
               - name: name
                 label: name
@@ -368,10 +436,10 @@ collections:
         label: Price
         widget: number
         required: true
-      - name: image
+      - name: featuredImage
         label: Image
         widget: object
-        required: false
+        required: true
         fields: 
           - name: src
             label: Select image...
@@ -460,10 +528,6 @@ collections:
       - name: title
         label: Title
         widget: string
-        required: true
-      - name: date
-        label: Date
-        widget: date
         required: true
       - name: body
         label: Body
