@@ -52,7 +52,7 @@ export default class Products extends React.Component < Props > {
         }
       } = product
 
-      let sectionStyles = cx(bulmaClassnames({
+      let sectionStyles = cx(css({minWidth: '200px'}), bulmaClassnames({
         column: ['4-desktop', '6-tablet', '11-mobile']
       }))
 
@@ -60,8 +60,8 @@ export default class Products extends React.Component < Props > {
 
       return (
         <div className={sectionStyles} key={title}>
-          <GridImage src={src} alt={alt}/>
-          <GridTitle title={title} extraClassname={titleStyles}/>
+          <GridImage to={slug} src={src} alt={alt}/>
+          <GridTitle title={title} to={slug} extraClassname={titleStyles}/>
           <Price price={price}/>
         </div>
       )

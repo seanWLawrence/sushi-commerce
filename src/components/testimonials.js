@@ -1,5 +1,5 @@
 // @flow
-import React from 'react'
+import * as React from 'react'
 import {cx, css} from 'emotion'
 import Img from 'gatsby-image'
 import bulmaClassnames from '../utils'
@@ -13,7 +13,7 @@ type Props = {
   testimonials: TestimonialType[]
 }
 
-let Testimonial = ({name, text} : TestimonialType) => {
+let Testimonial = ({name, text} : TestimonialType) : React.Node => {
 
   let sectionStyles = cx(bulmaClassnames({
     column: ['11-mobile', '10-tablet', '4-desktop']
@@ -36,8 +36,8 @@ let Testimonial = ({name, text} : TestimonialType) => {
 
 export default class Testimonials extends React.Component < Props > {
 
-  displayTestimonials(testimonials : TestimonialType[]) {
-    testimonials.map(testimonial => {
+  displayTestimonials(testimonials : Array < TestimonialType >) {
+    return testimonials.map(testimonial => {
       let {name, text} = testimonial
       return <Testimonial name={name} text={text} key={name}/>
     })
@@ -46,7 +46,7 @@ export default class Testimonials extends React.Component < Props > {
   render() {
     let {testimonials} = this.props
 
-    let outerSectionStyles = css({margin: '100px'})
+    let outerSectionStyles = cx(css({margin: '100px auto'}), 'container')
 
     let innerSectionStyles = cx('columns is-centered', css({margin: '50px auto'}))
 
@@ -55,11 +55,9 @@ export default class Testimonials extends React.Component < Props > {
     return (
       <div className={outerSectionStyles}>
         <h2 className={headingStyles}>Testimonials</h2>
-        <div className="container">
-          <section className={innerSectionStyles}>
-            {this.displayTestimonials(testimonials)}
-          </section>
-        </div>
+        <section className={innerSectionStyles}>
+          {this.displayTestimonials(testimonials)}
+        </section>
       </div>
     )
   }

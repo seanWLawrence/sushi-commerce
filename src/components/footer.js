@@ -17,11 +17,12 @@ let date = new Date()
 let thisYear = date.getFullYear()
 
 let Copyright = ({title}) => {
-  let textStyles = bulmaClassnames({textAlign: 'centered', textSize: '5'})
+  let textStyles = cx(css({marginBottom: '10px'}), bulmaClassnames({textAlign: 'centered', textSize: '5'}))
+
   return (
     <p className={textStyles}>
-      {`${title} - Copyright`}
-      &copy; {thisYear}</p>
+      {`Copyright `}
+      &copy; {`${thisYear} ${title}`}</p>
   )
 }
 
@@ -29,11 +30,12 @@ let SocialMedia = ({socialMedia}) => {
   let Social = ({site, href}) => {
     let buttonStyles = bulmaClassnames({
       is: [
-        'info', 'small'
+        'link', 'small', 'outlined'
       ],
       raw: 'button has-addons'
     })
     let textStyles = cx(css({textTransform: 'capitalize'}), bulmaClassnames({textWeight: 'semibold'}))
+
     return (
       <section className="tag">
         <a href={href} title={site} className={buttonStyles}>
@@ -57,6 +59,23 @@ let SocialMedia = ({socialMedia}) => {
   )
 }
 
+let PaymentOptions = () => {
+  let sectionStyles = css({display: 'flex', justifyContent: 'space-between', width: '200px'})
+
+  let iconStyles = {
+    backgroundColor: '#fff'
+  }
+
+  return (
+    <div className={sectionStyles}>
+      <FontAwesome name="cc-visa" size="2x" style={iconStyles}/>
+      <FontAwesome name="cc-mastercard" size="2x" style={iconStyles}/>
+      <FontAwesome name="cc-amex" size="2x" style={iconStyles}/>
+      <FontAwesome name="cc-discover" size="2x" style={iconStyles}/>
+    </div>
+  )
+}
+
 export default class Footer extends React.Component < Props > {
 
   render() {
@@ -67,13 +86,14 @@ export default class Footer extends React.Component < Props > {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '200px',
-      backgroundColor: '#f9f9f9'
+      height: '280px',
+      backgroundColor: '#eee'
     }))
     return (
       <ConditionalRender prop={!hideFooter}>
         <footer className={sectionStyles}>
           <Copyright title={title}/>
+          <PaymentOptions/>
           <SocialMedia socialMedia={socialMedia}/>
         </footer>
       </ConditionalRender>

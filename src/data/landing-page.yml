@@ -1,5 +1,8 @@
 name: landing-page
 banner: 
+  image: 
+    src: /static/images/banner.jpg
+  overlayColor: mojito
   heading: The world's best sushi
   subheading: Try it out yourself and see what everyone is talking about
   backgroundImage: null

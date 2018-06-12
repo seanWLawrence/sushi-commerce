@@ -76,8 +76,8 @@ export default class Posts extends React.Component < Props > {
         <div className={outerSectionStyles}>
           <h1 className={textStyles}>Posts</h1>
           <div className={innerSectionStyles} key ={title}>
-            <GridImage src={src} alt={alt}/>
-            <GridTitle title={title}/>
+            <GridImage src={src} alt={alt} to={slug}/>
+            <GridTitle title={title} to={slug}/>
             <Excerpt excerpt={excerpt}/>
             <To to={slug}/>
           </div>

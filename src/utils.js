@@ -76,6 +76,8 @@ let formatArray = (selector : string, value : string[]) : string => {
       return addPrefixToAllValues('is');
     case 'has':
       return addPrefixToAllValues('has');
+    case 'textSize':
+      return addPrefixToAllValues('is-size')
     default:
       console.warn('An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
           'ossible keys and values.');
@@ -101,7 +103,7 @@ type Classnames = {
   has?: string | string[],
   backgroundColor?: string,
   textColor?: string,
-  textSize?: string,
+  textSize?: string | string[],
   textWeight?: string,
   textTransformation?: string,
   textAlign?: string,

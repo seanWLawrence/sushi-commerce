@@ -6,11 +6,16 @@ import Banner from '../components/banner'
 import About from '../components/about'
 import {LandingFeatures} from '../components/features'
 import Testimonials from '../components/testimonials'
+import {OverlayColor} from '../types';
 
 type Props = {
   data: {
     landingPage: {
       banner: {
+        image: {
+          src: string
+        },
+        overlayColor: OverlayColor,
         heading: string,
         subheading: string,
         button: {
@@ -32,17 +37,6 @@ type Props = {
         name: string,
         text: string
       } >
-    },
-    bannerImage: {
-      sizes: {
-        aspectRatio: string,
-        sizes: string,
-        src: string,
-        srcSet: string,
-        srcSetWebp: string,
-        srcSetWebp: string,
-        tracedSVG: string
-      }
     }
   }
 }
@@ -54,15 +48,12 @@ let Index = ({data} : Props) => {
       about,
       features,
       testimonials
-    },
-    bannerImage: {
-      sizes
     }
   } = data
 
   return (
     <div>
-      <Banner banner={banner} sizes={sizes}/>
+      <Banner banner={banner}/>
       <About about={about}/>
       <LandingFeatures features={features}/>
       <Testimonials testimonials={testimonials}/>
@@ -79,7 +70,13 @@ export let query = graphql `
       regex : "/landing-page/"
     }) {
       banner {
-        heading subheading height button {
+        image {
+          src
+        }
+        overlayColor
+        heading 
+        subheading 
+        button {
           text
           color
           to
@@ -97,13 +94,6 @@ export let query = graphql `
       testimonials {
         name 
         text
-      }
-    }
-    bannerImage : imageSharp(id : {
-      regex: "/banner/"
-    }) {
-      sizes(quality : 85) {
-        ...GatsbyImageSharpSizes_withWebp
       }
     }
   }

@@ -25,10 +25,12 @@ export class ProductFeatures extends React.Component < {
 
     return (
       <aside className={sectionStyles}>
+        <hr/>
         <h2 className={titleStyles}>Features</h2>
         <ul className="menu-list">
           {this.displayFeatures(features)}
         </ul>
+        <hr/>
       </aside>
     )
   }
@@ -67,6 +69,7 @@ export class LandingFeatures extends React.Component < Props > {
           <FontAwesome name={icon} size="2x" className={iconStyles}/>
           <h3 className={headingStyles}>{heading}</h3>
           <p className={textStyles}>{text}</p>
+          <hr/>
         </div>
       )
     })
@@ -75,12 +78,9 @@ export class LandingFeatures extends React.Component < Props > {
   render() {
     let {features} = this.props
 
-    let sectionStyles = bulmaClassnames({
-      raw: 'hero',
-      is: ['small', 'primary']
-    })
+    let sectionStyles = bulmaClassnames({raw: 'hero', is: ['small'], textColor: 'primary'})
 
-    let innerSectionStyles = 'hero-body columns is-centered'
+    let innerSectionStyles = cx(css({maxWidth: '100%'}), 'hero-body columns is-centered')
 
     return (
       <div className={sectionStyles}>

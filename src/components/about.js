@@ -21,17 +21,26 @@ let About = ({about} : Props) => {
     </h2>
   )
 
-  let sectionStyles = cx('hero is-medium', css({padding: '50px auto', margin: '0 auto'}), bulmaClassnames({
-    column: ['6-desktop', '7-tablet', '11-mobile']
+  let sectionStyles = cx('hero is-medium', css({backgroundColor: '#eee', margin: '0'}), bulmaClassnames({column: '12'}))
+
+  let innerSectionStyles = cx(css({margin: 'auto'}), bulmaClassnames({
+    column: ['6-desktop', '10-tablet', '11-mobile']
   }))
 
-  let textStyles = bulmaClassnames({textSize: '4', textAlign: 'centered'})
+  let textStyles = bulmaClassnames({
+    textSize: [
+      '4-desktop', '4-tablet', '5-mobile'
+    ],
+    textAlign: 'centered'
+  })
 
   return (
     <section className={sectionStyles}>
       <section className="hero-body">
-        <Title heading={heading}/>
-        <p className={textStyles}>{text}</p>
+        <div className={innerSectionStyles}>
+          <Title heading={heading}/>
+          <p className={textStyles}>{text}</p>
+        </div>
       </section>
     </section>
   )
