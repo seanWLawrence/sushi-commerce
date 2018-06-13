@@ -79,8 +79,8 @@ export default class Products extends React.Component < Props > {
 
     let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
 
-    let innerSectionStyles = cx(css({maxWidth: '100vw', margin: 0}), bulmaClassnames({
-      raw: 'columns',
+    let innerSectionStyles = cx(css({maxWidth: '100vw', margin: 'auto'}), bulmaClassnames({
+      raw: 'columns is-multiline',
       is: ['mobile', 'centered']
     }))
 

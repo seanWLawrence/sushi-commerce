@@ -46,9 +46,9 @@ export default class Testimonials extends React.Component < Props > {
   render() {
     let {testimonials} = this.props
 
-    let outerSectionStyles = cx(css({margin: '100px auto'}), 'container')
+    let outerSectionStyles = css({margin: '100px auto'})
 
-    let innerSectionStyles = cx('columns is-centered', css({margin: '50px auto'}))
+    let innerSectionStyles = cx('columns is-centered is-multiline', css({margin: 'auto', marginBottom: '50px'}))
 
     let headingStyles = cx(bulmaClassnames({raw: 'title', textSize: '2', textAlign: 'centered'}), css({marginTop: '40px'}));
 

@@ -69,7 +69,6 @@ export class LandingFeatures extends React.Component < Props > {
           <FontAwesome name={icon} size="2x" className={iconStyles}/>
           <h3 className={headingStyles}>{heading}</h3>
           <p className={textStyles}>{text}</p>
-          <hr/>
         </div>
       )
     })
@@ -78,7 +77,7 @@ export class LandingFeatures extends React.Component < Props > {
   render() {
     let {features} = this.props
 
-    let sectionStyles = bulmaClassnames({raw: 'hero', is: ['small'], textColor: 'primary'})
+    let sectionStyles = cx(css({backgroundColor: '#eee'}), bulmaClassnames({raw: 'hero', is: ['small'], textColor: 'primary'}))
 
     let innerSectionStyles = cx(css({maxWidth: '100%'}), 'hero-body columns is-centered')
 

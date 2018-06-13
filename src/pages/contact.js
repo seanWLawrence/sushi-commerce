@@ -7,9 +7,9 @@ import ContactForm from '../components/contact-form'
 
 let Contact = () => {
 
-  let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center'})
+  let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh'})
 
-  let innerSectionStyles = cx(css({margin: 'auto', minHeight: '60vh'}), bulmaClassnames({
+  let innerSectionStyles = cx(css({maxWidth: '500px'}), bulmaClassnames({
     column: ['4-desktop', '6-tablet', '11-mobile']
   }))
   let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})

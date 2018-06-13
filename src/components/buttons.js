@@ -185,8 +185,7 @@ export class BuyButtons extends React.Component < Props > {
       padding: '20px 0',
       overflowX: 'scroll',
       backgroundColor: '#fff',
-      maxHeight: '70px',
-      zIndex: 1,
+      zIndex: 10,
       '@media (max-width: 500px)': {
         justifyContent: 'flex-start'
       }

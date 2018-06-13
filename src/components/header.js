@@ -2,6 +2,7 @@
 import * as React from 'react'
 import Link from 'gatsby-link'
 import {cx, css} from 'emotion'
+import FontAwesome from 'react-fontawesome'
 import bulmaClassnames, {ConditionalRender} from '../utils'
 
 let Logo = ({sizes}) => {
@@ -11,7 +12,7 @@ let Logo = ({sizes}) => {
         src={sizes.src}
         alt="site logo"
         style={{
-        maxHeight: '60px'
+        maxHeight: '50px'
       }}/>
     </ConditionalRender>
   )
@@ -21,14 +22,16 @@ let NavbarBrand = ({logo, onClick, isActive}) => {
   // Bulma .navbar-brand container for the site logo and title
 
   let buttonClassName = isActive
-    ? 'navbar-burger button is-active'
-    : 'navbar-burger button'
+    ? 'navbar-burger is-active'
+    : 'navbar-burger'
 
-  let buttonStyles = cx(css({width: '75px', height: '75px'}), buttonClassName)
+  let logoStyles = css({display: 'flex', alignItems: 'center'})
+
+  let buttonStyles = cx(css({width: '75px', height: '75px', border: 0}), buttonClassName)
 
   return (
     <section className="navbar-brand">
-      <Link className="navbar-item" to="/">
+      <Link className={logoStyles} to="/">
         <Logo sizes={logo}/>
       </Link>
       <button
@@ -51,9 +54,29 @@ let extraClassName = ''
 let PaypalCartButton = ({code, extraClassName}) => {
   let sectionStyles = cx('navbar-item', css({display: 'flex!important', justifyContent: 'flex-start', alignItems: 'center'}), extraClassName)
 
-  let buttonStyles = cx(css({margin: 0, border: 0, padding: 0, marginTop: '-10px'}), 'button', 'is-medium')
+  let buttonStyles = css({
+    backgroundColor: '#fff',
+    margin: 0,
+    border: 0,
+    padding: 0,
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer',
+    '@media (max-width: 1080px)': {
+      marginTop: '5px'
+    }
+  })
 
   let textStyles = bulmaClassnames({textSize: '6', textColor: 'grey-dark', is: 'hidden-desktop'})
+
+  let iconStyles = cx(css({
+    marginLeft: '10px',
+    cursor: 'pointer',
+    '@media (max-width: 1080px)': {
+      fontSize: '16px'
+    }
+  }), 'has-text-grey-dark')
+
   return (
     <form
       target="paypal"
@@ -66,9 +89,7 @@ let PaypalCartButton = ({code, extraClassName}) => {
         <span className={textStyles}>
           View cart
         </span>
-        <span className="icon is-small">
-          <i className="fa fa-shopping-bag"/>
-        </span>
+        <FontAwesome className={iconStyles} name="shopping-bag" size="2x"/>
       </button>
       <img
         style={{
@@ -87,9 +108,10 @@ let NavbarStart = ({menuItems, onClick, paypalCartButtonCode}) => {
   // button is not shown)
   let MenuItems = menuItems.map(item => {
     let {page, to} = item;
+    let textStyles = cx('navbar-item', css({marginTop: '4px'}))
 
     return (
-      <Link className="navbar-item" key={page} to={to}>
+      <Link className={textStyles} key={page} to={to}>
         {page}
       </Link>
     );
@@ -106,7 +128,7 @@ let NavbarStart = ({menuItems, onClick, paypalCartButtonCode}) => {
 };
 
 let NavbarEnd = ({paypalCartButtonCode}) => {
-    let buttonStyles = cx(css({padding: 0}), 'is-hidden-mobile')
+    let buttonStyles = cx(css({padding: 0, border: 0}), 'is-hidden-mobile')
     return (
       <section className="navbar-end level">
         <section className="navbar-item">

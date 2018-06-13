@@ -93,8 +93,16 @@ export default class Posts extends React.Component < Props > {
       }
     } = this.props.data;
 
-    let sectionStyles = cx(css({maxWidth: '100vw', margin: 0}), bulmaClassnames({
-      raw: 'columns',
+    let sectionStyles = cx(css({
+      maxWidth: '100vw',
+      margin: '0 auto',
+      minHeight: '70vh',
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }), bulmaClassnames({
+      raw: 'columns is-multiline',
       is: ['mobile', 'centered']
     }))
 

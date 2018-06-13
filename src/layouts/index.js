@@ -58,7 +58,7 @@ export default class Layout extends React.Component < Props > {
       }
     } = this.props
 
-    let sectionStyles = css({marginTop: '120px'})
+    let sectionStyles = css({marginTop: '90px'})
 
     return (
       <div className={sectionStyles}>

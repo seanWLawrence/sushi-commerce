@@ -21,7 +21,7 @@ let About = ({about} : Props) => {
     </h2>
   )
 
-  let sectionStyles = cx('hero is-medium', css({backgroundColor: '#eee', margin: '0'}), bulmaClassnames({column: '12'}))
+  let sectionStyles = cx('hero is-medium', css({margin: '0'}), bulmaClassnames({column: '12'}))
 
   let innerSectionStyles = cx(css({margin: 'auto'}), bulmaClassnames({
     column: ['6-desktop', '10-tablet', '11-mobile']

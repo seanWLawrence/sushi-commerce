@@ -30,24 +30,24 @@ let SocialMedia = ({socialMedia}) => {
   let Social = ({site, href}) => {
     let buttonStyles = bulmaClassnames({
       is: [
-        'link', 'small', 'outlined'
+        'primary', 'small'
       ],
       raw: 'button has-addons'
     })
     let textStyles = cx(css({textTransform: 'capitalize'}), bulmaClassnames({textWeight: 'semibold'}))
 
+    let iconStyles = css({marginRight: '10px'})
+
     return (
       <section className="tag">
         <a href={href} title={site} className={buttonStyles}>
-          <FontAwesome name={site} style={{
-            marginRight: '10px'
-          }}/>
+          <FontAwesome name={site} className={iconStyles}/>
           <span className={textStyles}>{site}</span>
         </a>
       </section>
     )
   }
-  let sectionStyles = cx(css({marginTop: '20px', width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}), "tags")
+  let sectionStyles = cx(css({marginTop: '20px', width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap'}))
 
   return (
     <div className={sectionStyles}>
@@ -62,16 +62,14 @@ let SocialMedia = ({socialMedia}) => {
 let PaymentOptions = () => {
   let sectionStyles = css({display: 'flex', justifyContent: 'space-between', width: '200px'})
 
-  let iconStyles = {
-    backgroundColor: '#fff'
-  }
+  let iconStyles = css({backgroundColor: 'transparent'})
 
   return (
     <div className={sectionStyles}>
-      <FontAwesome name="cc-visa" size="2x" style={iconStyles}/>
-      <FontAwesome name="cc-mastercard" size="2x" style={iconStyles}/>
-      <FontAwesome name="cc-amex" size="2x" style={iconStyles}/>
-      <FontAwesome name="cc-discover" size="2x" style={iconStyles}/>
+      <FontAwesome className={iconStyles} name="cc-visa" size="2x"/>
+      <FontAwesome className={iconStyles} name="cc-mastercard" size="2x"/>
+      <FontAwesome className={iconStyles} name="cc-amex" size="2x"/>
+      <FontAwesome className={iconStyles} name="cc-discover" size="2x"/>
     </div>
   )
 }
@@ -86,8 +84,10 @@ export default class Footer extends React.Component < Props > {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '280px',
-      backgroundColor: '#eee'
+      height: '300px',
+      backgroundColor: '#eee',
+      position: 'relative',
+      zIndex: -10
     }))
     return (
       <ConditionalRender prop={!hideFooter}>

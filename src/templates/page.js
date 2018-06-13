@@ -33,7 +33,7 @@ let Page = ({data} : Props) => {
     }
   } = data
 
-  let sectionStyles = cx(css({minHeight: '300px', maxWidth: '100vw', margin: 0}), 'columns is-mobile is-centered')
+  let sectionStyles = cx(css({minHeight: '70vh', maxWidth: '100vw', margin: '0 auto'}), 'columns is-mobile is-centered')
 
   let innerSectionStyles = bulmaClassnames({
     column: ['11-mobile', '8-tablet', '6-desktop']

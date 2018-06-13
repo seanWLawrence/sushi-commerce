@@ -65,6 +65,7 @@ let Banner = ({banner} : Props) => {
     justifyContent: 'center',
     alignItems: 'center',
     height: '90vh',
+    width: '100%',
     backgroundSize: 'cover',
     backgroundImage: `${backgroundColor[overlayColor]}, url(${withPrefix(linkedSrc)})`
   })
