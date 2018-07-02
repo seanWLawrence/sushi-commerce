@@ -3,7 +3,6 @@
 [include]
 
 [libs]
-./externalLibraryTypes.js
 
 [lints]
 

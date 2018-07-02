@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 import Banner from '../components/banner'
 import About from '../components/about'
@@ -12,9 +11,7 @@ type Props = {
   data: {
     landingPage: {
       banner: {
-        image: {
-          src: string
-        },
+        backgroundImage: string,
         overlayColor: OverlayColor,
         heading: string,
         subheading: string,
@@ -63,16 +60,15 @@ let Index = ({data} : Props) => {
 
 export default Index
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql `
   query IndexQuery {
     landingPage : dataYaml(id : {
       regex : "/landing-page/"
     }) {
       banner {
-        image {
-          src
-        }
+        backgroundImage 
         overlayColor
         heading 
         subheading 

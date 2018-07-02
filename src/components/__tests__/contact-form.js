@@ -3,7 +3,6 @@ import {
   render,
   queryByText,
   getByText,
-  Simulate,
   renderIntoDocument,
   cleanup,
   fireEvent
@@ -38,7 +37,13 @@ describe('Contact form', () => {
     }
     expect(encode(data)).toBe("email = hello%40gmail.com&message = I%20would%20like%20to%20talk")
   })
-  test('TODO: submits form on button click', () => {})
+  test('TODO: submits form on button click', () => {
+    let {getByText, Simulate} = renderIntoDocument(<ContactForm/>)
+    let submitButton = getByText('Send message')
+    let rightClick = {
+      button: 0
+    }
+  })
   test('TODO: displays text as it is typed', () => {})
   test('TODO: shows red border on invalid email', () => {})
   test('TODO: redirects to /contact-form-success on successful submit', () => {})

@@ -1,11 +1,10 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
-import {FeaturedImage} from '../components/images'
+import {FeaturedImage, FeaturedImagePreview} from '../components/images'
 import {PageTitle} from '../components/titles'
 import Date from '../components/date'
-import Html from '../components/html'
+import {Html, HtmlPreview} from '../components/html'
 import Tags from '../components/tags'
 
 type Props = {
@@ -31,10 +30,12 @@ type Props = {
         srcSetWebp: string
       }
     }
-  }
+  },
+  src?: string,
+  body?: string
 }
 
-let Post = ({data} : Props) => {
+let Post = ({data, src, body} : Props) => {
 
   let {
     markdownRemark: {
@@ -53,19 +54,24 @@ let Post = ({data} : Props) => {
     }
   } = data
 
-  let sectionStyles = cx(css({maxWidth: '100vw', margin: 'auto'}), 'columns is-mobile is-centered')
+  let sectionStyles = {
+    maxWidth: '100vw',
+    margin: 'auto'
+  }
 
   let innerSectionStyles = bulmaClassnames({
     column: ['11-mobile', '8-tablet', '6-desktop']
   })
 
   return (
-    <section className={sectionStyles}>
+    <section style={sectionStyles} className='columns is-mobile is-centered'>
       <div className={innerSectionStyles}>
         <FeaturedImage sizes={sizes} alt={alt}/>
+        <FeaturedImagePreview src={src} alt={alt}/>
         <PageTitle title={title}/>
         <Date date={date}/>
         <Html html={html}/>
+        <HtmlPreview body={body}/>
         <Tags tags={tags}/>
       </div>
     </section>
@@ -74,7 +80,8 @@ let Post = ({data} : Props) => {
 
 export default Post
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql ` query PostQuery($slug: String!,
 $featuredImage : String) {
   markdownRemark(fields : {
@@ -86,7 +93,8 @@ $featuredImage : String) {
       slug
     }
     frontmatter {
-      title date(formatString : "MMMM DD, YYYY")
+      title 
+      date(formatString : "MMMM DD, YYYY")
       featuredImage {
         alt
       }

@@ -1,7 +1,6 @@
 // @flow
 import * as React from 'react'
 import Link from 'gatsby-link'
-import {cx, css} from 'emotion'
 import FontAwesome from 'react-fontawesome'
 import bulmaClassnames, {ConditionalRender} from '../utils'
 
@@ -25,22 +24,24 @@ let NavbarBrand = ({logo, onClick, isActive}) => {
     ? 'navbar-burger is-active'
     : 'navbar-burger'
 
-  let logoStyles = css({display: 'flex', alignItems: 'center'})
+  let logoStyles = {
+    display: 'flex',
+    alignItems: 'center'
+  }
 
-  let buttonStyles = cx(css({width: '75px', height: '75px', border: 0}), buttonClassName)
+  let buttonStyles = {
+    width: '75px',
+    height: '75px',
+    border: 0,
+    backgroundColor: '#fff'
+  }
 
   return (
     <section className="navbar-brand">
-      <Link className={logoStyles} to="/">
+      <Link style={logoStyles} to="/">
         <Logo sizes={logo}/>
       </Link>
-      <button
-        onClick={onClick}
-        className={buttonStyles}
-        style={{
-        border: 0,
-        backgroundColor: '#fff'
-      }}>
+      <button onClick={onClick} style={buttonStyles} className={buttonClassName}>
         <span/>
         <span/>
         <span/>
@@ -49,12 +50,12 @@ let NavbarBrand = ({logo, onClick, isActive}) => {
   );
 };
 
-let extraClassName = ''
+let PaypalCartButton = ({
+  code,
+  className = ''
+}) => {
 
-let PaypalCartButton = ({code, extraClassName}) => {
-  let sectionStyles = cx('navbar-item', css({display: 'flex!important', justifyContent: 'flex-start', alignItems: 'center'}), extraClassName)
-
-  let buttonStyles = css({
+  let buttonStyles = {
     backgroundColor: '#fff',
     margin: 0,
     border: 0,
@@ -65,31 +66,32 @@ let PaypalCartButton = ({code, extraClassName}) => {
     '@media (max-width: 1080px)': {
       marginTop: '5px'
     }
-  })
+  }
 
   let textStyles = bulmaClassnames({textSize: '6', textColor: 'grey-dark', is: 'hidden-desktop'})
 
-  let iconStyles = cx(css({
+  let iconStyles = {
     marginLeft: '10px',
-    cursor: 'pointer',
-    '@media (max-width: 1080px)': {
-      fontSize: '16px'
-    }
-  }), 'has-text-grey-dark')
+    cursor: 'pointer'
+  }
 
   return (
     <form
       target="paypal"
       action="https://www.paypal.com/cgi-bin/webscr"
       method="post"
-      className={`navbar-item ${extraClassName}`}>
+      className={`navbar-item ${className}`}>
       <input type="hidden" name="cmd" value="_s-xclick"/>
       <input type="hidden" name="encrypted" value={code}/>
-      <button className={buttonStyles} name="submit">
+      <button style={buttonStyles} name="submit">
         <span className={textStyles}>
           View cart
         </span>
-        <FontAwesome className={iconStyles} name="shopping-bag" size="2x"/>
+        <FontAwesome
+          style={iconStyles}
+          className='has-text-grey-dark paypal-cart-button-icon'
+          name="shopping-bag"
+          size="2x"/>
       </button>
       <img
         style={{
@@ -108,10 +110,13 @@ let NavbarStart = ({menuItems, onClick, paypalCartButtonCode}) => {
   // button is not shown)
   let MenuItems = menuItems.map(item => {
     let {page, to} = item;
-    let textStyles = cx('navbar-item', css({marginTop: '4px'}))
+
+    let textStyles = {
+      marginTop: '4px'
+    }
 
     return (
-      <Link className={textStyles} key={page} to={to}>
+      <Link style={textStyles} className="navbar-item" key={page} to={to}>
         {page}
       </Link>
     );
@@ -122,17 +127,25 @@ let NavbarStart = ({menuItems, onClick, paypalCartButtonCode}) => {
       {MenuItems}
       <PaypalCartButton
         code={paypalCartButtonCode}
-        extraClassName="is-hidden-desktop is-hidden-tablet"/>
+        className="is-hidden-desktop is-hidden-tablet"/>
     </section>
   );
 };
 
 let NavbarEnd = ({paypalCartButtonCode}) => {
-    let buttonStyles = cx(css({padding: 0, border: 0}), 'is-hidden-mobile')
+
+    let buttonStyles = {
+      padding: 0,
+      border: 0
+    }
+
     return (
       <section className="navbar-end level">
         <section className="navbar-item">
-          <PaypalCartButton code={paypalCartButtonCode} extraClassName={buttonStyles}/>
+          <PaypalCartButton
+            style={buttonStyles}
+            code={paypalCartButtonCode}
+            className='is-hidden-mobile'/>
         </section>
       </section>
     )

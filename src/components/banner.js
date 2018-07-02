@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import Img from 'gatsby-image'
 import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../utils'
@@ -9,9 +8,7 @@ from '../types.js'
 
 type Props = {
   banner: {
-    image: {
-      src: string
-    },
+    backgroundImage: string,
     overlayColor: OverlayColor,
     heading: string,
     subheading: string,
@@ -26,9 +23,7 @@ type Props = {
 let Banner = ({banner} : Props) => {
 
   let {
-    image: {
-      src
-    },
+    backgroundImage,
     overlayColor,
     heading,
     subheading,
@@ -55,11 +50,13 @@ let Banner = ({banner} : Props) => {
     lush: 'linear-gradient(to right, rgba(86, 171, 47, .8), rgba(168, 224, 99, .8))'
   }
 
-  let linkedSrc = './'.concat(src.slice(8))
+  let linkedSrc = './'.concat(backgroundImage.slice(8))
 
-  let sectionStyles = css({marginTop: '-45px'})
+  let sectionStyles = {
+    marginTop: '-45px'
+  }
 
-  let innerSectionStyles = css({
+  let innerSectionStyles = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -68,9 +65,14 @@ let Banner = ({banner} : Props) => {
     width: '100%',
     backgroundSize: 'cover',
     backgroundImage: `${backgroundColor[overlayColor]}, url(${withPrefix(linkedSrc)})`
-  })
+  }
 
-  let bodyStyles = css({margin: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center'})
+  let bodyStyles = {
+    margin: '20px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
+  }
 
   let headingStyles = bulmaClassnames({
     raw: 'title',
@@ -96,9 +98,9 @@ let Banner = ({banner} : Props) => {
   })
 
   return (
-    <div className={sectionStyles}>
-      <div className={innerSectionStyles}>
-        <div className={bodyStyles}>
+    <div style={sectionStyles}>
+      <div style={innerSectionStyles}>
+        <div style={bodyStyles}>
           <h1 className={headingStyles}>{heading}</h1>
           <h2 className={subheadingStyles}>{subheading}</h2>
           <Link className={buttonStyles} to={to}>{text}</Link>

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import {cx, css} from 'emotion'
 import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../../utils'
 import {GridTitle} from '../../components/titles'
@@ -52,16 +51,22 @@ export default class Products extends React.Component < Props > {
         }
       } = product
 
-      let sectionStyles = cx(css({minWidth: '200px'}), bulmaClassnames({
-        column: ['4-desktop', '6-tablet', '11-mobile']
-      }))
+      let sectionStylesInline = {
+        minWidth: '200px'
+      }
 
-      let titleStyles = css({marginBottom: '0 !important'})
+      let sectionStyles = bulmaClassnames({
+        column: ['4-desktop', '6-tablet', '11-mobile']
+      })
+
+      let titleStyles = {
+        marginBottom: '0 !important'
+      }
 
       return (
-        <div className={sectionStyles} key={title}>
+        <div style={sectionStylesInline} className={sectionStyles} key={title}>
           <GridImage to={slug} src={src} alt={alt}/>
-          <GridTitle title={title} to={slug} extraClassname={titleStyles}/>
+          <GridTitle title={title} to={slug} style={titleStyles}/>
           <Price price={price}/>
         </div>
       )
@@ -75,19 +80,29 @@ export default class Products extends React.Component < Props > {
       }
     } = this.props.data;
 
-    let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '200px'})
+    let outerSectionStyles = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      marginBottom: '200px'
+    }
 
     let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
 
-    let innerSectionStyles = cx(css({maxWidth: '100vw', margin: 'auto'}), bulmaClassnames({
+    let innerSectionStylesInline = {
+      maxWidth: '100vw',
+      margin: 'auto'
+    }
+
+    let innerSectionStyles = bulmaClassnames({
       raw: 'columns is-multiline',
       is: ['mobile', 'centered']
-    }))
+    })
 
     return (
-      <div className={outerSectionStyles}>
+      <div style={outerSectionStyles}>
         <h1 className={textStyles}>Products</h1>
-        <section className={innerSectionStyles}>
+        <section style={innerSectionStylesInline} className={innerSectionStyles}>
           {this.displayProducts(products)}
         </section>
       </div>
@@ -95,7 +110,8 @@ export default class Products extends React.Component < Props > {
   }
 }
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql ` query ProductsQuery {
   allMarkdownRemark(filter: {frontmatter: {template: {eq: "product"}}}) {
     edges {

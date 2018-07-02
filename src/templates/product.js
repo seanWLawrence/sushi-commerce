@@ -1,12 +1,11 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
-import {FeaturedImage} from '../components/images'
+import {FeaturedImage, FeaturedImagePreview} from '../components/images'
 import {PageTitle} from '../components/titles'
 import Price from '../components/price'
 import {ProductFeatures} from '../components/features'
-import Html from '../components/html'
+import {Html, HtmlPreview} from '../components/html'
 import Tags from '../components/tags'
 import {BuyButtons} from '../components/buttons'
 
@@ -37,10 +36,12 @@ type Props = {
         srcSetWebp: string
       }
     }
-  }
+  },
+  src?: string,
+  body?: string
 }
 
-let Product = ({data} : Props) => {
+let Product = ({data, src, body} : Props) => {
 
   let {
     markdownRemark: {
@@ -63,20 +64,31 @@ let Product = ({data} : Props) => {
     }
   } = data
 
-  let sectionStyles = cx(css({maxWidth: '100vw', margin: 'auto', position: 'relative', zIndex: 0}), 'columns is-mobile is-centered')
+  let sectionStyles = {
+    maxWidth: '100vw',
+    margin: 'auto',
+    position: 'relative',
+    zIndex: 0
+  }
 
-  let innerSectionStyles = cx(bulmaClassnames({
+  let innerSectionStylesInline = {
+    marginBottom: '60px'
+  }
+
+  let innerSectionStyles = bulmaClassnames({
     column: ['11-mobile', '8-tablet', '6-desktop']
-  }), css({marginBottom: '60px'}));
+  })
 
   return (
-    <section className={sectionStyles}>
-      <div className={innerSectionStyles}>
+    <section style={sectionStyles} className='columns is-mobile is-centered'>
+      <div style={innerSectionStylesInline} className={innerSectionStyles}>
         <FeaturedImage sizes={sizes} alt={alt}/>
+        <FeaturedImagePreview src={src} alt={alt}/>
         <PageTitle title={title}/>
         <Price price={price}/>
         <ProductFeatures features={features}/>
         <Html html={html}/>
+        <HtmlPreview body={body}/>
         <Tags tags={tags}/>
       </div>
       <BuyButtons
@@ -89,7 +101,8 @@ let Product = ({data} : Props) => {
 
 export default Product
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql ` 
   query ProductQuery($slug: String!, $featuredImage: String) {
     markdownRemark(fields: {

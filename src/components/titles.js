@@ -1,21 +1,27 @@
 // @flow
 import * as React from 'react'
 import Link from 'gatsby-link'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 
 type PageTitleProps = {
   title: string,
-  extraClassname?: string | {}
+  className?: string
 }
 
-let extraClassname = ''
+export let PageTitle = ({
+  title,
+  className = ''
+} : PageTitleProps) => {
 
-export let PageTitle = ({title, extraClassname} : PageTitleProps) => {
-  let textStyles = cx(css({marginTop: '30px', display: 'flex'}), bulmaClassnames({raw: 'title', textAlign: 'left'}), extraClassname)
+  let textStylesInline = {
+    marginTop: '30px',
+    display: 'flex'
+  }
+
+  let textStyles = bulmaClassnames({raw: 'title', textAlign: 'left'})
 
   return (
-    <h1 className={textStyles}>
+    <h1 style={textStylesInline} className={`${textStyles} ${className}`}>
       {title}
     </h1>
   )
@@ -24,15 +30,22 @@ export let PageTitle = ({title, extraClassname} : PageTitleProps) => {
 type GridTitleProps = {
   title: string,
   to: string,
-  extraClassname?: string | {}
+  className?: string
 }
 
-export let GridTitle = ({title, to, extraClassname} : GridTitleProps) => {
-  let textStyles = cx(css({margin: '20px auto'}), bulmaClassnames({raw: 'title', textSize: '3', textAlign: 'left'}), extraClassname)
+export let GridTitle = ({
+  title,
+  to,
+  className = ''
+} : GridTitleProps) => {
+  let textStylesInline = {
+    margin: '20px auto'
+  }
+  let textStyles = bulmaClassnames({raw: 'title', textSize: '3', textAlign: 'left'})
 
   return (
     <Link to={to}>
-      <h2 className={textStyles}>
+      <h2 style={textStylesInline} className={`${textStyles} ${className}`}>
         {title}
       </h2>
     </Link>

@@ -1,23 +1,33 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 import {PageTitle} from '../components/titles'
 import ContactForm from '../components/contact-form'
 
 let Contact = () => {
 
-  let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '70vh'})
+  let outerSectionStyles = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '70vh'
+  }
 
-  let innerSectionStyles = cx(css({maxWidth: '500px'}), bulmaClassnames({
+  let innerSectionStylesInline = {
+    maxWidth: '500px'
+  }
+
+  let innerSectionStyles = bulmaClassnames({
     column: ['4-desktop', '6-tablet', '11-mobile']
-  }))
+  })
+
   let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
 
   return (
-    <div className={outerSectionStyles}>
+    <div style={outerSectionStyles}>
       <h1 className={textStyles}>Contact us</h1>
-      <div className={innerSectionStyles}>
+      <div style={innerSectionStylesInline} className={innerSectionStyles}>
         <ContactForm/>
       </div>
     </div>

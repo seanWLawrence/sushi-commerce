@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 
 type Props = {
@@ -21,11 +20,19 @@ let About = ({about} : Props) => {
     </h2>
   )
 
-  let sectionStyles = cx('hero is-medium', css({margin: '0'}), bulmaClassnames({column: '12'}))
+  let sectionStylesInline = {
+    margin: 0
+  }
 
-  let innerSectionStyles = cx(css({margin: 'auto'}), bulmaClassnames({
+  let sectionStyles = bulmaClassnames({raw: 'hero', is: 'medium', column: '12'})
+
+  let innerSectionStylesInline = {
+    margin: 'auto'
+  }
+
+  let innerSectionStyles = bulmaClassnames({
     column: ['6-desktop', '10-tablet', '11-mobile']
-  }))
+  })
 
   let textStyles = bulmaClassnames({
     textSize: [
@@ -35,9 +42,9 @@ let About = ({about} : Props) => {
   })
 
   return (
-    <section className={sectionStyles}>
+    <section style={sectionStylesInline} className={sectionStyles}>
       <section className="hero-body">
-        <div className={innerSectionStyles}>
+        <div style={innerSectionStylesInline} className={innerSectionStyles}>
           <Title heading={heading}/>
           <p className={textStyles}>{text}</p>
         </div>

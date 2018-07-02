@@ -1,6 +1,5 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 
 export let validateEmail = (email : string) => {
   // regular expression that returns true if the input has the correct format for
@@ -173,16 +172,22 @@ let InputField = ({isInvalid, onChange, onBlur, value}) => {
             }
           }).catch(error =>
           // on failed submission, alerts error message
-          alert(errorMessage(error))
-        );
+          alert(errorMessage(error)));
           event.preventDefault()
         };
 
         render() {
           let {email, message} = this.state
           return (
-            <form id="contact-form" className="form" name="contact-form" method="POST" action="/contact-form-success" data-netlify="true" data-netlify-honeypot="bot-field"  
-  onSubmit={this._handleSubmit}>
+            <form
+              id="contact-form"
+              className="form"
+              name="contact-form"
+              method="POST"
+              action="/contact-form-success"
+              data-netlify="true"
+              data-netlify-honeypot="bot-field"
+              onSubmit={this._handleSubmit}>
               <input name="bot-field" hidden/> {/*for Netlify to catch bots*/}
               <EmailInput onChange={this._handleInputFieldChange} value={email}/>
               <MessageInput onChange={this._handleTextAreaChange} value={message}/>

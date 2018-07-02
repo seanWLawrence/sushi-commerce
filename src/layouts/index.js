@@ -1,27 +1,26 @@
 // @flow
-import * as React from 'react'
-import {css} from 'emotion'
-import Header from '../components/header'
-import Footer from '../components/footer'
-import './index.scss'
-import 'font-awesome/scss/font-awesome.scss'
+import * as React from 'react';
+import Header from '../components/header';
+import Footer from '../components/footer';
+import './index.scss';
+import 'font-awesome/scss/font-awesome.scss';
 
 type Props = {
   data: {
     navigation: {
-      menuItems: Array < {
+      menuItems: Array<{
         page: string,
-        to: string
-      } >,
+        to: string,
+      }>,
       paypalCartButtonCode: string,
-      hideFooter: boolean
+      hideFooter: boolean,
     },
     siteDetails: {
       title: string,
-      socialMedia: Array < {
+      socialMedia: Array<{
         site: string,
-        href: string
-      } >
+        href: string,
+      }>,
     },
     logo: {
       sizes: {
@@ -31,70 +30,69 @@ type Props = {
         srcSet: string,
         srcSetWebp: string,
         srcSetWebp: string,
-        tracedSVG: string
-      }
-    }
+        tracedSVG: string,
+      },
+    },
   },
-  children: () => React.Node
-}
+  children: () => React.Node,
+};
 
-export default class Layout extends React.Component < Props > {
+export default class Layout extends React.Component<Props> {
   render() {
     let {
       children,
       data: {
-        navigation: {
-          menuItems,
-          paypalCartButtonCode,
-          hideFooter
-        },
-        siteDetails: {
-          title,
-          socialMedia
-        },
-        logo: {
-          sizes
-        }
-      }
-    } = this.props
+        navigation: { menuItems, paypalCartButtonCode, hideFooter },
+        siteDetails: { title, socialMedia },
+        logo: { sizes },
+      },
+    } = this.props;
 
-    let sectionStyles = css({marginTop: '90px'})
+    let sectionStyles = {
+      marginTop: '90px',
+    };
 
     return (
-      <div className={sectionStyles}>
+      <div style={sectionStyles}>
         <Header
           logo={sizes}
           paypalCartButtonCode={paypalCartButtonCode}
-          menuItems={menuItems}/> {children()}
-        <Footer hideFooter={hideFooter} title={title} socialMedia={socialMedia}/>
+          menuItems={menuItems}
+        />{' '}
+        {children()}
+        <Footer
+          hideFooter={hideFooter}
+          title={title}
+          socialMedia={socialMedia}
+        />
       </div>
-    )
+    );
   }
 }
 
-// $FlowFixMe
-export const query = graphql `
+declare function graphql(query: string[]): string;
+
+export const query = graphql`
   query RootQuery {
-    navigation: dataYaml(id: { regex: "/navigation/"}) {
-      paypalCartButtonCode menuItems {
+    navigation: dataYaml(id: { regex: "/navigation/" }) {
+      paypalCartButtonCode
+      menuItems {
         page
         to
       }
       hideFooter
     }
-    siteDetails: dataYaml(id: { regex: "/details/"}) {
+    siteDetails: dataYaml(id: { regex: "/details/" }) {
       title
       socialMedia {
         site
         href
       }
     }
-    logo : imageSharp(id : {
-      regex: "/logo/"
-    }) {
-      sizes(quality : 65) {
+    logo: imageSharp(id: { regex: "/logo/" }) {
+      sizes(quality: 65) {
         ...GatsbyImageSharpSizes_withWebp
       }
     }
   }
-  `
+`;

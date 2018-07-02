@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import {cx, css} from 'emotion'
 import Img from 'gatsby-image'
 import bulmaClassnames from '../utils'
 
@@ -15,16 +14,20 @@ type Props = {
 
 let Testimonial = ({name, text} : TestimonialType) : React.Node => {
 
-  let sectionStyles = cx(bulmaClassnames({
+  let sectionStylesInline = {
+    margin: '20px'
+  }
+
+  let sectionStyles = bulmaClassnames({
     column: ['11-mobile', '10-tablet', '4-desktop']
-  }), css({margin: '20px'}));
+  })
 
   let textStyles = bulmaClassnames({textSize: '4'})
 
   let nameStyles = bulmaClassnames({textColor: 'grey-darker'})
 
   return (
-    <div className={sectionStyles}>
+    <div style={sectionStylesInline} className={sectionStyles}>
       <p className={textStyles}>
         "{text}"
         <br/>
@@ -46,16 +49,27 @@ export default class Testimonials extends React.Component < Props > {
   render() {
     let {testimonials} = this.props
 
-    let outerSectionStyles = css({margin: '100px auto'})
+    let outerSectionStyles = {
+      margin: '100px auto'
+    }
 
-    let innerSectionStyles = cx('columns is-centered is-multiline', css({margin: 'auto', marginBottom: '50px'}))
+    let innerSectionStyles = {
+      margin: 'auto',
+      marginBottom: '50px'
+    }
 
-    let headingStyles = cx(bulmaClassnames({raw: 'title', textSize: '2', textAlign: 'centered'}), css({marginTop: '40px'}));
+    let headingStylesInline = {
+      marginTop: '40px'
+    }
+
+    let headingStyles = bulmaClassnames({raw: 'title', textSize: '2', textAlign: 'centered'})
 
     return (
-      <div className={outerSectionStyles}>
-        <h2 className={headingStyles}>Testimonials</h2>
-        <section className={innerSectionStyles}>
+      <div style={outerSectionStyles}>
+        <h2 style={headingStylesInline} className={headingStyles}>Testimonials</h2>
+        <section
+          style={innerSectionStyles}
+          className='columns is-centered is-multiline'>
           {this.displayTestimonials(testimonials)}
         </section>
       </div>

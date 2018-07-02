@@ -1,4 +1,9 @@
 import React from "react";
-import "netlify-cms/dist/cms.css";
-// import PostPreview from './post-preview' CMS.registerPreviewTemplate("posts",
-// PostPreview)
+import {PostPreview, ProductPreview, PagePreview, LandingPagePreview} from './previews'
+import CMS from 'netlify-cms'
+
+CMS.registerPreviewTemplate('posts', PostPreview);
+CMS.registerPreviewTemplate('products', ProductPreview);
+CMS.registerPreviewTemplate('pages', PagePreview);
+CMS.registerPreviewTemplate('landingPage', LandingPagePreview);
+CMS.registerPreviewStyle('/styles.css')

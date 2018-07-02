@@ -1,9 +1,8 @@
 // @flow
 import React from 'react'
-import {cx, css} from 'emotion'
 import bulmaClassnames from '../utils'
 import {PageTitle} from '../components/titles'
-import Html from '../components/html'
+import {Html, HtmlPreview} from '../components/html'
 import Tags from '../components/tags'
 
 type Props = {
@@ -19,10 +18,11 @@ type Props = {
       },
       html: string
     }
-  }
+  },
+  body: string
 }
 
-let Page = ({data} : Props) => {
+let Page = ({data, body} : Props) => {
   let {
     markdownRemark: {
       frontmatter: {
@@ -33,17 +33,22 @@ let Page = ({data} : Props) => {
     }
   } = data
 
-  let sectionStyles = cx(css({minHeight: '70vh', maxWidth: '100vw', margin: '0 auto'}), 'columns is-mobile is-centered')
+  let sectionStyles = {
+    minHeight: '70vh',
+    maxWidth: '100vw',
+    margin: '0 auto'
+  }
 
   let innerSectionStyles = bulmaClassnames({
     column: ['11-mobile', '8-tablet', '6-desktop']
   })
 
   return (
-    <section className={sectionStyles}>
+    <section style={sectionStyles} className='columns is-mobile is-centered'>
       <div className={innerSectionStyles}>
         <PageTitle title={title}/>
         <Html html={html}/>
+        <HtmlPreview body={body}/>
         <Tags tags={tags}/>
       </div>
     </section>
@@ -52,7 +57,8 @@ let Page = ({data} : Props) => {
 
 export default Page
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql ` 
 query PageQuery($slug: String! ) {
   markdownRemark(fields : {

@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import {cx, css} from 'emotion'
 import FontAwesome from 'react-fontawesome'
 import bulmaClassnames from '../utils'
 
@@ -19,12 +18,14 @@ export class ProductFeatures extends React.Component < {
   render() {
     let {features} = this.props
 
-    let sectionStyles = cx(css({marginTop: '20px'}), 'menu')
+    let sectionStyles = {
+      marginTop: '20px'
+    }
 
     let titleStyles = bulmaClassnames({raw: 'title', textSize: '5', textColor: 'grey-dark'})
 
     return (
-      <aside className={sectionStyles}>
+      <aside style={sectionStyles} className="menu">
         <hr/>
         <h2 className={titleStyles}>Features</h2>
         <ul className="menu-list">
@@ -60,13 +61,22 @@ export class LandingFeatures extends React.Component < Props > {
 
       let headingStyles = bulmaClassnames({raw: 'title', textSize: '4', textAlign: 'centered'})
 
-      let iconStyles = cx(css({margin: '5px auto', width: '100%'}), bulmaClassnames({textAlign: 'centered'}))
+      let iconStylesInline = {
+        margin: '5px auto',
+        width: '100%'
+      }
+
+      let iconStyles = bulmaClassnames({textAlign: 'centered'})
 
       let textStyles = bulmaClassnames({raw: 'subtitle', textAlign: 'centered'})
 
       return (
         <div className={featureStyles} key={heading}>
-          <FontAwesome name={icon} size="2x" className={iconStyles}/>
+          <FontAwesome
+            name={icon}
+            size="2x"
+            style={iconStylesInline}
+            className={iconStyles}/>
           <h3 className={headingStyles}>{heading}</h3>
           <p className={textStyles}>{text}</p>
         </div>
@@ -77,13 +87,19 @@ export class LandingFeatures extends React.Component < Props > {
   render() {
     let {features} = this.props
 
-    let sectionStyles = cx(css({backgroundColor: '#eee'}), bulmaClassnames({raw: 'hero', is: ['small'], textColor: 'primary'}))
+    let sectionStylesInline = {
+      backgroundColor: '#eee'
+    }
 
-    let innerSectionStyles = cx(css({maxWidth: '100%'}), 'hero-body columns is-centered')
+    let sectionStyles = bulmaClassnames({raw: 'hero', is: 'small', textColor: 'primary'})
+
+    let innerSectionStyles = {
+      maxWidth: '100%'
+    }
 
     return (
-      <div className={sectionStyles}>
-        <div className={innerSectionStyles}>
+      <div style={sectionStylesInline} className={sectionStyles}>
+        <div style={innerSectionStyles} className='hero-body columns is-centered'>
           {this.displayFeatures(features)}
         </div>
       </div>

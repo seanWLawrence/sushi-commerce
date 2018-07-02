@@ -1,6 +1,5 @@
 // @flow
 import * as React from 'react'
-import {cx, css} from 'emotion'
 import Link, {withPrefix} from 'gatsby-link'
 import bulmaClassnames from '../../utils'
 import {GridTitle} from '../../components/titles'
@@ -31,10 +30,12 @@ type Props = {
 }
 
 let Excerpt = ({excerpt}) => {
-  let sectionStyles = css({margin: '10px auto'})
+  let sectionStyles = {
+    margin: '10px auto'
+  }
 
   return (
-    <p className={sectionStyles}>{excerpt}</p>
+    <p style={sectionStyles}>{excerpt}</p>
   )
 }
 
@@ -64,16 +65,21 @@ export default class Posts extends React.Component < Props > {
         }
       } = post
 
-      let outerSectionStyles = css({display: 'flex', flexDirection: 'column', alignItems: 'center', marginBottom: '200px'})
+      let outerSectionStyles = {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginBottom: '200px'
+      }
 
       let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
 
-      let innerSectionStyles = cx(bulmaClassnames({
+      let innerSectionStyles = bulmaClassnames({
         column: ['4-desktop', '6-tablet', '11-mobile']
-      }))
+      })
 
       return (
-        <div className={outerSectionStyles}>
+        <div style={outerSectionStyles}>
           <h1 className={textStyles}>Posts</h1>
           <div className={innerSectionStyles} key ={title}>
             <GridImage src={src} alt={alt} to={slug}/>
@@ -93,7 +99,7 @@ export default class Posts extends React.Component < Props > {
       }
     } = this.props.data;
 
-    let sectionStyles = cx(css({
+    let sectionStylesInline = {
       maxWidth: '100vw',
       margin: '0 auto',
       minHeight: '70vh',
@@ -101,20 +107,23 @@ export default class Posts extends React.Component < Props > {
       flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center'
-    }), bulmaClassnames({
+    }
+
+    let sectionStyles = bulmaClassnames({
       raw: 'columns is-multiline',
       is: ['mobile', 'centered']
-    }))
+    })
 
     return (
-      <section className={sectionStyles}>
+      <section style={sectionStylesInline} className={sectionStyles}>
         {this.displayPosts(posts)}
       </section>
     )
   }
 }
 
-// $FlowFixMe
+declare function graphql(query : string[]) : string;
+
 export let query = graphql ` query PostsQuery {
   allMarkdownRemark(filter: {frontmatter: {template: {eq: "post"}}}) {
     edges {

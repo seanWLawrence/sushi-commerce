@@ -2,3 +2,15 @@ $primary:  rgb(245, 139, 157);
 
 @import "~bulma";
 
+
+@media (max-width: 500px) {
+  .buy-buttons {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 1080px) {
+  .paypal-cart-button-icon {
+    font-size: 16px;
+  }
+}

@@ -1,17 +1,21 @@
 // @flow
 import * as React from 'react'
 import bulmaClassnames from '../utils'
-import {cx} from 'emotion'
 
-let Price = ({price, extraClassname} : {
+type PriceProps = {
   price: number,
-  extraClassname?: string | {}
-}) => {
+  className?: string
+}
 
-  let priceStyles = cx(bulmaClassnames({textColor: 'gray', textSize: '4'}), extraClassname = {})
+let Price = ({
+  price,
+  className = ''
+} : PriceProps) => {
+
+  let priceStyles = bulmaClassnames({textColor: 'gray', textSize: '4'})
 
   return (
-    <span className={priceStyles}>${price}</span>
+    <span className={`${priceStyles} ${className}`}>${price}</span>
   )
 }
 

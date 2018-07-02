@@ -1,7 +1,6 @@
 // @flow
 
 import * as React from 'react'
-import {css, cx} from 'emotion'
 import {ConditionalRender} from '../utils';
 import bulmaClassnames from '../utils'
 import FontAwesome from 'react-fontawesome'
@@ -31,7 +30,9 @@ export class CoinbaseCommerceButton extends React.Component < {
       marginRight: '10px',
       backgroundColor: '#065FBF'
     }
+
     let textStyles = bulmaClassnames({textColor: 'white', textWeight: 'semibold'})
+
     let href = `https://commerce.coinbase.com/checkout/${code}`
 
     return (
@@ -46,11 +47,12 @@ export class CoinbaseCommerceButton extends React.Component < {
 
   render() {
     let {code} = this.props;
+    let sectionStyles = {
+      display: 'flex'
+    }
 
     return (
-      <div style={{
-        display: 'flex'
-      }}>
+      <div style={sectionStyles}>
         {this.renderButtonWithCode(code)}
         <script src="https://commerce.coinbase.com/v1/checkout.js"/>
       </div>
@@ -62,13 +64,17 @@ export class PaypalBuyNowButton extends React.Component < {
   code : string
 } > {
   Button() {
+    let buttonStyles = {
+      backgroundColor: '#FFC439'
+    }
+
+    let iconStyles = {
+      marginRight: '10px'
+    }
+
     return (
-      <button className="button" style={{
-        backgroundColor: '#FFC439'
-      }}>
-        <span className="icon" style={{
-          marginRight: '10px'
-        }}>
+      <button className="button" style={buttonStyles}>
+        <span className="icon" style={iconStyles}>
           <FontAwesome name="paypal"/>
         </span>
         <span className="title is-6">Buy now</span>
@@ -77,24 +83,30 @@ export class PaypalBuyNowButton extends React.Component < {
   }
 
   TrackingPixel() {
-    return (<img
-      alt=""
-      style={{
+
+    let pixelStyles = {
       border: 0
-    }}
+    }
+
+    return <img
+      alt=""
+      style={pixelStyles}
       src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif"
       width="1"
-      height="1"/>);
+      height="1"/>
   }
 
   renderButtonWithCode(code : string) {
+
+    let formStyles = {
+      display: 'flex',
+      margin: '0 10px'
+    }
+
     return (
       <ConditionalRender prop={code}>
         <form
-          style={{
-          display: 'flex',
-          margin: '0 10px'
-        }}
+          style={formStyles}
           target="paypal"
           action="https://www.paypal.com/cgi-bin/webscr"
           method="post">
@@ -174,7 +186,8 @@ export class PaypalAddToCartButton extends React.Component < {
 export class BuyButtons extends React.Component < Props > {
   render() {
     let {paypalBuyNowButtonCode, paypalAddToCartButtonCode, coinbaseCommerceButtonCode} = this.props;
-    let styles = css({
+
+    let sectionStyles = {
       position: 'fixed',
       bottom: 0,
       left: 'auto',
@@ -185,14 +198,11 @@ export class BuyButtons extends React.Component < Props > {
       padding: '20px 0',
       overflowX: 'scroll',
       backgroundColor: '#fff',
-      zIndex: 10,
-      '@media (max-width: 500px)': {
-        justifyContent: 'flex-start'
-      }
-    })
+      zIndex: 10
+    }
 
     return (
-      <div className={styles}>
+      <div style={sectionStyles} className="buy-buttons">
         <PaypalBuyNowButton code={paypalBuyNowButtonCode}/>
         <PaypalAddToCartButton code={paypalAddToCartButtonCode}/>
         <CoinbaseCommerceButton code={coinbaseCommerceButtonCode}/>

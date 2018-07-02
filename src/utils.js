@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react'
+import {withPrefix} from 'gatsby-link'
 
 let formatString = (selector : string, value : string) => {
   switch (selector) {
@@ -139,6 +140,7 @@ type Props = {
   prop: *,
   children: React.Node | () => React.Node
 }
+
 class ConditionalRender extends React.Component < Props > {
   render() {
     let {prop, children} = this.props
@@ -146,6 +148,16 @@ class ConditionalRender extends React.Component < Props > {
       ? children
       : null
   }
+}
+
+export let linkSrcToStaticImage = (src : string) => {
+
+  // crop 'static' from the file name and add './' in front of it
+  let formattedFileName = './'.concat(src.slice(8))
+
+  // use 'gatsby-link' helper function to link the file to the image in the static
+  // folder
+  return withPrefix(formattedFileName)
 }
 
 export {ConditionalRender, bulmaClassnames as default}
