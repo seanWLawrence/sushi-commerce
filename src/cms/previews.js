@@ -26,6 +26,7 @@ export let PostPreview = ({ entry, widgetFor, getAsset }: PostPreviewProps) => {
         title: entry.getIn(['data', 'title']),
         date: entry.getIn(['data', 'date']),
         featuredImage: {
+          src: getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
           alt: entry.getIn(['data', 'alt']),
         },
         tags: entry.getIn(['data', 'tags']),
@@ -33,8 +34,6 @@ export let PostPreview = ({ entry, widgetFor, getAsset }: PostPreviewProps) => {
       html: widgetFor('body'),
     },
     featuredImageSizes: undefined,
-    featuredImageSrc: getAsset(entry.getIn(['data', 'featuredImage', 'src']))
-      .value,
     isPreview: true,
   };
 
@@ -70,6 +69,7 @@ export let ProductPreview = ({
           'coinbaseCommerceButtonLink',
         ]),
         featuredImage: {
+          src: getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
           alt: entry.getIn(['data', 'alt']),
         },
         tags: entry.getIn(['data', 'tags']),
@@ -77,8 +77,6 @@ export let ProductPreview = ({
       html: widgetFor('body'),
     },
     featuredImageSizes: undefined,
-    featuredImageSrc: getAsset(entry.getIn(['data', 'featuredImage', 'src']))
-      .value,
     isPreview: true,
   };
 

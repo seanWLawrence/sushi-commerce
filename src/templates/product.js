@@ -18,6 +18,7 @@ type Props = {
         price: number,
         features: string[],
         featuredImage: {
+          src?: string,
           alt: string,
         },
         tags: string[],
@@ -28,7 +29,6 @@ type Props = {
       html: string,
     },
     featuredImageSizes?: GatsbyImageSizes,
-    featuredImageSrc?: string,
     isPreview?: boolean,
   },
 };
@@ -40,7 +40,7 @@ let Product = ({ data }: Props) => {
         title,
         price,
         features,
-        featuredImage: { alt },
+        featuredImage: { src, alt },
         tags,
         paypalAddToCartButtonCode,
         paypalBuyNowButtonCode,
@@ -49,17 +49,14 @@ let Product = ({ data }: Props) => {
       html,
     },
     featuredImageSizes,
-    featuredImageSrc,
     isPreview,
   } = data;
 
-  let sizes, src;
+  let sizes;
 
   // if one of these props exist, assign it to the sizes or src variable
   if (featuredImageSizes !== undefined) {
     sizes = featuredImageSizes.sizes;
-  } else if (featuredImageSrc !== undefined) {
-    src = featuredImageSrc;
   }
 
   let sectionStyles = {
@@ -80,7 +77,12 @@ let Product = ({ data }: Props) => {
   return (
     <section style={sectionStyles} className="columns is-mobile is-centered">
       <div style={innerSectionStylesInline} className={innerSectionStyles}>
-        <FeaturedImage sizes={sizes} src={src} alt={alt} />
+        <FeaturedImage
+          sizes={sizes}
+          src={src}
+          alt={alt}
+          isPreview={isPreview}
+        />
         <PageTitle title={title} />
         <Price price={price} />
         <ProductFeatures features={features} />
@@ -110,6 +112,7 @@ export let query = graphql`
         title
         price
         featuredImage {
+          src
           alt
         }
         features

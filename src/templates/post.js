@@ -15,6 +15,7 @@ type Props = {
         title: string,
         date: string,
         featuredImage: {
+          src?: string,
           alt: string,
         },
         tags: string[],
@@ -22,7 +23,6 @@ type Props = {
       html: string,
     },
     featuredImageSizes?: GatsbyImageSizes,
-    featuredImageSrc?: string,
     isPreview?: boolean,
   },
 };
@@ -33,23 +33,20 @@ let Post = ({ data }: Props) => {
       frontmatter: {
         title,
         date,
-        featuredImage: { alt },
+        featuredImage: { src, alt },
         tags,
       },
       html,
     },
     featuredImageSizes,
-    featuredImageSrc,
     isPreview,
   } = data;
 
-  let sizes, src;
+  let sizes;
 
   // if one of these props exist, assign it to the sizes or src variable
   if (featuredImageSizes !== undefined) {
     sizes = featuredImageSizes.sizes;
-  } else if (featuredImageSrc !== undefined) {
-    src = featuredImageSrc;
   }
 
   let sectionStyles = {
@@ -64,7 +61,12 @@ let Post = ({ data }: Props) => {
   return (
     <section style={sectionStyles} className="columns is-mobile is-centered">
       <div className={innerSectionStyles}>
-        <FeaturedImage sizes={sizes} src={src} alt={alt} />
+        <FeaturedImage
+          sizes={sizes}
+          src={src}
+          alt={alt}
+          isPreview={isPreview}
+        />
         <PageTitle title={title} />
         <Date date={date} />
         <Html html={html} isPreview={isPreview} />
@@ -88,6 +90,7 @@ export let query = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         featuredImage {
+          src
           alt
         }
         tags
