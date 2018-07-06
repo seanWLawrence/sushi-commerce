@@ -153,15 +153,6 @@ class ConditionalRender extends React.Component<Props> {
   }
 }
 
-let linkSrcToStaticImage = (src: string) => {
-  // crop 'static' from the file name and add './' in front of it
-  let formattedFileName = './'.concat(src.slice(8));
-
-  // use 'gatsby-link' helper function to link the file to the image in the static
-  // folder
-  return withPrefix(formattedFileName);
-};
-
 let firstLetterToUppercase = (word: string) =>
   word.replace(/^\w/, character => character.toUpperCase());
 
@@ -184,7 +175,6 @@ let defaultNumber = (number: number) => (number > 0 ? number : 0);
 
 export {
   ConditionalRender,
-  linkSrcToStaticImage,
   firstLetterToUppercase,
   stripHtmlFromPaypalCode,
   defaultString,
