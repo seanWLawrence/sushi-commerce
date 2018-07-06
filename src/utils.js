@@ -176,10 +176,20 @@ let stripHtmlFromPaypalCode = (code: string) => {
   return value.slice(1, endOfValue);
 };
 
+let defaultString = (string: string) => (string ? string : '');
+let defaultArray = (array: *[]) => (array.length > 1 ? array : []);
+let defaultObject = (object: {}) =>
+  Object.keys(object).length > 1 ? object : {};
+let defaultNumber = (number: number) => (number > 0 ? number : 0);
+
 export {
   ConditionalRender,
   linkSrcToStaticImage,
   firstLetterToUppercase,
   stripHtmlFromPaypalCode,
+  defaultString,
+  defaultArray,
+  defaultObject,
+  defaultNumber,
   bulmaClassnames as default,
 };

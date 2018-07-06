@@ -5,7 +5,13 @@ import Product from '../templates/product';
 import Page from '../templates/page';
 import Index from '../pages/index';
 import DataTable from './data-table';
-import { firstLetterToUppercase } from '../utils';
+import {
+  firstLetterToUppercase,
+  defaultString,
+  defaultObject,
+  defaultArray,
+  defaultNumber,
+} from '../utils';
 
 type Entry = (string[]) => string;
 type WidgetFor = string => string;
@@ -23,17 +29,18 @@ export let PostPreview = ({ entry, widgetFor, getAsset }: PostPreviewProps) => {
   let data = {
     markdownRemark: {
       frontmatter: {
-        title: entry.getIn(['data', 'title']),
-        date: entry.getIn(['data', 'date']),
+        title: defaultString(entry.getIn(['data', 'title'])),
+        date: defaultString(entry.getIn(['data', 'date'])),
         featuredImage: {
-          src: getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
-          alt: entry.getIn(['data', 'alt']),
+          src: defaultString(
+            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value
+          ),
+          alt: defaultString(entry.getIn(['data', 'alt'])),
         },
-        tags: entry.getIn(['data', 'tags']),
+        tags: defaultArray(entry.getIn(['data', 'tags'])),
       },
-      html: widgetFor('body'),
+      html: defaultString(widgetFor('body')),
     },
-    featuredImageSizes: undefined,
     isPreview: true,
   };
 
@@ -56,27 +63,28 @@ export let ProductPreview = ({
   let data = {
     markdownRemark: {
       frontmatter: {
-        title: entry.getIn(['data', 'title']),
-        price: entry.getIn(['data', 'price']),
-        features: entry.getIn(['data', 'features']),
-        paypalAddToCartButtonCode: entry.getIn([
-          'data',
-          'paypalAddToCartButtonCode',
-        ]),
-        paypalBuyNowButtonCode: entry.getIn(['data', 'paypalBuyNowButtonCode']),
-        coinbaseCommerceButtonLink: entry.getIn([
-          'data',
-          'coinbaseCommerceButtonLink',
-        ]),
+        title: defaultString(entry.getIn(['data', 'title'])),
+        price: defaultNumber(entry.getIn(['data', 'price'])),
+        features: defaultArray(entry.getIn(['data', 'features'])),
+        paypalAddToCartButtonCode: defaultString(
+          entry.getIn(['data', 'paypalAddToCartButtonCode'])
+        ),
+        paypalBuyNowButtonCode: defaultString(
+          entry.getIn(['data', 'paypalBuyNowButtonCode'])
+        ),
+        coinbaseCommerceButtonLink: defaultString(
+          entry.getIn(['data', 'coinbaseCommerceButtonLink'])
+        ),
         featuredImage: {
-          src: getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
-          alt: entry.getIn(['data', 'alt']),
+          src: defaultString(
+            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value
+          ),
+          alt: defaultString(entry.getIn(['data', 'alt'])),
         },
-        tags: entry.getIn(['data', 'tags']),
+        tags: defaultArray(entry.getIn(['data', 'tags'])),
       },
-      html: widgetFor('body'),
+      html: defaultString(widgetFor('body')),
     },
-    featuredImageSizes: undefined,
     isPreview: true,
   };
 
@@ -98,11 +106,11 @@ export let PagePreview = ({ entry, widgetFor, getAsset }: PagePreviewProps) => {
         slug: '',
       },
       frontmatter: {
-        title: entry.getIn(['data', 'title']),
-        tags: entry.getIn(['data', 'tags']),
+        title: defaultString(entry.getIn(['data', 'title'])),
+        tags: defaultArray(entry.getIn(['data', 'tags'])),
         date: '',
       },
-      html: widgetFor('body'),
+      html: defaultString(widgetFor('body')),
     },
     isPreview: true,
   };
@@ -126,35 +134,47 @@ export let LandingPagePreview = ({
   let data = {
     landingPage: {
       banner: {
-        backgroundImage: getAsset(
-          entry.getIn(['data', 'banner', 'backgroundImage'])
-        ).value,
-        overlayColor: entry.getIn(['data', 'banner', 'overlayColor']),
-        heading: entry.getIn(['data', 'banner', 'heading']),
-        subheading: entry.getIn(['data', 'banner', 'subheading']),
+        backgroundImage: defaultString(
+          getAsset(entry.getIn(['data', 'banner', 'backgroundImage'])).value
+        ),
+        overlayColor: defaultString(
+          entry.getIn(['data', 'banner', 'overlayColor'])
+        ),
+        heading: defaultString(entry.getIn(['data', 'banner', 'heading'])),
+        subheading: defaultString(
+          entry.getIn(['data', 'banner', 'subheading'])
+        ),
         button: {
-          text: entry.getIn(['data', 'banner', 'button', 'text']),
-          color: entry.getIn(['data', 'banner', 'button', 'color']),
-          to: entry.getIn(['data', 'banner', 'button', 'to']),
+          text: defaultString(
+            entry.getIn(['data', 'banner', 'button', 'text'])
+          ),
+          color: defaultString(
+            entry.getIn(['data', 'banner', 'button', 'color'])
+          ),
+          to: defaultString(entry.getIn(['data', 'banner', 'button', 'to'])),
         },
       },
       about: {
-        heading: entry.getIn(['data', 'about', 'heading']),
-        text: entry.getIn(['data', 'about', 'text']),
+        heading: defaultString(entry.getIn(['data', 'about', 'heading'])),
+        text: defaultString(entry.getIn(['data', 'about', 'text'])),
       },
-      features: widgetsFor('features').map(feature => {
-        return {
-          heading: feature.getIn(['data', 'heading']),
-          text: feature.getIn(['data', 'text']),
-          icon: feature.getIn(['data', 'icon']),
-        };
-      }),
-      testimonials: widgetsFor('testimonials').map(testimonial => {
-        return {
-          name: testimonial.getIn(['data', 'name']),
-          text: testimonial.getIn(['data', 'text']),
-        };
-      }),
+      features: defaultArray(
+        widgetsFor('features').map(feature => {
+          return {
+            heading: feature.getIn(['data', 'heading']),
+            text: feature.getIn(['data', 'text']),
+            icon: feature.getIn(['data', 'icon']),
+          };
+        })
+      ),
+      testimonials: defaultArray(
+        widgetsFor('testimonials').map(testimonial => {
+          return {
+            name: testimonial.getIn(['data', 'name']),
+            text: testimonial.getIn(['data', 'text']),
+          };
+        })
+      ),
     },
   };
 
@@ -183,7 +203,7 @@ export let NavigationPreview = ({
   let data = [
     {
       heading: 'Menu items',
-      text: menuItems.join(', '),
+      text: defaultString(menuItems.join(', ')),
     },
     {
       heading: 'Hide footer?',
@@ -191,7 +211,7 @@ export let NavigationPreview = ({
     },
     {
       heading: 'Paypal cart button code',
-      text: entry.getIn(['data', 'paypalCartButtonCode']),
+      text: defaultString(entry.getIn(['data', 'paypalCartButtonCode'])),
     },
   ];
 
@@ -226,15 +246,15 @@ export let StoreDetailsPreview = ({
   let data = [
     {
       heading: 'Title',
-      text: entry.getIn(['data', 'title']),
+      text: defaultString(entry.getIn(['data', 'title'])),
     },
     {
       heading: 'Description',
-      text: entry.getIn(['data', 'description']),
+      text: defaultString(entry.getIn(['data', 'description'])),
     },
     {
       heading: 'Keywords',
-      text: keywords.join(', '),
+      text: defaultString(keywords.join(', ')),
     },
     {
       heading: 'Logo',
@@ -242,19 +262,19 @@ export let StoreDetailsPreview = ({
     },
     {
       heading: 'Social media',
-      text: socialMedia.join(', '),
+      text: defaultString(socialMedia.join(', ')),
     },
     {
       heading: 'Google Analytics',
-      text: entry.getIn(['data', 'googleAnalytics']),
+      text: defaultString(entry.getIn(['data', 'googleAnalytics'])),
     },
     {
       heading: 'Custom CSS',
-      text: entry.getIn(['data', 'customCSS']),
+      text: defaultString(entry.getIn(['data', 'customCSS'])),
     },
     {
       heading: 'Custom JavaScript',
-      text: `${entry.getIn(['data', 'customJS'])}`,
+      text: defaultString(`${entry.getIn(['data', 'customJS'])}`),
     },
   ];
 
