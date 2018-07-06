@@ -1,134 +1,132 @@
 // @flow
-import * as React from 'react'
-import Link, {withPrefix} from 'gatsby-link'
-import bulmaClassnames from '../../utils'
-import {GridTitle} from '../../components/titles'
-import {GridImage} from '../../components/images'
-import Price from '../../components/price'
+import * as React from 'react';
+import Link, { withPrefix } from 'gatsby-link';
+import bulmaClassnames from '../../utils';
+import { GridTitle } from '../../components/titles';
+import { GridImage } from '../../components/images';
+import Price from '../../components/price';
 
 type Product = {
   node: {
     fields: {
-      slug: string
+      slug: string,
     },
     frontmatter: {
       title: string,
       price: number,
       featuredImage: {
         src: string,
-        alt: string
+        alt: string,
       },
-      tags: string[]
-    }
-  }
-}
+      tags: string[],
+    },
+  },
+};
 
 type Props = {
   data: {
     allMarkdownRemark: {
-      edges: Product[]
-    }
-  }
-}
+      edges: Product[],
+    },
+  },
+};
 
-export default class Products extends React.Component < Props > {
-
-  displayProducts(products : Product[]) : React.Node[] {
+export default class Products extends React.Component<Props> {
+  displayProducts(products: Product[]): React.Node[] {
     return products.map(product => {
       let {
         node: {
-          fields: {
-            slug
-          },
+          fields: { slug },
           frontmatter: {
             price,
-            featuredImage: {
-              src,
-              alt
-            },
-            title
-          }
-        }
-      } = product
+            featuredImage: { src, alt },
+            title,
+          },
+        },
+      } = product;
 
       let sectionStylesInline = {
-        minWidth: '200px'
-      }
+        minWidth: '200px',
+      };
 
       let sectionStyles = bulmaClassnames({
-        column: ['4-desktop', '6-tablet', '11-mobile']
-      })
+        column: ['4-desktop', '6-tablet', '11-mobile'],
+      });
 
       let titleStyles = {
-        marginBottom: '0 !important'
-      }
+        marginBottom: '0 !important',
+      };
 
       return (
         <div style={sectionStylesInline} className={sectionStyles} key={title}>
-          <GridImage to={slug} src={src} alt={alt}/>
-          <GridTitle title={title} to={slug} style={titleStyles}/>
-          <Price price={price}/>
+          <GridImage to={slug} src={src} alt={alt} />
+          <GridTitle title={title} to={slug} style={titleStyles} />
+          <Price price={price} />
         </div>
-      )
-    })
+      );
+    });
   }
 
   render() {
     let {
-      allMarkdownRemark: {
-        edges: products
-      }
+      allMarkdownRemark: { edges: products },
     } = this.props.data;
 
     let outerSectionStyles = {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      marginBottom: '200px'
-    }
+      marginBottom: '200px',
+    };
 
-    let textStyles = bulmaClassnames({raw: 'title', textSize: '2'})
+    let textStyles = bulmaClassnames({ raw: 'title', textSize: '2' });
 
     let innerSectionStylesInline = {
-      maxWidth: '100vw',
-      margin: 'auto'
-    }
+      maxWidth: '90vw',
+      margin: 'auto',
+    };
 
     let innerSectionStyles = bulmaClassnames({
       raw: 'columns is-multiline',
-      is: ['mobile', 'centered']
-    })
+      is: ['mobile', 'centered'],
+    });
 
     return (
       <div style={outerSectionStyles}>
         <h1 className={textStyles}>Products</h1>
-        <section style={innerSectionStylesInline} className={innerSectionStyles}>
+        <section
+          style={innerSectionStylesInline}
+          className={innerSectionStyles}
+        >
           {this.displayProducts(products)}
         </section>
       </div>
-    )
+    );
   }
 }
 
-declare function graphql(query : string[]) : string;
+declare function graphql(query: string[]): string;
 
-export let query = graphql ` query ProductsQuery {
-  allMarkdownRemark(filter: {frontmatter: {template: {eq: "product"}}}) {
-    edges {
-      node {
-        fields { 
-          slug
-        }
-        frontmatter {
-          title
-          price
-          featuredImage {
-            src
-            alt
+export let query = graphql`
+  query ProductsQuery {
+    allMarkdownRemark(
+      filter: { frontmatter: { template: { eq: "product" } } }
+    ) {
+      edges {
+        node {
+          fields {
+            slug
+          }
+          frontmatter {
+            title
+            price
+            featuredImage {
+              src
+              alt
+            }
           }
         }
       }
     }
   }
-}
-`
+`;

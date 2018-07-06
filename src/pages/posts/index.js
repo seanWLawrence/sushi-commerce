@@ -55,12 +55,16 @@ export default class Posts extends React.Component<Props> {
         },
       } = post;
 
-      let innerSectionStyles = bulmaClassnames({
-        column: ['4-desktop', '6-tablet', '11-mobile'],
+      let sectionStylesInline = {
+        marginBottom: '30px',
+      };
+
+      let sectionStyles = bulmaClassnames({
+        column: ['6-desktop', '6-tablet', '11-mobile'],
       });
 
       return (
-        <div className={innerSectionStyles} key={title}>
+        <div style={sectionStylesInline} className={sectionStyles} key={title}>
           <GridImage src={src} alt={alt} to={slug} />
           <GridTitle title={title} to={slug} />
           <Excerpt excerpt={excerpt} />
