@@ -1,13 +1,13 @@
 // @flow
-import React from 'react'
-import bulmaClassnames from '../utils'
-import {FeaturedImage, FeaturedImagePreview} from '../components/images'
-import {PageTitle} from '../components/titles'
-import Price from '../components/price'
-import {ProductFeatures} from '../components/features'
-import {Html, HtmlPreview} from '../components/html'
-import Tags from '../components/tags'
-import {BuyButtons} from '../components/buttons'
+import React from 'react';
+import bulmaClassnames from '../utils';
+import { FeaturedImage, FeaturedImagePreview } from '../components/images';
+import { PageTitle } from '../components/titles';
+import Price from '../components/price';
+import { ProductFeatures } from '../components/features';
+import { Html, HtmlPreview } from '../components/html';
+import Tags from '../components/tags';
+import { BuyButtons } from '../components/buttons';
 
 type Props = {
   data: {
@@ -17,14 +17,14 @@ type Props = {
         price: number,
         features: string[],
         featuredImage: {
-          alt: string
+          alt: string,
         },
         tags: string[],
         paypalAddToCartButtonCode: string,
         paypalBuyNowButtonCode: string,
-        coinbaseCommerceButtonCode: string
+        coinbaseCommerceButtonCode: string,
       },
-      html: string
+      html: string,
     },
     featuredImage: {
       sizes: {
@@ -33,88 +33,80 @@ type Props = {
         src: string,
         srcSet: string,
         srcSetWebp: string,
-        srcSetWebp: string
-      }
-    }
+        srcSetWebp: string,
+      },
+    },
   },
   src?: string,
-  body?: string
-}
+  body?: string,
+};
 
-let Product = ({data, src, body} : Props) => {
-
+let Product = ({ data, src, body }: Props) => {
   let {
     markdownRemark: {
       frontmatter: {
         title,
         price,
         features,
-        featuredImage: {
-          alt
-        },
+        featuredImage: { alt },
         tags,
         paypalAddToCartButtonCode,
         paypalBuyNowButtonCode,
-        coinbaseCommerceButtonCode
+        coinbaseCommerceButtonCode,
       },
-      html
+      html,
     },
-    featuredImage: {
-      sizes
-    }
-  } = data
+    featuredImage: { sizes },
+  } = data;
 
   let sectionStyles = {
     maxWidth: '100vw',
     margin: 'auto',
     position: 'relative',
-    zIndex: 0
-  }
+    zIndex: 1,
+  };
 
   let innerSectionStylesInline = {
-    marginBottom: '60px'
-  }
+    marginBottom: '60px',
+  };
 
   let innerSectionStyles = bulmaClassnames({
-    column: ['11-mobile', '8-tablet', '6-desktop']
-  })
+    column: ['11-mobile', '8-tablet', '6-desktop'],
+  });
 
   return (
-    <section style={sectionStyles} className='columns is-mobile is-centered'>
+    <section style={sectionStyles} className="columns is-mobile is-centered">
       <div style={innerSectionStylesInline} className={innerSectionStyles}>
-        <FeaturedImage sizes={sizes} alt={alt}/>
-        <FeaturedImagePreview src={src} alt={alt}/>
-        <PageTitle title={title}/>
-        <Price price={price}/>
-        <ProductFeatures features={features}/>
-        <Html html={html}/>
-        <HtmlPreview body={body}/>
-        <Tags tags={tags}/>
+        <FeaturedImage sizes={sizes} alt={alt} />
+        <FeaturedImagePreview src={src} alt={alt} />
+        <PageTitle title={title} />
+        <Price price={price} />
+        <ProductFeatures features={features} />
+        <Html html={html} />
+        <HtmlPreview body={body} />
+        <Tags tags={tags} />
       </div>
       <BuyButtons
         paypalBuyNowButtonCode={paypalBuyNowButtonCode}
         paypalAddToCartButtonCode={paypalAddToCartButtonCode}
-        coinbaseCommerceButtonCode={coinbaseCommerceButtonCode}/>
+        coinbaseCommerceButtonCode={coinbaseCommerceButtonCode}
+      />
     </section>
-  )
-}
+  );
+};
 
-export default Product
+export default Product;
 
-declare function graphql(query : string[]) : string;
+declare function graphql(query: string[]): string;
 
-export let query = graphql ` 
+export let query = graphql`
   query ProductQuery($slug: String!, $featuredImage: String) {
-    markdownRemark(fields: {
-      slug: {
-        eq: $slug
-      }
-    }) {
+    markdownRemark(fields: { slug: { eq: $slug } }) {
       fields {
         slug
       }
       frontmatter {
-        title 
+        title
         price
         featuredImage {
           alt
@@ -127,12 +119,10 @@ export let query = graphql `
       }
       html
     }
-    featuredImage: imageSharp(id: {
-      regex: $featuredImage
-    }) {
-      sizes(maxWidth : 700, quality : 65) {
+    featuredImage: imageSharp(id: { regex: $featuredImage }) {
+      sizes(maxWidth: 700, quality: 65) {
         ...GatsbyImageSharpSizes_withWebp
       }
     }
   }
-`
+`;

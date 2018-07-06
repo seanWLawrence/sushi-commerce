@@ -14,3 +14,9 @@ $primary:  rgb(245, 139, 157);
     font-size: 16px;
   }
 }
+
+@media (max-width: 1080px) {
+  .paypal-cart-button {
+    margin-top: 5px;
+  }
+}
