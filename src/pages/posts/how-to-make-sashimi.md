@@ -1,10 +1,10 @@
 ---
+template: post
 title: How to make sashimi
 date: '2018-05-28'
-template: post
 featuredImage:
   alt: Plate of sashimi
-  src: /static/images/sashimi.jpg
+  src: /images/epicurrence-64533-unsplash.jpg
 tags:
   - sushi
   - sashimi
