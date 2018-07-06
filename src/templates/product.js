@@ -16,7 +16,7 @@ type Props = {
       frontmatter: {
         title: string,
         price: number,
-        features: string[],
+        features: string,
         featuredImage: {
           src?: string,
           alt: string,

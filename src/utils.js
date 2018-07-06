@@ -167,11 +167,14 @@ let stripHtmlFromPaypalCode = (code: string) => {
   return value.slice(1, endOfValue);
 };
 
+// if prop is not passed, returns empty version of that prop type
+// used for Netlify CMS to always show the preview, even with some props not entered yet
 let defaultString = (string: string) => (string ? string : '');
 let defaultArray = (array: *[]) => (array.length > 1 ? array : []);
 let defaultObject = (object: {}) =>
   Object.keys(object).length > 1 ? object : {};
 let defaultNumber = (number: number) => (number > 0 ? number : 0);
+let defaultBoolean = (boolean: boolean) => (boolean ? boolean : false);
 
 export {
   ConditionalRender,
@@ -181,5 +184,6 @@ export {
   defaultArray,
   defaultObject,
   defaultNumber,
+  defaultBoolean,
   bulmaClassnames as default,
 };

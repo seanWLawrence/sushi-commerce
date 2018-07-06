@@ -5,9 +5,7 @@ price: 20
 featuredImage:
   alt: Plate of sashimi
   src: /static/images/sashimi.jpg
-features:
-  - Made with the freshest fish, caught daily
-  - World-class chefs carve each slice by hand
+features: Made with the freshest fish caught daily, World-class chefs carve each slice by hand
 paypalAddToCartButtonCode: >-
   <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
   <input type="hidden" name="cmd" value="_s-xclick">

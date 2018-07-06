@@ -454,14 +454,9 @@ collections:
             required: false
             default: Product image
       - name: features
-        label: Features
-        widget: list
+        label: Features (separate with comma)
+        widget: text
         required: true
-        field:
-          - name: feature
-            label: Feature
-            widget: string
-            required: true
       - name: paypalAddToCartButtonCode
         label: PayPal Add to Cart Button code
         widget: text

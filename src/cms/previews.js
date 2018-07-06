@@ -11,6 +11,7 @@ import {
   defaultObject,
   defaultArray,
   defaultNumber,
+  defaultBoolean,
 } from '../utils';
 
 type Entry = (string[]) => string;
@@ -65,7 +66,7 @@ export let ProductPreview = ({
       frontmatter: {
         title: defaultString(entry.getIn(['data', 'title'])),
         price: defaultNumber(entry.getIn(['data', 'price'])),
-        features: defaultArray(entry.getIn(['data', 'features'])),
+        features: defaultString(entry.getIn(['data', 'features'])),
         paypalAddToCartButtonCode: defaultString(
           entry.getIn(['data', 'paypalAddToCartButtonCode'])
         ),
@@ -87,6 +88,8 @@ export let ProductPreview = ({
     },
     isPreview: true,
   };
+
+  console.log(data.markdownRemark.frontmatter.features);
 
   // render <Product /> in preview
   return <Product data={data} />;

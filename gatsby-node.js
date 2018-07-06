@@ -82,7 +82,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
                       src
                       alt
                     }
-                    features
+                    features 
                     paypalAddToCartButtonCode
                     paypalBuyNowButtonCode
                     coinbaseCommerceButtonLink
