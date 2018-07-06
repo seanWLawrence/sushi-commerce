@@ -3,7 +3,10 @@ import * as React from 'react';
 import Link from 'gatsby-link';
 import FontAwesome from 'react-fontawesome';
 import type { Properties } from 'csstype';
-import bulmaClassnames, { ConditionalRender } from '../utils';
+import bulmaClassnames, {
+  ConditionalRender,
+  stripHtmlFromPaypalCode,
+} from '../utils';
 
 let Logo = ({ sizes }) => {
   return (
@@ -65,6 +68,9 @@ let PaypalCartButton = ({
   className = '',
   style = {},
 }: PaypalCartButtonProps) => {
+  // remove the value from the full html code for the button
+  code = stripHtmlFromPaypalCode(code);
+
   let buttonStyles = {
     backgroundColor: '#fff',
     margin: 0,

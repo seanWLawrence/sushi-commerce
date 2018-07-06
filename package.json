@@ -37,7 +37,7 @@
   "license": "MIT",
   "scripts": {
     "build": "flow && gatsby build",
-    "prepublish": "flow",
+    "flow": "clear && flow",
     "flow:watch": "flow-watch",
     "build:serve": "flow && gatsby build && gatsby serve",
     "develop": "flow && gatsby develop",

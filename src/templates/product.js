@@ -1,13 +1,14 @@
 // @flow
 import React from 'react';
 import bulmaClassnames from '../utils';
-import { FeaturedImage, FeaturedImagePreview } from '../components/images';
+import { FeaturedImage } from '../components/images';
 import { PageTitle } from '../components/titles';
 import Price from '../components/price';
 import { ProductFeatures } from '../components/features';
-import { Html, HtmlPreview } from '../components/html';
+import Html from '../components/html';
 import Tags from '../components/tags';
 import { BuyButtons } from '../components/buttons';
+import type { GatsbyImageSizes } from '../types';
 
 type Props = {
   data: {
@@ -22,26 +23,17 @@ type Props = {
         tags: string[],
         paypalAddToCartButtonCode: string,
         paypalBuyNowButtonCode: string,
-        coinbaseCommerceButtonCode: string,
+        coinbaseCommerceButtonLink: string,
       },
       html: string,
     },
-    featuredImage: {
-      sizes: {
-        aspectRatio: string,
-        sizes: string,
-        src: string,
-        srcSet: string,
-        srcSetWebp: string,
-        srcSetWebp: string,
-      },
-    },
+    featuredImageSizes?: GatsbyImageSizes,
+    featuredImageSrc?: string,
+    isPreview?: boolean,
   },
-  src?: string,
-  body?: string,
 };
 
-let Product = ({ data, src, body }: Props) => {
+let Product = ({ data }: Props) => {
   let {
     markdownRemark: {
       frontmatter: {
@@ -52,12 +44,23 @@ let Product = ({ data, src, body }: Props) => {
         tags,
         paypalAddToCartButtonCode,
         paypalBuyNowButtonCode,
-        coinbaseCommerceButtonCode,
+        coinbaseCommerceButtonLink,
       },
       html,
     },
-    featuredImage: { sizes },
+    featuredImageSizes,
+    featuredImageSrc,
+    isPreview,
   } = data;
+
+  let sizes, src;
+
+  // if one of these props exist, assign it to the sizes or src variable
+  if (featuredImageSizes !== undefined) {
+    sizes = featuredImageSizes.sizes;
+  } else if (featuredImageSrc !== undefined) {
+    src = featuredImageSrc;
+  }
 
   let sectionStyles = {
     maxWidth: '100vw',
@@ -77,19 +80,17 @@ let Product = ({ data, src, body }: Props) => {
   return (
     <section style={sectionStyles} className="columns is-mobile is-centered">
       <div style={innerSectionStylesInline} className={innerSectionStyles}>
-        <FeaturedImage sizes={sizes} alt={alt} />
-        <FeaturedImagePreview src={src} alt={alt} />
+        <FeaturedImage sizes={sizes} src={src} alt={alt} />
         <PageTitle title={title} />
         <Price price={price} />
         <ProductFeatures features={features} />
-        <Html html={html} />
-        <HtmlPreview body={body} />
+        <Html html={html} isPreview={isPreview} />
         <Tags tags={tags} />
       </div>
       <BuyButtons
         paypalBuyNowButtonCode={paypalBuyNowButtonCode}
         paypalAddToCartButtonCode={paypalAddToCartButtonCode}
-        coinbaseCommerceButtonCode={coinbaseCommerceButtonCode}
+        coinbaseCommerceButtonCode={coinbaseCommerceButtonLink}
       />
     </section>
   );
@@ -114,12 +115,12 @@ export let query = graphql`
         features
         paypalAddToCartButtonCode
         paypalBuyNowButtonCode
-        coinbaseCommerceButtonCode
+        coinbaseCommerceButtonLink
         tags
       }
       html
     }
-    featuredImage: imageSharp(id: { regex: $featuredImage }) {
+    featuredImageSizes: imageSharp(id: { regex: $featuredImage }) {
       sizes(maxWidth: 700, quality: 65) {
         ...GatsbyImageSharpSizes_withWebp
       }

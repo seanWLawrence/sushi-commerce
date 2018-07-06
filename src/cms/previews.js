@@ -1,15 +1,25 @@
+// @flow
 import React from 'react';
 import Post from '../templates/post';
 import Product from '../templates/product';
 import Page from '../templates/page';
 import Index from '../pages/index';
+import DataTable from './data-table';
+import { firstLetterToUppercase } from '../utils';
 
-export let PostPreview = ({ entry, widgetFor, getAsset }) => {
-  // get image.src from assets
-  let src = getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value;
-  let body = widgetFor('body');
+type Entry = (string[]) => string;
+type WidgetFor = string => string;
+type GetAsset = string => { value: string };
+type WidgetsFor = (*) => *[];
 
-  // create data object with cms helpers to pass to <Post />
+type PostPreviewProps = {
+  entry: Entry,
+  widgetFor: WidgetFor,
+  getAsset: GetAsset,
+};
+
+export let PostPreview = ({ entry, widgetFor, getAsset }: PostPreviewProps) => {
+  // pull data with entry to display in preview of Netlify CMS
   let data = {
     markdownRemark: {
       frontmatter: {
@@ -20,23 +30,30 @@ export let PostPreview = ({ entry, widgetFor, getAsset }) => {
         },
         tags: entry.getIn(['data', 'tags']),
       },
-      html: '',
+      html: widgetFor('body'),
     },
-    featuredImage: {
-      sizes: null,
-    },
+    featuredImageSizes: undefined,
+    featuredImageSrc: getAsset(entry.getIn(['data', 'featuredImage', 'src']))
+      .value,
+    isPreview: true,
   };
 
-  // render <Post />
-  return <Post data={data} src={src} body={body} />;
+  // render <Post /> in preview
+  return <Post data={data} />;
 };
 
-export let ProductPreview = ({ entry, widgetFor, getAsset }) => {
-  // get image.src from assets
-  let src = getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value;
-  let body = widgetFor('body');
+type ProductPreviewProps = {
+  entry: Entry,
+  widgetFor: WidgetFor,
+  getAsset: GetAsset,
+};
 
-  // create data object with cms helpers to pass to <Product />
+export let ProductPreview = ({
+  entry,
+  widgetFor,
+  getAsset,
+}: ProductPreviewProps) => {
+  // pull data with entry to display in preview of Netlify CMS
   let data = {
     markdownRemark: {
       frontmatter: {
@@ -48,29 +65,35 @@ export let ProductPreview = ({ entry, widgetFor, getAsset }) => {
           'paypalAddToCartButtonCode',
         ]),
         paypalBuyNowButtonCode: entry.getIn(['data', 'paypalBuyNowButtonCode']),
-        coinbaseCommerceButtonCode: entry.getIn([
+        coinbaseCommerceButtonLink: entry.getIn([
           'data',
-          'coinbaseCommerceButtonCode',
+          'coinbaseCommerceButtonLink',
         ]),
         featuredImage: {
           alt: entry.getIn(['data', 'alt']),
         },
         tags: entry.getIn(['data', 'tags']),
       },
+      html: widgetFor('body'),
     },
-    featuredImage: {
-      sizes: null,
-    },
+    featuredImageSizes: undefined,
+    featuredImageSrc: getAsset(entry.getIn(['data', 'featuredImage', 'src']))
+      .value,
+    isPreview: true,
   };
 
-  // render <Product />
-  return <Product data={data} src={src} body={body} />;
+  // render <Product /> in preview
+  return <Product data={data} />;
 };
 
-export let PagePreview = ({ entry, widgetFor, getAsset }) => {
-  let body = widgetFor('body');
+type PagePreviewProps = {
+  entry: Entry,
+  widgetFor: WidgetFor,
+  getAsset: GetAsset,
+};
 
-  // create data object with cms helpers to pass to <Page />
+export let PagePreview = ({ entry, widgetFor, getAsset }: PagePreviewProps) => {
+  // pull data with entry to display in preview of Netlify CMS
   let data = {
     markdownRemark: {
       fields: {
@@ -81,16 +104,27 @@ export let PagePreview = ({ entry, widgetFor, getAsset }) => {
         tags: entry.getIn(['data', 'tags']),
         date: '',
       },
-      html: '',
+      html: widgetFor('body'),
     },
+    isPreview: true,
   };
 
-  // render <Page />
-  return <Page data={data} body={body} />;
+  // render <Page /> in preview
+  return <Page data={data} />;
 };
 
-export let LandingPagePreview = ({ entry, widgetsFor, getAsset }) => {
-  // create data object with cms helpers to pass to <Index />
+type LandingPagePreviewProps = {
+  entry: Entry,
+  widgetsFor: WidgetsFor,
+  getAsset: GetAsset,
+};
+
+export let LandingPagePreview = ({
+  entry,
+  widgetsFor,
+  getAsset,
+}: LandingPagePreviewProps) => {
+  // pull data with entry to display in preview of Netlify CMS
   let data = {
     landingPage: {
       banner: {
@@ -126,6 +160,182 @@ export let LandingPagePreview = ({ entry, widgetsFor, getAsset }) => {
     },
   };
 
-  // render <Index />
+  // render <Index /> in preview
   return <Index data={data} />;
 };
+
+type NavigationPreviewProps = {
+  entry: Entry,
+  widgetsFor: WidgetsFor,
+};
+
+export let NavigationPreview = ({
+  entry,
+  widgetsFor,
+}: NavigationPreviewProps) => {
+  // get pages from the menuItems list
+  let menuItems = widgetsFor('menuItems').map(menuItem => {
+    let page = menuItem.getIn(['data', 'page']);
+
+    // capitalize the first letter of each page
+    return firstLetterToUppercase(page);
+  });
+
+  // pull data from entry to display in preview of Netlify CMS
+  let data = [
+    {
+      heading: 'Menu items',
+      text: menuItems.join(', '),
+    },
+    {
+      heading: 'Hide footer?',
+      text: entry.getIn(['data', 'hideFooter']) ? 'True' : 'False',
+    },
+    {
+      heading: 'Paypal cart button code',
+      text: entry.getIn(['data', 'paypalCartButtonCode']),
+    },
+  ];
+
+  // render data into <DataTable /> component
+  return <DataTable data={data} />;
+};
+
+type StoreDetailsPreviewProps = {
+  entry: Entry,
+  widgetsFor: WidgetsFor,
+};
+
+export let StoreDetailsPreview = ({
+  entry,
+  widgetsFor,
+}: StoreDetailsPreviewProps) => {
+  // get list of sites from socialMedia data
+  let socialMedia = widgetsFor('socialMedia').map(site => {
+    site = site.getIn(['data', 'site']);
+
+    // capitalize the first letter
+    return firstLetterToUppercase(site);
+  });
+
+  // capitalize the first letter of each keyword
+  let keywords = entry
+    .getIn(['data', 'keywords'])
+    .map(keyword => firstLetterToUppercase(keyword));
+  console.log(keywords);
+
+  // pull data from entry for preview in Netlify CMS
+  let data = [
+    {
+      heading: 'Title',
+      text: entry.getIn(['data', 'title']),
+    },
+    {
+      heading: 'Description',
+      text: entry.getIn(['data', 'description']),
+    },
+    {
+      heading: 'Keywords',
+      text: keywords.join(', '),
+    },
+    {
+      heading: 'Logo',
+      text: 'N/A',
+    },
+    {
+      heading: 'Social media',
+      text: socialMedia.join(', '),
+    },
+    {
+      heading: 'Google Analytics',
+      text: entry.getIn(['data', 'googleAnalytics']),
+    },
+    {
+      heading: 'Custom CSS',
+      text: entry.getIn(['data', 'customCSS']),
+    },
+    {
+      heading: 'Custom JavaScript',
+      text: `${entry.getIn(['data', 'customJS'])}`,
+    },
+  ];
+
+  // render data in <DataTable /> component
+  return <DataTable data={data} />;
+};
+
+// Upcoming feature, currently inactive
+/* export let StylesPreview = ({ entry }) => {
+  let data = [
+    {
+      heading: 'Color - primary',
+      text: entry.getIn(['data', 'colors', 'primary']),
+    },
+    {
+      heading: 'Color - info',
+      text: entry.getIn(['data', 'colors', 'info']),
+    },
+    {
+      heading: 'Color - link',
+      text: entry.getIn(['data', 'colors', 'link']),
+    },
+    {
+      heading: 'Color - success',
+      text: entry.getIn(['data', 'colors', 'success']),
+    },
+    {
+      heading: 'Color - warning',
+      text: entry.getIn(['data', 'colors', 'warning']),
+    },
+    {
+      heading: 'Color - danger',
+      text: entry.getIn(['data', 'colors', 'danger']),
+    },
+    {
+      heading: 'Font - family',
+      text: entry.getIn(['data', 'fonts', 'family']),
+    },
+    {
+      heading: 'Font - heading 1 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading1']),
+    },
+    {
+      heading: 'Font - heading 2 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading2']),
+    },
+    {
+      heading: 'Font - heading 3 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading3']),
+    },
+    {
+      heading: 'Font - heading 4 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading4']),
+    },
+    {
+      heading: 'Font - heading 5 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading5']),
+    },
+    {
+      heading: 'Font - heading 6 size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'heading6']),
+    },
+    {
+      heading: 'Font - body size',
+      text: entry.getIn(['data', 'fonts', 'sizes', 'body']),
+    },
+    {
+      heading: 'Font - headings weight',
+      text: entry.getIn(['data', 'fonts', 'weights', 'headings']),
+    },
+    {
+      heading: 'Font - body weight',
+      text: entry.getIn(['data', 'fonts', 'weights', 'body']),
+    },
+    {
+      heading: 'Button style',
+      text: entry.getIn(['data', 'buttonStyle']),
+    },
+  ];
+
+  return <DataTable data={data} name="Styles" />;
+}; */

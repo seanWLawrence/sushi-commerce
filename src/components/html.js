@@ -7,9 +7,23 @@ type HtmlProps = {
   html: string,
   style?: Properties<string | number>,
   className?: string,
+  isPreview?: boolean,
 };
 
-export let Html = ({ html, style = {}, className = '' }: HtmlProps) => {
+let Html = ({
+  html,
+  style = {},
+  className = '',
+  isPreview = false,
+}: HtmlProps) => {
+  if (isPreview) {
+    return (
+      <div style={style} className={`content ${className}`}>
+        {html}
+      </div>
+    );
+  }
+
   return (
     <div
       style={style}
@@ -21,22 +35,4 @@ export let Html = ({ html, style = {}, className = '' }: HtmlProps) => {
   );
 };
 
-type HtmlPreviewProps = {
-  body?: string,
-  style?: Properties<string | number>,
-  className?: string,
-};
-
-export let HtmlPreview = ({
-  body,
-  style = {},
-  className = '',
-}: HtmlPreviewProps) => {
-  return (
-    <ConditionalRender prop={body}>
-      <div style={style} className={`content ${className}`}>
-        {body}
-      </div>
-    </ConditionalRender>
-  );
-};
+export default Html;

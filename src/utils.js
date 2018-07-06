@@ -1,11 +1,11 @@
 // @flow
-import * as React from 'react'
-import {withPrefix} from 'gatsby-link'
+import * as React from 'react';
+import { withPrefix } from 'gatsby-link';
 
-let formatString = (selector : string, value : string) => {
+let formatString = (selector: string, value: string) => {
   switch (selector) {
     case 'backgroundColor':
-      return `has-background-color-${value}`
+      return `has-background-color-${value}`;
     case 'textColor':
       return `has-text-${value}`;
     case 'textSize':
@@ -41,17 +41,22 @@ let formatString = (selector : string, value : string) => {
     case 'has':
       return `has-${value}`;
     case 'raw':
-      return value
+      return value;
     default:
-      console.warn('An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
-          'ossible keys and values.');
-      return ''
+      console.warn(
+        'An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
+          'ossible keys and values.'
+      );
+      return '';
   }
-}
+};
 
-let formatArray = (selector : string, value : string[]) : string => {
-  let addPrefixToAllValues = (prefix : string) : string => {
-    return value.reduce((acc, next) => acc.concat(` ${prefix}-${next}`).trim(), "")
+let formatArray = (selector: string, value: string[]): string => {
+  let addPrefixToAllValues = (prefix: string): string => {
+    return value.reduce(
+      (acc, next) => acc.concat(` ${prefix}-${next}`).trim(),
+      ''
+    );
   };
 
   switch (selector) {
@@ -78,26 +83,30 @@ let formatArray = (selector : string, value : string[]) : string => {
     case 'has':
       return addPrefixToAllValues('has');
     case 'textSize':
-      return addPrefixToAllValues('is-size')
+      return addPrefixToAllValues('is-size');
     default:
-      console.warn('An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
-          'ossible keys and values.');
-      return ''
+      console.warn(
+        'An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
+          'ossible keys and values.'
+      );
+      return '';
   }
-}
+};
 
-let formatClassname = (selector : string, value : $FlowFixMe) : string => {
+let formatClassname = (selector: string, value: $FlowFixMe): string => {
   if (typeof value === 'string') {
-    return formatString(selector, value)
+    return formatString(selector, value);
   }
   if (Array.isArray(value) && value.map(entry => typeof entry === 'string')) {
-    return formatArray(selector, value)
+    return formatArray(selector, value);
   } else {
-    console.warn('Invalid value has been passed to bulmaClassnames. Values can only be a string or' +
-        ' array')
-    return ''
+    console.warn(
+      'Invalid value has been passed to bulmaClassnames. Values can only be a string or' +
+        ' array'
+    );
+    return '';
   }
-}
+};
 
 type Classnames = {
   is?: string | string[],
@@ -118,46 +127,59 @@ type Classnames = {
   inlineBlock?: string | string[],
   inline?: string | string[],
   image?: string | string[],
-  raw?: string
-}
+  raw?: string,
+};
 
-let bulmaClassnames = ({
-  ...classNames
-} : Classnames) : string => {
-  return Object
-    .entries(classNames)
+let bulmaClassnames = ({ ...classNames }: Classnames): string => {
+  return Object.entries(classNames)
     .map(entry => {
-      let [selector,
-        value] = entry;
-      return formatClassname(selector, value)
+      let [selector, value] = entry;
+      return formatClassname(selector, value);
     })
     .reduce((acc, next) => {
-      return acc.concat(` ${next}`)
-    })
-}
+      return acc.concat(` ${next}`);
+    });
+};
 
 type Props = {
   prop: *,
-  children: React.Node | () => React.Node
-}
+  children: React.Node | (() => React.Node),
+};
 
-class ConditionalRender extends React.Component < Props > {
+class ConditionalRender extends React.Component<Props> {
   render() {
-    let {prop, children} = this.props
-    return prop
-      ? children
-      : null
+    let { prop, children } = this.props;
+    return prop ? children : null;
   }
 }
 
-export let linkSrcToStaticImage = (src : string) => {
-
+let linkSrcToStaticImage = (src: string) => {
   // crop 'static' from the file name and add './' in front of it
-  let formattedFileName = './'.concat(src.slice(8))
+  let formattedFileName = './'.concat(src.slice(8));
 
   // use 'gatsby-link' helper function to link the file to the image in the static
   // folder
-  return withPrefix(formattedFileName)
-}
+  return withPrefix(formattedFileName);
+};
 
-export {ConditionalRender, bulmaClassnames as default}
+let firstLetterToUppercase = (word: string) =>
+  word.replace(/^\w/, character => character.toUpperCase());
+
+// strips away html and gets the code's value for the buy button components
+let stripHtmlFromPaypalCode = (code: string) => {
+  let value = code.split('value=')[2].split('>')[0];
+
+  // get value minus 1 to strip ending quote in return statement
+  let endOfValue = value.length - 1;
+
+  // strips the quotes from the beginning and end so it will load correctly in the paypalButton components
+  return value.slice(1, endOfValue);
+};
+
+export {
+  ConditionalRender,
+  linkSrcToStaticImage,
+  firstLetterToUppercase,
+  stripHtmlFromPaypalCode,
+  bulmaClassnames as default,
+};

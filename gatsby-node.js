@@ -1,16 +1,16 @@
-let path = require('path')
-let {createFilePath} = require('gatsby-source-filesystem')
+let path = require('path');
+let { createFilePath } = require('gatsby-source-filesystem');
 
-exports.onCreateNode = ({node, getNode, boundActionCreators}) => {
-  let {createNodeField} = boundActionCreators
+exports.onCreateNode = ({ node, getNode, boundActionCreators }) => {
+  let { createNodeField } = boundActionCreators;
   if (node.internal.type === 'MarkdownRemark') {
-    let slug = createFilePath({node, getNode, basePath: 'pages'})
-    createNodeField({node, name: 'slug', value: slug})
+    let slug = createFilePath({ node, getNode, basePath: 'pages' });
+    createNodeField({ node, name: 'slug', value: slug });
   }
-}
+};
 
-exports.createPages = ({boundActionCreators, graphql}) => {
-  let {createPage} = boundActionCreators
+exports.createPages = ({ boundActionCreators, graphql }) => {
+  let { createPage } = boundActionCreators;
 
   return new Promise((resolve, reject) => {
     // prettier-ignore
@@ -85,7 +85,7 @@ exports.createPages = ({boundActionCreators, graphql}) => {
                     features
                     paypalAddToCartButtonCode
                     paypalBuyNowButtonCode
-                    coinbaseCommerceButtonCode
+                    coinbaseCommerceButtonLink
                     tags
                   }
                   html
@@ -184,5 +184,5 @@ exports.createPages = ({boundActionCreators, graphql}) => {
           })
         })
     }))
-  })
-}
+  });
+};
