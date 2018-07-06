@@ -3,6 +3,7 @@ template: post
 title: 10 Reasons Sushi is Good for a Healthy Lifestyle
 date: '2018-07-06'
 featuredImage:
+  alt: Person doing yoga on the edge of a mountain
   src: /static/images/marion-michele-191320-unsplash.jpg
 tags:
   - tips
