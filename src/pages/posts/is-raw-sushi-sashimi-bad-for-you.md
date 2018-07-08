@@ -4,7 +4,7 @@ title: Is raw sushi (sashimi) bad for you?
 date: '2018-07-06'
 featuredImage:
   alt: Hand grabbing raw sushi (sashimi)
-  src: /static/images/kyle-head-465761-unsplash.jpg
+  src: /images/kyle-head-465761-unsplash.jpg
 tags:
   - Raw
   - Sashimi
