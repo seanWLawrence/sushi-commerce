@@ -36,7 +36,7 @@ let SocialMedia = ({ socialMedia }) => {
     };
 
     let buttonStyles = bulmaClassnames({
-      is: ['primary', 'small'],
+      is: ['primary', 'small', 'rounded'],
       raw: 'button has-addons',
     });
 

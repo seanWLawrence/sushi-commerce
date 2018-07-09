@@ -10,15 +10,15 @@ export class ProductFeatures extends React.Component<{
     let featuresArray = [];
 
     // if multiple features, map over them and put them each in a <li> element
-    if (features.split(', ')) {
+    if (features.split('.')) {
       // split them by the commas
-      featuresArray = features.split(', ');
+      featuresArray = features.split('.');
 
       // map over them
       return featuresArray.map(feature => {
         return (
           <li key={feature} className="menu-item">
-            {feature}
+            {feature.trim()}
           </li>
         );
       });

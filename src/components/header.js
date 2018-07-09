@@ -71,6 +71,8 @@ let PaypalCartButton = ({
   // remove the value from the full html code for the button
   code = stripHtmlFromPaypalCode(code);
 
+  let sectionStyles = { display: 'flex', flexDirection: 'column' };
+
   let buttonStyles = {
     backgroundColor: '#fff',
     margin: 0,
@@ -98,7 +100,7 @@ let PaypalCartButton = ({
       action="https://www.paypal.com/cgi-bin/webscr"
       method="post"
       className={`navbar-item ${className}`}
-      style={style}
+      style={{ ...sectionStyles, style }}
     >
       <input type="hidden" name="cmd" value="_s-xclick" />
       <input type="hidden" name="encrypted" value={code} />

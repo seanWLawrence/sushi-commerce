@@ -243,7 +243,6 @@ export let StoreDetailsPreview = ({
   let keywords = entry
     .getIn(['data', 'keywords'])
     .map(keyword => firstLetterToUppercase(keyword));
-  console.log(keywords);
 
   // pull data from entry for preview in Netlify CMS
   let data = [

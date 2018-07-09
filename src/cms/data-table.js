@@ -5,7 +5,7 @@ import * as React from 'react';
 let DataSection = ({ data }) => {
   let sectionStyles = {
     border: '2px solid #ccc',
-    maxWidth: '500px',
+    width: '500px',
     display: 'flex',
     flexDirection: 'column',
     fontFamily: 'sans-serif',
@@ -61,6 +61,9 @@ let DataTable = ({ data }: DataTableProps): React.Node => {
 
   let sectionStyles = {
     margin: '50px auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   };
 
   // render the <DataTable />

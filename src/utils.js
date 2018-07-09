@@ -170,7 +170,7 @@ let stripHtmlFromPaypalCode = (code: string) => {
 // if prop is not passed, returns empty version of that prop type
 // used for Netlify CMS to always show the preview, even with some props not entered yet
 let defaultString = (string: string) => (string ? string : '');
-let defaultArray = (array: *[]) => (array.length > 1 ? array : []);
+let defaultArray = (array: *[]) => (array.length !== 0 ? array : []);
 let defaultObject = (object: {}) =>
   Object.keys(object).length > 1 ? object : {};
 let defaultNumber = (number: number) => (number > 0 ? number : 0);

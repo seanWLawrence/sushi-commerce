@@ -20,7 +20,7 @@ export let FeaturedImage = ({
   isPreview = false,
 }: FeaturedImageProps) => {
   // renders standard image when used as a preview
-  if (isPreview) {
+  if (isPreview && src !== '') {
     let linkedSrc = withPrefix(src);
 
     let imageStyles = {

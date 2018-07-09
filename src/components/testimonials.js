@@ -21,7 +21,7 @@ let Testimonial = ({ name, text }: TestimonialType): React.Node => {
     column: ['11-mobile', '10-tablet', '4-desktop'],
   });
 
-  let textStyles = bulmaClassnames({ textSize: '4' });
+  let textStyles = bulmaClassnames({ textSize: '4', textAlign: 'centered' });
 
   let nameStyles = bulmaClassnames({ textColor: 'grey-darker' });
 

@@ -51,7 +51,7 @@ let Post = ({ data }: Props) => {
 
   let sectionStyles = {
     maxWidth: '100vw',
-    margin: 'auto',
+    margin: '50px auto',
   };
 
   let innerSectionStyles = bulmaClassnames({
