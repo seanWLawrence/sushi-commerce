@@ -195,6 +195,7 @@ export default class ContactForm extends React.Component<{}, ContactState> {
         data-netlify-honeypot="bot-field"
         onSubmit={this._handleSubmit}
       >
+        <input type="hidden" name="contact-form" value="contact-form" />
         <input name="bot-field" hidden /> {/*for Netlify to catch bots*/}
         <EmailInput onChange={this._handleInputFieldChange} value={email} />
         <MessageInput onChange={this._handleTextAreaChange} value={message} />
