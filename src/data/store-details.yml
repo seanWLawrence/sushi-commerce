@@ -1,13 +1,12 @@
-name: storeDetails
 title: Sushi Commerce
 description: The best sushi on the planet.
-keywords: 
+keywords:
   - sushi
   - sashimi
-logo: /static/images/logo.jpg
+logo: /images/logo.svg
 socialMedia:
-  - site: instagram
-    href: https://instagram.com/sushi-commerce
-googleAnalytics: UA-XXXXX-Y 
+  - href: 'https://instagram.com/sushi-commerce'
+    site: instagram
+googleAnalytics: UA-XXXXX-Y
 customCSS: /* CSS goes here */
 customJS: /* JavaScript goes here */
