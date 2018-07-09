@@ -1,5 +1,6 @@
 // @flow
 import React from 'react';
+import { navigateTo } from 'gatsby-link';
 
 export let validateEmail = (email: string) => {
   // regular expression that returns true if the input has the correct format for
@@ -159,27 +160,25 @@ export default class ContactForm extends React.Component<{}, ContactState> {
     let errorMessage = (error: string) =>
       `Sorry, there was a problem sending your request. Please try again. - Error: ${error}`;
 
+    event.preventDefault();
+    console.log('clicked!');
+
     fetch('/', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'contact-form', email, message }),
-    })
-      /* fetch('/', {
       method: 'POST',
       headers,
       body,
-    }) */
+    })
       .then(response => {
+        console.log(response);
         if (response.status === 200) {
           // on successful submission, opens success page
-          return (window.location = '/contact-form-success');
+          navigateTo('/contact-form-success/');
         }
       })
       .catch(error =>
         // on failed submission, alerts error message
         alert(errorMessage(error))
       );
-    event.preventDefault();
   };
 
   render() {
