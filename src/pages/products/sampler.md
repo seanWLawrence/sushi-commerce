@@ -5,7 +5,9 @@ price: '35'
 featuredImage:
   alt: Plate with different types of sushi
   src: /images/sashimi.jpg
-features: lkjlkj.lkjlkj
+features: |-
+  lkjlkj.
+  lkjlkj.
 tags:
   - Sampler
   - Roll
