@@ -42,7 +42,7 @@ paypalBuyNowButtonCode: >
   height="1">
 
   </form>
-coinbaseCommerceButtonLink: 'https://commerce.coinbase.com/checkout/0a176124-2b34-4435-bcea-b8beb31eb89a'
+coinbaseCommerceButtonLink: 'https://commerce.coinbase.com/checkout/e20839dc-4f34-4394-a11f-98a909190c87'
 tags:
   - Sampler
   - Roll
