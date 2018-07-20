@@ -109,7 +109,7 @@ export default class Footer extends React.Component<Props> {
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
-      height: '300px',
+      height: '320px',
       backgroundColor: '#eee',
       position: 'relative',
       zIndex: 0,

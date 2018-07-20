@@ -9,14 +9,9 @@ $primary:  rgb(245, 139, 157);
   }
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1088px) {
   .paypal-cart-button-icon {
-    font-size: 16px !important;
-  }
-}
-
-@media (max-width: 1080px) {
-  .paypal-cart-button {
+    font-size: 18px !important;
     margin-top: 5px !important;
   }
 }
