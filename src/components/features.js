@@ -10,7 +10,7 @@ export class ProductFeatures extends React.Component<{
     let featuresArray = [];
 
     // if multiple features, map over them and put them each in a <li> element
-    if (features.split('.')) {
+    if (features.indexOf('.')) {
       // split them by the commas
       featuresArray = features.split('.');
 
