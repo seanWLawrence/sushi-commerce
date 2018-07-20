@@ -15,7 +15,6 @@ let InputField = ({ isInvalid, onChange, onBlur, value }) => {
 
   return (
     <input
-      id="email"
       name="email"
       type="email"
       onChange={onChange}
@@ -68,19 +67,19 @@ class EmailInput extends React.Component<EmailProps, EmailState> {
     let { value } = this.props;
 
     return (
-      <section className="input-field field">
-        <label htmlFor="email" className="label">
+      <div className="input-field field">
+        <div htmlFor="email" className="label">
           Email
-        </label>
-        <section className="control">
+        </div>
+        <div className="control">
           <InputField
             onChange={this._handleChange}
             onBlur={this._handleBlur}
             isInvalid={isInvalid}
             value={value}
           />
-        </section>
-      </section>
+        </div>
+      </div>
     );
   }
 }
@@ -96,11 +95,11 @@ class MessageInput extends React.Component<MessageProps> {
   render() {
     let { value } = this.props;
     return (
-      <section className="input-field field">
+      <div className="input-field field">
         <label htmlFor="message" className="label">
           Message
         </label>
-        <section className="control">
+        <div className="control">
           <textarea
             id="message"
             name="message"
@@ -109,21 +108,21 @@ class MessageInput extends React.Component<MessageProps> {
             className="textarea"
             value={value}
           />
-        </section>
-      </section>
+        </div>
+      </div>
     );
   }
 }
 
-type Encode = {
+type EncodeData = {
+  'form-name': string,
   email: string,
   message: string,
 };
 
-export let encode = (data: Encode) => {
-  // formats the input to the proper escaped text to send via ContactForm
+let encode = (data: EncodeData) => {
   return Object.keys(data)
-    .map(key => `${encodeURIComponent(key)} = ${encodeURIComponent(data[key])}`)
+    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&');
 };
 
@@ -148,54 +147,38 @@ export default class ContactForm extends React.Component<{}, ContactState> {
 
   _handleTextAreaChange = (value: string) => this.setState({ message: value });
 
-  _handleSubmit = (event: SyntheticEvent<HTMLButtonElement>) => {
-    // submits the form values via a fetch request
-
+  _handleSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
     let { email, message } = this.state;
-
-    let headers = { 'Content-Type': 'application/x-www-form-urlencoded' };
-
-    let body = encode({ 'form-name': 'contact-form', email, message });
-
-    let errorMessage = (error: string) =>
-      `Sorry, there was a problem sending your request. Please try again. - Error: ${error}`;
-
-    event.preventDefault();
-    console.log('clicked!');
-
+    e.preventDefault();
     fetch('/', {
       method: 'POST',
-      headers,
-      body,
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact-form',
+        email,
+        message,
+      }),
     })
-      .then(response => {
-        console.log(response);
-        if (response.status === 200) {
-          // on successful submission, opens success page
-          navigateTo('/contact-form-success/');
-        }
-      })
-      .catch(error =>
-        // on failed submission, alerts error message
-        alert(errorMessage(error))
-      );
+      .then(() => navigateTo('/contact-form-success/'))
+      .catch(error => alert(error));
   };
 
   render() {
     let { email, message } = this.state;
     return (
       <form
-        id="contact-form"
         className="form"
         name="contact-form"
-        method="POST"
+        method="post"
         action="/contact-form-success"
         data-netlify="true"
         data-netlify-honeypot="bot-field"
         onSubmit={this._handleSubmit}
       >
         <input type="hidden" name="contact-form" value="contact-form" />
-        <input name="bot-field" hidden /> {/*for Netlify to catch bots*/}
+        <p hidden>
+          <input name="bot-field" onChange={this._handleInputFieldChange} />
+        </p>
         <EmailInput onChange={this._handleInputFieldChange} value={email} />
         <MessageInput onChange={this._handleTextAreaChange} value={message} />
         <SubmitButton />
@@ -203,3 +186,75 @@ export default class ContactForm extends React.Component<{}, ContactState> {
     );
   }
 }
+
+/* type ContactFormProps = {
+  email: string,
+  message: string,
+};
+
+export default class ContactForm extends React.Component<{}, ContactFormProps> {
+  state = {
+    email: '',
+    message: '',
+  };
+
+  _handleChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    this.setState({ [e.currentTarget.name]: e.currentTarget.value });
+  };
+
+  _handleSubmit = (e: SyntheticEvent<HTMLButtonElement>) => {
+    let { email, message } = this.state;
+    e.preventDefault();
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: encode({
+        'form-name': 'contact-form',
+        email,
+        message,
+      }),
+    })
+      .then(() => navigateTo('/contact-form-success/'))
+      .catch(error => alert(error));
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Contact</h1>
+        <form
+          name="contact-form"
+          method="post"
+          action="/contact-form-success/"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+          onSubmit={this.handleSubmit}
+        >
+          <input type="hidden" name="contact-form" value="contact-form" />
+          <p hidden>
+            <label>
+              Don’t fill this out:{' '}
+              <input name="bot-field" onChange={this._handleChange} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Email:<br />
+              <input type="email" name="email" onChange={this._handleChange} />
+            </label>
+          </p>
+          <p>
+            <label>
+              Message:<br />
+              <textarea name="message" onChange={this._handleChange} />
+            </label>
+          </p>
+          <p>
+            <button type="submit">Send</button>
+          </p>
+        </form>
+      </div>
+    );
+  }
+}
+*/

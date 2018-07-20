@@ -82,7 +82,6 @@ export default class Products extends React.Component<Props> {
     let textStyles = bulmaClassnames({ raw: 'title', textSize: '2' });
 
     let innerSectionStylesInline = {
-      maxWidth: '90vw',
       margin: 'auto',
     };
 

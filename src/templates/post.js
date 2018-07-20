@@ -98,7 +98,7 @@ export let query = graphql`
       html
     }
     featuredImageSizes: imageSharp(id: { regex: $featuredImage }) {
-      sizes(maxWidth: 700, quality: 65) {
+      sizes(maxWidth: 700, quality: 75) {
         ...GatsbyImageSharpSizes_withWebp
       }
     }

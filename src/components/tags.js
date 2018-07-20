@@ -5,12 +5,15 @@ type Props = {
   tags: string[],
 };
 
-let Tag = ({ tag }: { tag: string }) => (
-  <span className="tag is-info" key={tag}>
-    {tag}
-  </span>
-);
+let Tag = ({ tag }: { tag: string }) => {
+  let tagStyles = { textTransform: 'capitalize' };
 
+  return (
+    <span style={tagStyles} className="tag is-info" key={tag}>
+      {tag}
+    </span>
+  );
+};
 export default class Tags extends React.Component<Props> {
   displayTags(tags: string[]) {
     return tags.map(tag => {

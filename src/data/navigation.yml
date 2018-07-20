@@ -1,11 +1,11 @@
 name: navigation
 menuItems:
   - page: Products
-    to: /products
+    to: /products/
   - page: Posts
-    to: /posts
+    to: /posts/
   - page: Contact
-    to: /contact
+    to: /contact/
 paypalCartButtonCode: >-
   <form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post" >
   <input type="hidden" name="cmd" value="_s-xclick">
