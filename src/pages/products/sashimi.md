@@ -4,7 +4,7 @@ title: Sashimi
 price: 20
 featuredImage:
   alt: Plate of sashimi
-  src: /images/sashimi.jpg
+  src: /images/kyle-head-465761-unsplash.jpg
 features: >-
   Made with the freshest fish caught daily. World-class chefs carve each slice
   by hand
