@@ -50,7 +50,7 @@ export default class Products extends React.Component<Props> {
       };
 
       let sectionStyles = bulmaClassnames({
-        column: ['4-desktop', '6-tablet', '11-mobile'],
+        column: ['4-desktop', '6-tablet', '12-mobile'],
       });
 
       let titleStyles = {
@@ -76,6 +76,9 @@ export default class Products extends React.Component<Props> {
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
+      width: '95vw',
+      maxWidth: '1250px',
+      margin: 'auto',
       marginBottom: '200px',
     };
 
