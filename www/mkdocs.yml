@@ -1,0 +1,65 @@
+#Project information
+site_name: Sushi Commerce
+site_description: Sushi Commerce documentation.
+site_author: Sean Lawrence
+site_url: https://sushi-commerce.netlify.com/docs
+pages:
+  - Introduction: index.md
+  - Getting started: getting-started.md
+  - Adding store details: adding-store-details.md
+  - Creating products: creating-products.md
+  - Creating pages: creating-pages.md
+  - Creating posts: creating-posts.md
+  - Customizing your store: customizing-your-store.md
+  - License: license.md
+  - Contributing: contributing.md
+
+# Repository
+repo_name: seanwlawrence/sushi-commerce
+repo_url: https://github.com/seanwlawrence/sushi-commerce/www
+
+# Copyright
+copyright: Copyright &copy; 2018 Sushi Commerce 
+
+# Configuration
+theme:
+  name: material
+  custom_dir: theme
+  language: en
+  palette:
+    primary: white
+    accent: green
+  font: false
+  logo: images/logo.svg
+  tabs: true
+  favicon: images/favicon.ico
+
+# Customization
+extra:
+  social:
+    - type: github
+      link: https://github.com/seanwlawrence/sushi-commerce
+
+# Google Analytics
+google_analytics:
+  - 'UA-XXXXXXXX-X'
+  - 'auto'
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - footnotes
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.superfences
+
+# Overrides
+extra_css: 
+  - overrides/styles.css
+extra_javascript:
+  - overrides/scripts.js
