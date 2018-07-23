@@ -15,7 +15,7 @@ copyright: 'Copyright &copy; 2016 - 2018 Sean Lawrence'
 # Configuration
 theme:
   name: null
-  custom_dir: material
+  custom_dir: theme/material
 
   # 404 page
   static_templates:
@@ -85,4 +85,4 @@ pages:
   - License: license.md
 
 # Google Analytics
-# google_analytics:
+# google_analytics:uess_lang: false
