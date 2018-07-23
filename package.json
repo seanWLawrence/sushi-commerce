@@ -36,7 +36,7 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build:docs": "cd www && mkdocs build",
+    "builddocs": "cd www && yarn run build",
     "build": "flow && gatsby build",
     "flow": "clear && flow",
     "flow:watch": "flow-watch",

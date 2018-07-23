@@ -1,38 +1,41 @@
-#Project information
+# Project information
 site_name: Sushi Commerce
-site_description: Sushi Commerce documentation.
+site_description: Static e-commerce website generator.
 site_author: Sean Lawrence
-site_url: https://sushi-commerce.netlify.com/docs
-pages:
-  - Introduction: index.md
-  - Getting started: getting-started.md
-  - Adding store details: adding-store-details.md
-  - Creating products: creating-products.md
-  - Creating pages: creating-pages.md
-  - Creating posts: creating-posts.md
-  - Customizing your store: customizing-your-store.md
-  - License: license.md
-  - Contributing: contributing.md
+site_url: http://sushi-commerce.netlify.com
 
 # Repository
 repo_name: seanwlawrence/sushi-commerce
-repo_url: https://github.com/seanwlawrence/sushi-commerce/www
+repo_url: https://github.com/seanwlawrence/sushi-commerce
+edit_uri: ""
 
 # Copyright
-copyright: Copyright &copy; 2018 Sushi Commerce 
+copyright: 'Copyright &copy; 2016 - 2018 Sean Lawrence'
 
 # Configuration
 theme:
-  name: material
-  custom_dir: theme
+  name: null
+  custom_dir: material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
   language: en
+  feature:
+    tabs: true
   palette:
-    primary: white
-    accent: green
+    primary: indigo
+    accent: indigo
   font: false
-  logo: images/logo.svg
-  tabs: true
-  favicon: images/favicon.ico
+  favicon: assets/images/favicon.png
+  logo:
+    icon: "\uE80C"
 
 # Customization
 extra:
@@ -40,26 +43,46 @@ extra:
     - type: github
       link: https://github.com/seanwlawrence/sushi-commerce
 
-# Google Analytics
-google_analytics:
-  - 'UA-XXXXXXXX-X'
-  - 'auto'
-
 # Extensions
 markdown_extensions:
-  - admonition
-  - footnotes
-  - codehilite:
+  - markdown.extensions.admonition
+  - markdown.extensions.codehilite:
       guess_lang: false
-  - toc:
+  - markdown.extensions.def_list
+  - markdown.extensions.footnotes
+  - markdown.extensions.meta
+  - markdown.extensions.toc:
       permalink: true
+  - pymdownx.arithmatex
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic
   - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
   - pymdownx.inlinehilite
+  - pymdownx.keys
   - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
   - pymdownx.superfences
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.tilde
 
-# Overrides
-extra_css: 
-  - overrides/styles.css
-extra_javascript:
-  - overrides/scripts.js
+# Page tree
+pages:
+  - Material: index.md
+  - Getting started: getting-started.md
+  - Adding store details: adding-store-details.md
+  - Creating products: creating-products.md
+  - Creating pages: creating-pages.md
+  - Creating posts: creating-posts.md
+  - Customizing your store: customizing-your-store.md
+  - Open source: open-source.md
+  - Contributing: contributing.md
+  - License: license.md
+
+# Google Analytics
+# google_analytics:
