@@ -15,7 +15,7 @@ copyright: 'Copyright &copy; 2016 - 2018 Sean Lawrence'
 # Configuration
 theme:
   name: null
-  custom_dir: theme/material
+  custom_dir: mkdocs-material/material
 
   # 404 page
   static_templates:
