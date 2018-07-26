@@ -30,12 +30,11 @@ theme:
   feature:
     tabs: true
   palette:
-    primary: indigo
-    accent: indigo
+    primary: green
+    accent: white
   font: false
-  favicon: assets/images/favicon.png
-  logo:
-    icon: "\uE80C"
+  favicon: assets/images/favicon.ico
+  logo: assets/images/logo.svg
 
 # Customization
 extra:
