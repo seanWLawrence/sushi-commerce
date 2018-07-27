@@ -72,16 +72,24 @@ markdown_extensions:
 
 # Page tree
 pages:
-  - Material: index.md
+  - Introduction: index.md
   - Getting started: getting-started.md
   - Adding store details: adding-store-details.md
   - Creating products: creating-products.md
   - Creating pages: creating-pages.md
   - Creating posts: creating-posts.md
   - Customizing your store: customizing-your-store.md
+  - Roadmap: roadmap.md
   - Open source: open-source.md
   - Contributing: contributing.md
   - License: license.md
 
 # Google Analytics
 # google_analytics:uess_lang: false
+
+# Overrides
+
+extra_css: 
+  - assets/styles.css
+extra_javascript: 
+  - assets/scripts.js

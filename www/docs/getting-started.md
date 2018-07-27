@@ -1,6 +1,6 @@
 # Getting started
 
-Sushi Commerce is designed to be as simple as possible, with powerful built-in features like a blog, contact form, landing page, and most importantly, products pages.
+Sushi Commerce is designed to be as simple as possible, with powerful built-in features like a blog, contact form, landing page, and most importantly, product pages.
 
 ## Installation
 
@@ -8,7 +8,7 @@ Sushi Commerce offers two installation methods for both "turn key" and custom us
 
 ### Quick installation
 
-You can deploy Sushi Commerce with one-click thanks Netlify's amazing support for git-hosted static websites like this, and the best part is, hosting is free!*
+You can deploy Sushi Commerce **in less than a minute** thanks Netlify's amazing support for git-hosted static websites like this, and the best part is, hosting is free!*
 
 <button style="background-color: green; padding: 10px 20px; color: #fff;">Deploy to Netlify</button>
 

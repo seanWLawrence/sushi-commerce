@@ -1,17 +1,23 @@
-# Welcome to MkDocs
+# Introduction
 
-For full documentation visit [mkdocs.org](http://mkdocs.org).
+Sushi Commerce is a powerful static e-commerce website generator built on some of the latest, extremely fast [open source technologies](/open-source/).
 
-## Commands
+## The problem
 
-* `mkdocs new [dir-name]` - Create a new project.
-* `mkdocs serve` - Start the live-reloading docs server.
-* `mkdocs build` - Build the documentation site.
-* `mkdocs help` - Print this help message.
+Creating an e-commerce site using a popular service like Shopify, WooCommerce, Magento, Big Commerce, etc. is usually overkill for new businesses and can get expensive until you start making money.
 
-## Project layout
+Most of the awesome features that these services offer are uneccessary when you're first starting out and all you need is a pretty website, simple way to accecpt payments, get a customer's shipping address and rank high in Google searches.
 
-    mkdocs.yml    # The configuration file.
-    docs/
-        index.md  # The documentation homepage.
-        ...       # Other markdown pages, images and other files.
+## The solution
+
+Sushi Commerce allows you to get a new site [up and running in less than 1 minute](/getting-started#quick-installation), host it for free on GitHub or GitLab, and has all of the most important features that you need built-in with no coding necessary:
+
+- Full-featured CMS/Dashboard with rich text editor, markdown support and live preview
+- PayPal and Coinbase Commerce (yes, cryptocurrency!) payments
+- Shopping cart
+- Responsive, mobile-friendly theme (more [coming soon!](/roadmap/))
+- Search engine optimization
+- Blog
+- Contact form
+- Full-featured documentation for easy hacking
+- 100% open source!
