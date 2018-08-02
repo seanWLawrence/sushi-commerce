@@ -38,13 +38,13 @@
   "scripts": {
     "flow": "clear && flow",
     "flow:watch": "flow-watch",
-    "develop": "flow && gatsby develop",
+    "develop": "yarn flow && gatsby develop",
     "develop:docs": "cd www && mkdocs serve",
     "format": "prettier --write 'src/**/*.js'",
     "test": "jest --watch",
-    "build": "flow && yarn run demo:format  && && gatsby build",
+    "build": "yarn flow && gatsby build",
     "build:docs": "cd www && mkdocs build",
-    "serve": "flow && gatsby build && gatsby serve"
+    "serve": "yarn flow && gatsby build && gatsby serve"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
