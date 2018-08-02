@@ -1,7 +1,7 @@
 ---
 template: product
 title: Sampler
-price: '50'
+price: 50
 featuredImage:
   alt: Plate with different types of sushi
   src: /images/sashimi.jpg

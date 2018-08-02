@@ -1,7 +1,7 @@
 ---
 template: product
 title: Nigiri
-price: '25'
+price: 25
 featuredImage:
   alt: Plate of nigiri
   src: /images/banner.jpg

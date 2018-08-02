@@ -15,7 +15,7 @@ Sushi Commerce allows you to get a new site [up and running in less than 1 minut
 - Full-featured CMS/Dashboard with rich text editor, markdown support and live preview
 - PayPal and Coinbase Commerce (yes, cryptocurrency!) payments
 - Shopping cart
-- Responsive, mobile-friendly theme (more [coming soon!](/roadmap/ "Roadmap of upcoming features"))
+- Responsive, mobile-friendly theme (more themes [coming soon!](/roadmap/ "Roadmap of upcoming features"))
 - Search engine optimization
 - Blog
 - Contact form
