@@ -51,3 +51,7 @@ That's it!
 You can also use other authentication methods if you prefer, like [Netlify Identity](https://www.netlifycms.org/docs/authentication-backends/#git-gateway-with-netlify-identity "Setting up Netlify Identity aunthentication") (free for simple usage)*, [GitLab](https://www.netlifycms.org/docs/authentication-backends/#gitlab-backend "Setting up GitLab authentication"), and [Netlify CMS' Git Gateway with your own server](https://www.netlifycms.org/docs/authentication-backends/#git-gateway-without-netlify "Setting up Git Gateway authentication").
 
 > *Sushi Commerce is not affiliated with Netlify and Netlify's pricing may change at any time without our knowledge.
+
+## Setting up the contact form
+
+TODO
