@@ -27,11 +27,11 @@ theme:
 
   # Default values, taken from mkdocs_theme.yml
   language: en
-  feature:
-    tabs: true
   palette:
     primary: green
     accent: white
+  feature:
+    tabs: false
   font: false
   favicon: assets/images/favicon.ico
   logo: assets/images/logo.svg

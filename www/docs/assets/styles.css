@@ -1,3 +1,7 @@
-.md-typeset pre {
+.md-typeset pre, .md-typeset code {
   font-size: 15px;
+}
+
+.md-typeset code {
+  color: #333;
 }

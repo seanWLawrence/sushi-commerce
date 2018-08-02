@@ -167,6 +167,8 @@ The background color for your button
 
 > Default is "primary"
 
+---
+
 ### About
 
 A brief "About us" section to tell your company's story
@@ -180,6 +182,8 @@ A title for the section, i.e. "Our story"
 #### Text
 
 A brief story about your business and your mission statement
+
+---
 
 ### Features
 
@@ -199,6 +203,8 @@ An icon that best demonstrates the feature, i.e. "heart"
 
 > Sushi Commerce has over 30 built-in icons from Font Awesome to choose from!
 
+---
+
 ### Testimonials
 
 A row of customer testimonials to highlight their experience with your products or services.
@@ -212,6 +218,8 @@ Name of the customer, i.e. "John Doe - Company name"
 A brief testimonial/review of their experience
 
 > Note: always ask for permission in writing from your customer to share their testimonial and name on your website
+
+---
 
 ## Navigation
 
@@ -243,14 +251,16 @@ The HTML code that is generated after creating a new "View Cart" button on PayPa
 
 #### Generating a PayPal Cart Button Code
 
-1. After [creating your first PayPal Add to Cart Button](/creating-products/#generating-a-new-paypal-add-to-cart-button-code), click the "Create a View Cart button" near the bottom of the page
+1. After [creating your first PayPal Add to Cart Button](/creating-products/#generating-a-new-paypal-add-to-cart-button-code "Creating a PayPal Add to Cart button"), click the "Create a View Cart button" near the bottom of the page
 2. Click "Create Button"
 3. Click "Select code" and copy the highlighted code 
 4. Paste the code in Sushi Commerce under in the "PayPal Cart Button code" field found in settings -> Navigation -> PayPal Cart Button code
 
+---
+
 ## Store details
 
-The store details improve search engine optimization for your store by allowing you to easily add your store name, description, keywords, logo, social media links, Google Analytics snippet, and any custom CSS or JavaScript you want.
+The store details improve search engine optimization for your store by allowing you to easily add your store name, description, keywords, logo, social media links, [Google Analytics](https://marketingplatform.google.com/about/ "Google Analytics home") snippet, and any custom CSS or JavaScript you want.
 
 ### Title
 
@@ -278,11 +288,11 @@ A list of your social media profiles, which is displayed in your site's footer o
 
 Name of the social media site, i.e. "youtube"
 
-> Sushi Commerce has built-in icons for Instagram, Facebook, YouTube and Twitter thanks to Font Awesome!
+> Sushi Commerce has built-in icons for [Instagram](https://instagram.com "Instagram home"), [Facebook](https://facebook.com "Facebook home"), [YouTube](https://youtube.com "YouTube home") and [Twitter](https://twitter.com "Twitter home") thanks to [Font Awesome](https://fontawesome.com "Font Awesome home")!
 
 #### URL
 
-The URL for your social media profile, i.e. "https://facebook.com/bobsbeds"
+The URL for your social media profile, i.e. `https://facebook.com/bobsbeds`
 
 ### Google Analytics snippet
 

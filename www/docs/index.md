@@ -1,6 +1,6 @@
 # Introduction
 
-Sushi Commerce is a powerful static e-commerce website generator built on some of the latest, extremely fast [open source technologies](/open-source/).
+Sushi Commerce is a powerful static e-commerce website generator built on some of the latest, extremely fast [open source technologies](/open-source/ "List of open source technolgies used in Sushi Commerce").
 
 ## The problem
 
@@ -10,12 +10,12 @@ Most of the awesome features that these services offer are uneccessary when you'
 
 ## The solution
 
-Sushi Commerce allows you to get a new site [up and running in less than 1 minute](/getting-started#quick-installation), host it for free on GitHub or GitLab, and has all of the most important features that you need built-in with no coding necessary:
+Sushi Commerce allows you to get a new site [up and running in less than 1 minute](/getting-started#quick-installation "Getting started with Sushi Commerce"), host it for free on GitHub or GitLab, and has all of the most important features that you need built-in with no coding necessary:
 
 - Full-featured CMS/Dashboard with rich text editor, markdown support and live preview
 - PayPal and Coinbase Commerce (yes, cryptocurrency!) payments
 - Shopping cart
-- Responsive, mobile-friendly theme (more [coming soon!](/roadmap/))
+- Responsive, mobile-friendly theme (more [coming soon!](/roadmap/ "Roadmap of upcoming features"))
 - Search engine optimization
 - Blog
 - Contact form

@@ -2,7 +2,6 @@ backend:
   name: github
   repo: seanwlawrence/sushi-commerce
   branch: master
-publish_mode: editorial_workflow
 media_folder: static/images
 public_folder: /images
 display_url: https://sushi-commerce.netlify.com

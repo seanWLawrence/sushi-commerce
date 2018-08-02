@@ -2,35 +2,75 @@
 
 Creating a product is as simple as it gets. Sushi Commerce includes built-in support and styling for a title, price, image, list of features, tags, and an HTML product description and payments with a PayPal Cart Button, PayPal Buy Now Button, and Coinbase Commerce button (for cryptocurrency). 
 
+??? "Data structure and types"
+    ```ts
+    type Product = {
+      title: string,
+      price: number,
+      image: {
+        src: string,
+        alt: string
+      },
+      features: string,
+      paypalAddToCartButtonCode: string,
+      paypalBuyNowButtonCode: string,
+      coinbaseCommerceLink: string,
+      tags: string[],
+      body: string,
+    }
+    ```
+
+## Creating a new product
+
+1. [Login]() to your CMS dashboard
+2. Click the "Quick add" dropdown menu at the top of the page and select "Products"
+3. Enter in your information
+4. Click "Publish" at the top of the page
+
+## Editing a product
+
+1. [Login]() to your CMS dashboard
+2. Click "Products"
+3. Select the product that you'd like to update
+4. Enter in your new information
+5. Click "Publish" at the top of the page
+
+## Deleting a product
+
+1. [Login]() to your CMS dashboard
+2. Click "Products"
+3. Select the product that you'd like to delete
+4. Click "Delete published entry" at the top of the page
+
 ## Fields
 
-The data that can be configured for eeach product.
+Each field is explained below, along with examples:
 
-### Title: ```string```
+### Title
 
-The product title.
+The product title, i.e. "Boat shoes"
 
-### Price: ```number```
+### Price
 
-The product price.
+The product price, i.e. "60"
 
-### Image: ```{ src: string, alt: string }```
+### Image
 
-The product image and a description of that image (for SEO).
+The product image and a description of that image (for SEO), i.e "Model wearing black boat shoes"
 
-### Features: ```string```
+### Features
 
-The product features, written in paragraph form. Separate each feature with a period and the template will automatically create a new line for each feature. 
+The product features, written in paragraph form. Separate each feature with a period and the template will automatically create a new line for each feature.
 
-For example, "A feature. Another feature. And another feature." will become:
+For example, Sushi Commerce will turn "A feature. Another feature. And another feature." into:
 
 - A feature
 - Another feature
 - And another feature
 
-### PayPal Add to Cart Button Code: ```string```
+### PayPal Add to Cart Button Code
 
-The code that PayPal automatically generates when you create a new Add to Cart Button. 
+The HTML that PayPal automatically generates when you create a new Add to Cart button
 
 #### Generating a new PayPal Add to Cart Button code
 
@@ -43,9 +83,9 @@ The code that PayPal automatically generates when you create a new Add to Cart B
 7. Click "Select code" and copy the highlighted code 
 8. Paste the code into the PayPal Add to Cart Button code field in Sushi Commerce
 
-### PayPal Buy Now Button code: ```string```
+### PayPal Buy Now Button Code
 
-The code that PayPal automatically generates when you create a new Buy Now button.
+The HTML that PayPal automatically generates when you create a new Buy Now button
 
 #### Generating a new PayPal Buy Now Button code
 
@@ -58,9 +98,9 @@ The code that PayPal automatically generates when you create a new Buy Now butto
 7. Click "Select code" and copy the highlighted code 
 8. Paste the code into the PayPal Buy Now Button code field in Sushi Commerce
 
-### Coinbase Commerce Link: ```string```
+### Coinbase Commerce Link
 
-The link that Coinbase Commerce automatically generates when you create a new product.
+The link that Coinbase Commerce automatically generates when you create a new product
 
 #### Generating a new Coinbase Commerce Button link
 
@@ -73,12 +113,30 @@ The link that Coinbase Commerce automatically generates when you create a new pr
 7. Copy the link
 8. Paste the link into the Coinbase Commerce button link in Sushi Commerce
 
-### Tags: ```string```
+### Tags
 
-Keywords that describe your product, written as text separated by commas. 
+Keywords that describe your product, written as text separated by commas.
 
-For example, to write the tags "Tag one" and "Tag two," you'd enter "Tag one, Tag two" and Sushi Commerce will create two tags automatically and display them at the bottom of your product page and enter them in your <head> HTML element for SEO.
+For example, Sushi Commerce will turn "Tag one, Tag two" into two tags automatically and display them at the bottom of your product page and enter them in your ```<head>``` HTML element for SEO.
 
-### Description: ```string```
+### Description
 
-A product description, written with the built-in rich text editor or as markdown. Sushi Commerce will automatically output the correct HTML, and you can even add your own HTML here if desired. 
+The main content of your product, written in Markdown or with the built-in rich text editor. Sushi Commerce will automatically output the correct HTML, and you can even add your own HTML here if desired
+
+For example, Sushi Commerce will turn this Markdown:
+
+```md
+# Title 1
+
+Some text and a [link](/url-on-this-site).
+```
+
+Into pure HTML:
+
+```html
+
+<h1>Title 1</h1>
+<p>Some text and a <a href="/url-on-this-site">link</a>
+```
+
+Here's a [Markdown cheat sheet](https://guides.github.com/pdfs/markdown-cheatsheet-online.pdf) if you're not familiar with the syntax.
