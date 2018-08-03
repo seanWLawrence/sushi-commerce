@@ -43,7 +43,7 @@
     "develop:docs": "cd www && mkdocs serve",
     "format": "prettier --write 'src/**/*.js'",
     "test": "jest --watch",
-    "build": "rm -rf www && rm requirements.txt && yarn flow && gatsby build",
+    "build": "rm requirements.txt && yarn flow && gatsby build",
     "build:docs": "cd www && mkdocs build",
     "serve": "yarn flow && gatsby build && gatsby serve"
   },
