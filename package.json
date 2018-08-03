@@ -22,7 +22,8 @@
     "gatsby-transformer-yaml": "^1.5.17",
     "netlify-cms": "^1.8.4",
     "react-fontawesome": "^1.6.1",
-    "react-helmet": "^5.2.0"
+    "react-helmet": "^5.2.0",
+    "serve": "^9.4.0"
   },
   "keywords": [
     "generator",
