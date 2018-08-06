@@ -44,7 +44,7 @@ describe('Footer', () => {
   test('is not rendered if hideFooter is set to true', () => {
     let { title, socialMedia } = props;
     let { queryByText } = render(
-      <Footer title={title} socialMedia={socialMedia} hideFooter />
+      <Footer title={title} socialMedia={socialMedia} hideFooter />,
     );
   });
 });

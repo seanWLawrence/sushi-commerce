@@ -43,5 +43,5 @@ describe('Header', () => {
 
   test('TODO: displays cart icon when cart value is passed', () => {});
 
-  test("TODO: doesn't display cart icon when cart value is not passed", () => {});
+  test('TODO: doesn\'t display cart icon when cart value is not passed', () => {});
 });

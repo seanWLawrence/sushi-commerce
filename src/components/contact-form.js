@@ -29,7 +29,7 @@ let InputField = ({ isInvalid, onChange, onBlur, value }) => {
 
 type EmailProps = {
   value: string,
-  onChange: string => void,
+  onChange: (string) => void,
 };
 
 type EmailState = {
@@ -41,7 +41,7 @@ class EmailInput extends React.Component<EmailProps, EmailState> {
     isInvalid: false,
   };
 
-  _handleChange = event => {
+  _handleChange = (event) => {
     let { value } = event.currentTarget;
     let { onChange } = this.props;
     let { isInvalid } = this.state;
@@ -55,7 +55,7 @@ class EmailInput extends React.Component<EmailProps, EmailState> {
     }
   };
 
-  _handleBlur = event => {
+  _handleBlur = (event) => {
     let { value } = event.currentTarget;
 
     if (!validateEmail(value)) {
@@ -86,12 +86,12 @@ class EmailInput extends React.Component<EmailProps, EmailState> {
 }
 
 type MessageProps = {
-  onChange: string => void,
+  onChange: (string) => void,
   value: string,
 };
 
 class MessageInput extends React.Component<MessageProps> {
-  _handleChange = event => this.props.onChange(event.currentTarget.value);
+  _handleChange = (event) => this.props.onChange(event.currentTarget.value);
 
   render() {
     let { value } = this.props;
@@ -123,7 +123,7 @@ type EncodeData = {
 
 export let encode = (data: EncodeData) => {
   return Object.keys(data)
-    .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
+    .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&');
 };
 
@@ -161,7 +161,7 @@ export default class ContactForm extends React.Component<{}, ContactState> {
       }),
     })
       .then(() => navigateTo('/contact-form-success/'))
-      .catch(error => alert(error));
+      .catch((error) => alert(error));
   };
 
   render() {

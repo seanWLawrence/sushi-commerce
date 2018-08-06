@@ -42,13 +42,13 @@ describe('Contact form', () => {
 
     // get number of emails that passed
     let numberOfActualGoodEmails = allEmails
-      .map(email => validateEmail(email))
+      .map((email) => validateEmail(email))
       .filter(Boolean).length;
 
     // get amount of emails that failed
     let numberOfActualBadEmails = allEmails
-      .map(email => validateEmail(email))
-      .filter(isValid => isValid === false).length;
+      .map((email) => validateEmail(email))
+      .filter((isValid) => isValid === false).length;
 
     // expect the same number of goodEmails passed in to pass
     expect(numberOfActualGoodEmails).toEqual(numberOfExpectedGoodEmails);
@@ -66,7 +66,7 @@ describe('Contact form', () => {
 
     // expect the encode function to encode the data to a URL friendly string
     expect(encode(data)).toBe(
-      'email=hello%40gmail.com&message=I%20would%20like%20to%20talk'
+      'email=hello%40gmail.com&message=I%20would%20like%20to%20talk',
     );
   });
 
@@ -79,13 +79,13 @@ describe('Contact form', () => {
       new MouseEvent('click', {
         bubbles: true, // click events must bubble for React to see it
         cancelable: true,
-      })
+      }),
     );
 
-    expect(fetch.mock.calls.length).toEqual(1);
+    expect(fetch.mock.calls).toHaveLength(1);
   });
 
-  test("displays email field's text as it is typed", () => {
+  test('displays email field\'s text as it is typed', () => {
     let { getByLabelText } = render(<ContactForm />);
 
     let emailField = getByLabelText('Email');
@@ -103,7 +103,7 @@ describe('Contact form', () => {
     expect(emailField.value).toBe('test');
   });
 
-  test("displays message field's text as it is typed", () => {
+  test('displays message field\'s text as it is typed', () => {
     let { getByLabelText } = render(<ContactForm />);
 
     let messageField = getByLabelText('Message');
@@ -157,7 +157,7 @@ describe('Contact form', () => {
       new MouseEvent('click', {
         bubbles: true, // click events must bubble for React to see it
         cancelable: true,
-      })
+      }),
     );
 
     expect(window.alert).toHaveBeenCalledTimes(1);

@@ -19,3 +19,11 @@ www/site
 # Distribution files
 www/theme/dist
 www/theme/mkdocs_material.egg-info
+
+# Coverage
+
+coverage
+
+# VS code
+
+.vscode
