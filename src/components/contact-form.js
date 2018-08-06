@@ -15,6 +15,7 @@ let InputField = ({ isInvalid, onChange, onBlur, value }) => {
 
   return (
     <input
+      id="email"
       name="email"
       type="email"
       onChange={onChange}
@@ -68,9 +69,9 @@ class EmailInput extends React.Component<EmailProps, EmailState> {
 
     return (
       <div className="input-field field">
-        <div htmlFor="email" className="label">
+        <label htmlFor="email" className="label">
           Email
-        </div>
+        </label>
         <div className="control">
           <InputField
             onChange={this._handleChange}
@@ -120,7 +121,7 @@ type EncodeData = {
   message: string,
 };
 
-let encode = (data: EncodeData) => {
+export let encode = (data: EncodeData) => {
   return Object.keys(data)
     .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&');

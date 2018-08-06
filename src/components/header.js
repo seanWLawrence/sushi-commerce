@@ -129,7 +129,7 @@ let NavbarStart = ({ menuItems, onClick, paypalCartButtonCode }) => {
   // Bulma .navbar-start container with the navigation links and submenus (on
   // mobile, also adds a PayPal 'view cart' button, since the desktop 'view cart'
   // button is not shown)
-  let MenuItems = menuItems.map(item => {
+  let MenuItems = menuItems.map((item) => {
     let { page, to } = item;
 
     let textStyles = {

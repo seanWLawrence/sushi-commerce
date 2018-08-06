@@ -45,7 +45,7 @@ let formatString = (selector: string, value: string) => {
     default:
       console.warn(
         'An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
-          'ossible keys and values.'
+          'ossible keys and values.',
       );
       return '';
   }
@@ -55,7 +55,7 @@ let formatArray = (selector: string, value: string[]): string => {
   let addPrefixToAllValues = (prefix: string): string => {
     return value.reduce(
       (acc, next) => acc.concat(` ${prefix}-${next}`).trim(),
-      ''
+      '',
     );
   };
 
@@ -87,7 +87,7 @@ let formatArray = (selector: string, value: string[]): string => {
     default:
       console.warn(
         'An incorrect key was passed to bulmaClassnames. Refer to the API for a list of p' +
-          'ossible keys and values.'
+          'ossible keys and values.',
       );
       return '';
   }
@@ -97,12 +97,12 @@ let formatClassname = (selector: string, value: $FlowFixMe): string => {
   if (typeof value === 'string') {
     return formatString(selector, value);
   }
-  if (Array.isArray(value) && value.map(entry => typeof entry === 'string')) {
+  if (Array.isArray(value) && value.map((entry) => typeof entry === 'string')) {
     return formatArray(selector, value);
   } else {
     console.warn(
       'Invalid value has been passed to bulmaClassnames. Values can only be a string or' +
-        ' array'
+        ' array',
     );
     return '';
   }
@@ -132,7 +132,7 @@ type Classnames = {
 
 let bulmaClassnames = ({ ...classNames }: Classnames): string => {
   return Object.entries(classNames)
-    .map(entry => {
+    .map((entry) => {
       let [selector, value] = entry;
       return formatClassname(selector, value);
     })
@@ -154,7 +154,7 @@ class ConditionalRender extends React.Component<Props> {
 }
 
 let firstLetterToUppercase = (word: string) =>
-  word.replace(/^\w/, character => character.toUpperCase());
+  word.replace(/^\w/, (character) => character.toUpperCase());
 
 // strips away html and gets the code's value for the buy button components
 let stripHtmlFromPaypalCode = (code: string) => {

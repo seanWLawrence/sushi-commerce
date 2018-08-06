@@ -23,7 +23,7 @@ let Copyright = ({ title }) => {
 
   return (
     <p style={textStylesInline} className={textStyles}>
-      {`Copyright `}
+      {'Copyright '}
       &copy; {`${thisYear} ${title}`}
     </p>
   );
@@ -71,7 +71,7 @@ let SocialMedia = ({ socialMedia }) => {
 
   return (
     <div style={sectionStyles}>
-      {socialMedia.map(social => {
+      {socialMedia.map((social) => {
         let { site, href } = social;
         return <Social site={site} href={href} key={site} />;
       })}

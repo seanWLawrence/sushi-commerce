@@ -55,7 +55,7 @@ type DataTableProps = {
 //
 let DataTable = ({ data }: DataTableProps): React.Node => {
   // maps over data array prop and renders a DataSection component for each index
-  let displayData = data.map(data => {
+  let displayData = data.map((data) => {
     return <DataSection data={data} key={data.heading} />;
   });
 

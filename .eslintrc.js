@@ -3,8 +3,13 @@ module.exports = {
     browser: true,
     commonjs: true,
     es6: true,
+    jest: true,
   },
-  extends: ['eslint:recommended', 'plugin:flowtype/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:flowtype/recommended',
+    'plugin:jsx-a11y/recommended',
+  ],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -12,11 +17,16 @@ module.exports = {
     ecmaVersion: 2018,
     sourceType: 'module',
   },
-  plugins: ['react', 'flowtype'],
+  parser: 'babel-eslint',
+  plugins: ['flowtype', 'jest', 'react', 'jsx-a11y'],
   rules: {
-    indent: ['error', 'tab'],
     'linebreak-style': ['error', 'unix'],
-    quotes: ['error', 'single'],
+    quotes: ['warn', 'single'],
     semi: ['error', 'always'],
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
   },
 };

@@ -15,8 +15,8 @@ import {
 } from '../utils';
 
 type Entry = (string[]) => string;
-type WidgetFor = string => string;
-type GetAsset = string => { value: string };
+type WidgetFor = (string) => string;
+type GetAsset = (string) => { value: string };
 type WidgetsFor = (*) => *[];
 
 type PostPreviewProps = {
@@ -34,7 +34,7 @@ export let PostPreview = ({ entry, widgetFor, getAsset }: PostPreviewProps) => {
         date: defaultString(entry.getIn(['data', 'date'])),
         featuredImage: {
           src: defaultString(
-            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value
+            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
           ),
           alt: defaultString(entry.getIn(['data', 'alt'])),
         },
@@ -68,17 +68,17 @@ export let ProductPreview = ({
         price: defaultNumber(entry.getIn(['data', 'price'])),
         features: defaultString(entry.getIn(['data', 'features'])),
         paypalAddToCartButtonCode: defaultString(
-          entry.getIn(['data', 'paypalAddToCartButtonCode'])
+          entry.getIn(['data', 'paypalAddToCartButtonCode']),
         ),
         paypalBuyNowButtonCode: defaultString(
-          entry.getIn(['data', 'paypalBuyNowButtonCode'])
+          entry.getIn(['data', 'paypalBuyNowButtonCode']),
         ),
         coinbaseCommerceButtonLink: defaultString(
-          entry.getIn(['data', 'coinbaseCommerceButtonLink'])
+          entry.getIn(['data', 'coinbaseCommerceButtonLink']),
         ),
         featuredImage: {
           src: defaultString(
-            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value
+            getAsset(entry.getIn(['data', 'featuredImage', 'src'])).value,
           ),
           alt: defaultString(entry.getIn(['data', 'alt'])),
         },
@@ -138,21 +138,21 @@ export let LandingPagePreview = ({
     landingPage: {
       banner: {
         backgroundImage: defaultString(
-          getAsset(entry.getIn(['data', 'banner', 'backgroundImage'])).value
+          getAsset(entry.getIn(['data', 'banner', 'backgroundImage'])).value,
         ),
         overlayColor: defaultString(
-          entry.getIn(['data', 'banner', 'overlayColor'])
+          entry.getIn(['data', 'banner', 'overlayColor']),
         ),
         heading: defaultString(entry.getIn(['data', 'banner', 'heading'])),
         subheading: defaultString(
-          entry.getIn(['data', 'banner', 'subheading'])
+          entry.getIn(['data', 'banner', 'subheading']),
         ),
         button: {
           text: defaultString(
-            entry.getIn(['data', 'banner', 'button', 'text'])
+            entry.getIn(['data', 'banner', 'button', 'text']),
           ),
           color: defaultString(
-            entry.getIn(['data', 'banner', 'button', 'color'])
+            entry.getIn(['data', 'banner', 'button', 'color']),
           ),
           to: defaultString(entry.getIn(['data', 'banner', 'button', 'to'])),
         },
@@ -162,21 +162,21 @@ export let LandingPagePreview = ({
         text: defaultString(entry.getIn(['data', 'about', 'text'])),
       },
       features: defaultArray(
-        widgetsFor('features').map(feature => {
+        widgetsFor('features').map((feature) => {
           return {
             heading: feature.getIn(['data', 'heading']),
             text: feature.getIn(['data', 'text']),
             icon: feature.getIn(['data', 'icon']),
           };
-        })
+        }),
       ),
       testimonials: defaultArray(
-        widgetsFor('testimonials').map(testimonial => {
+        widgetsFor('testimonials').map((testimonial) => {
           return {
             name: testimonial.getIn(['data', 'name']),
             text: testimonial.getIn(['data', 'text']),
           };
-        })
+        }),
       ),
     },
   };
@@ -195,7 +195,7 @@ export let NavigationPreview = ({
   widgetsFor,
 }: NavigationPreviewProps) => {
   // get pages from the menuItems list
-  let menuItems = widgetsFor('menuItems').map(menuItem => {
+  let menuItems = widgetsFor('menuItems').map((menuItem) => {
     let page = menuItem.getIn(['data', 'page']);
 
     // capitalize the first letter of each page
@@ -232,7 +232,7 @@ export let StoreDetailsPreview = ({
   widgetsFor,
 }: StoreDetailsPreviewProps) => {
   // get list of sites from socialMedia data
-  let socialMedia = widgetsFor('socialMedia').map(site => {
+  let socialMedia = widgetsFor('socialMedia').map((site) => {
     site = site.getIn(['data', 'site']);
 
     // capitalize the first letter
@@ -242,7 +242,7 @@ export let StoreDetailsPreview = ({
   // capitalize the first letter of each keyword
   let keywords = entry
     .getIn(['data', 'keywords'])
-    .map(keyword => firstLetterToUppercase(keyword));
+    .map((keyword) => firstLetterToUppercase(keyword));
 
   // pull data from entry for preview in Netlify CMS
   let data = [

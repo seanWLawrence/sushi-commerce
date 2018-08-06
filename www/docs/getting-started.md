@@ -59,7 +59,6 @@ Sushi Commerce uses the GitHub backend authentication feature of Netlify CMS by 
 3. Under Authentication Providers, click Install Provider
 4. Select GitHub and enter the Client ID and Client Secret, then save
 
-
 That's it!
 
 ### GitLab Authentication

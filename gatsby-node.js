@@ -95,8 +95,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
           }
         `).then(result => {
       if (result.errors) {
-        console.log(result.errors)
-        reject(result.errors)
+        console.log(result.errors);
+        reject(result.errors);
       }
 
       // create pages
@@ -119,8 +119,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
             context: {
               slug
             }
-          })
-        })
+          });
+        });
 
       // create post pages
       result
@@ -139,7 +139,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
                 src
               }
             }
-          } = node
+          } = node;
           // create page with the post.js template and pass the slug and featuredImage.src
           // value as a regEx as context so it can be queried in the template
           createPage({
@@ -150,8 +150,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               slug,
               featuredImage: `/${src}/`
             }
-          })
-        })
+          });
+        });
 
       // create product pages
       result
@@ -170,7 +170,7 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
                 src
               }
             }
-          } = node
+          } = node;
           // create page with the post.js template and pass the slug and first image's
           // "src" value as a regEx as context so it can be queried in the template
           createPage({
@@ -181,8 +181,8 @@ exports.createPages = ({ boundActionCreators, graphql }) => {
               slug,
               featuredImage: `/${src}/`
             }
-          })
-        })
-    }))
+          });
+        });
+    }));
   });
 };

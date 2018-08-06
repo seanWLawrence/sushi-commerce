@@ -38,7 +38,7 @@ let Testimonial = ({ name, text }: TestimonialType): React.Node => {
 
 export default class Testimonials extends React.Component<Props> {
   displayTestimonials(testimonials: Array<TestimonialType>) {
-    return testimonials.map(testimonial => {
+    return testimonials.map((testimonial) => {
       let { name, text } = testimonial;
       return <Testimonial name={name} text={text} key={name} />;
     });

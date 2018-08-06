@@ -1,1 +1,1 @@
-module.exports = graphql => ''
+module.exports = (graphql) => '';

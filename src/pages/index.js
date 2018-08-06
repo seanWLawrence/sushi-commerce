@@ -1,11 +1,11 @@
 // @flow
-import React from 'react'
-import bulmaClassnames from '../utils'
-import Banner from '../components/banner'
-import About from '../components/about'
-import {LandingFeatures} from '../components/features'
-import Testimonials from '../components/testimonials'
-import {OverlayColor} from '../types';
+import React from 'react';
+import bulmaClassnames from '../utils';
+import Banner from '../components/banner';
+import About from '../components/about';
+import { LandingFeatures } from '../components/features';
+import Testimonials from '../components/testimonials';
+import { OverlayColor } from '../types';
 
 type Props = {
   data: {
@@ -18,60 +18,53 @@ type Props = {
         button: {
           text: string,
           color: string,
-          to: string
-        }
+          to: string,
+        },
       },
       about: {
         heading: string,
-        text: string
+        text: string,
       },
-      features: Array < {
+      features: Array<{
         heading: string,
         icon: string,
-        text: string
-      } >,
-      testimonials: Array < {
+        text: string,
+      }>,
+      testimonials: Array<{
         name: string,
-        text: string
-      } >
-    }
-  }
-}
+        text: string,
+      }>,
+    },
+  },
+};
 
-let Index = ({data} : Props) => {
+let Index = ({ data }: Props) => {
   let {
-    landingPage: {
-      banner,
-      about,
-      features,
-      testimonials
-    }
-  } = data
+    landingPage: { banner, about, features, testimonials },
+  } = data;
 
   return (
     <div>
-      <Banner banner={banner}/>
-      <About about={about}/>
-      <LandingFeatures features={features}/>
-      <Testimonials testimonials={testimonials}/>
+      <Banner banner={banner} />
+      <About about={about} />
+      <LandingFeatures features={features} />
+      <Testimonials testimonials={testimonials} />
     </div>
-  )
-}
+  );
+};
 
-export default Index
+export default Index;
 
-declare function graphql(query : string[]) : string;
+declare function graphql(query: string[]): string;
 
-export let query = graphql `
+export let query = graphql`
   query IndexQuery {
-    landingPage : dataYaml(id : {
-      regex : "/landing-page/"
-    }) {
+    landingPage: dataYaml(id: { regex: "/landing-page/" }) {
       banner {
-        backgroundImage 
+        backgroundImage
         overlayColor
-        heading 
-        subheading 
+        heading
+        subheading
         button {
           text
           color
@@ -79,18 +72,18 @@ export let query = graphql `
         }
       }
       about {
-        heading 
+        heading
         text
       }
       features {
-        heading 
-        text 
+        heading
+        text
         icon
       }
       testimonials {
-        name 
+        name
         text
       }
     }
   }
-  `
+`;

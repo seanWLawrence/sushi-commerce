@@ -15,7 +15,7 @@ export class ProductFeatures extends React.Component<{
       featuresArray = features.split('.');
 
       // map over them
-      return featuresArray.map(feature => {
+      return featuresArray.map((feature) => {
         return (
           <li key={feature} className="menu-item">
             {feature.trim()}
@@ -64,7 +64,7 @@ type Props = {
 
 export class LandingFeatures extends React.Component<Props> {
   displayFeatures(features: Array<Feature>) {
-    return features.map(feature => {
+    return features.map((feature) => {
       let { heading, text, icon } = feature;
 
       let featureStyles = bulmaClassnames({

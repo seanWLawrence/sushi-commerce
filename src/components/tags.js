@@ -16,7 +16,7 @@ let Tag = ({ tag }: { tag: string }) => {
 };
 export default class Tags extends React.Component<Props> {
   displayTags(tags: string[]) {
-    return tags.map(tag => {
+    return tags.map((tag) => {
       return <Tag tag={tag} key={tag} />;
     });
   }

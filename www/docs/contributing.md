@@ -1,6 +1,6 @@
 # Contributing
 
-Contributions are welcome! Right now the project is maintained by [Sean W. Lawrence](http://swl.netlify.com "Sean W. Lawrence official website") (myself), and 
+Contributions are welcome! Right now the project is maintained by [Sean W. Lawrence](http://swl.netlify.com "Sean W. Lawrence official website") (myself).
 
 ## How to contribute
 

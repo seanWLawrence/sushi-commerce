@@ -72,7 +72,7 @@ let Banner = ({ banner }: Props) => {
     width: '100%',
     backgroundSize: 'cover',
     backgroundImage: `${backgroundColor[overlayColor]}, url(${withPrefix(
-      linkedSrc
+      linkedSrc,
     )})`,
   };
 

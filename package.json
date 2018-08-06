@@ -1,11 +1,14 @@
 {
   "name": "sushi-commerce",
   "description": "Sushi Commerce e-commerce website generator and CMS",
-  "version": "0.1.0",
+  "version": "0.0.0-development",
   "author": "Sean Lawrence <sean.w.lawrence@gmail.com>",
+  "repository": "https://github.com/seanwlawrence/sushi-commerce.git",
+  "private": false,
   "dependencies": {
     "@types/react-helmet": "^5.0.6",
     "bulma": "^0.7.1",
+    "bulma-classnames": "^1.0.0",
     "csstype": "^2.5.5",
     "font-awesome": "^4.7.0",
     "gatsby": "^1.9.247",
@@ -38,30 +41,46 @@
   ],
   "license": "MIT",
   "scripts": {
-    "flow": "flow",
-    "flow:watch": "flow-watch",
     "develop": "yarn flow && gatsby develop",
     "develop:docs": "cd www && mkdocs serve",
-    "format": "prettier --write 'src/**/*.js'",
-    "test": "jest --watch",
-    "build": "rm requirements.txt && yarn flow && gatsby build",
+    "flow": "flow",
+    "flow:watch": "flow-watch",
+    "flow:stop": "flow stop",
+    "test": "jest",
+    "test:ci": "yarn flow:stop && yarn flow && yarn test",
+    "test:watch": "jest --watch",
+    "lint:format": "prettier-eslint --config .prettierrc.js --eslint-config-path .eslintrc.js --write 'src/**/*.js'",
+    "prepare": "yarn test:ci && yarn lint:format",
     "build:docs": "cd www && mkdocs build",
+    "build": "rm requirements.txt && yarn prepare && gatsby build",
+    "commit": "yarn test:ci && git-cz",
+    "semantic-release": "semantic-release",
+    "travis-deploy-once": "travis-deploy-once",
     "serve": "yarn flow && gatsby build && gatsby serve"
   },
   "devDependencies": {
+    "babel-eslint": "^8.2.6",
     "babel-jest": "^23.0.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "commitizen": "^2.10.1",
+    "conventional-changelog": "^2.0.1",
     "eslint": "^5.1.0",
     "eslint-plugin-flowtype": "^2.50.0",
+    "eslint-plugin-jest": "^21.18.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.10.0",
     "fetch-mock": "^6.4.4",
     "flow-bin": "^0.73.0",
     "flow-watch": "^1.1.3",
     "jest": "^23.0.1",
-    "jest-dom": "^1.3.0",
+    "jest-dom": "^1.12.0",
+    "jest-fetch-mock": "^1.6.5",
     "prettier": "^1.13.7",
     "prettier-eslint": "^8.8.2",
-    "react-testing-library": "^3.1.3"
+    "prettier-eslint-cli": "^4.7.1",
+    "react-testing-library": "^4.1.6",
+    "semantic-release": "^15.9.5",
+    "travis-deploy-once": "^5.0.2"
   },
   "jest": {
     "transform": {
@@ -71,8 +90,23 @@
       "/node_modules/",
       "/.cache/"
     ],
+    "automock": false,
     "setupFiles": [
       "./jest-setup.js"
-    ]
+    ],
+    "testEnvironment": "jsdom",
+    "coverageDirectory": "./coverage/",
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!**/node_modules/**",
+      "!.prettierrc.js",
+      "!.*.js"
+    ],
+    "collectCoverage": true
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }

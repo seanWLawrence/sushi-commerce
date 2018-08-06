@@ -33,7 +33,7 @@ type Props = {
 
 export default class Products extends React.Component<Props> {
   displayProducts(products: Product[]): React.Node[] {
-    return products.map(product => {
+    return products.map((product) => {
       let {
         node: {
           fields: { slug },

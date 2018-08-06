@@ -43,7 +43,7 @@ let To = ({ to }) => {
 
 export default class Posts extends React.Component<Props> {
   displayPosts(posts: Post[]): React.Node[] {
-    return posts.map(post => {
+    return posts.map((post) => {
       let {
         node: {
           excerpt,
