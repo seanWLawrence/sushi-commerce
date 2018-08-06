@@ -51,7 +51,7 @@
     "lint:format": "prettier-eslint --config .prettierrc.js --eslint-config-path .eslintrc.js --write 'src/**/*.js'",
     "prepare": "yarn test:ci && yarn lint:format",
     "build:docs": "cd www && mkdocs build",
-    "build": "rm requirements.txt && yarn prepare && gatsby build",
+    "build": "yarn prepare && gatsby build",
     "commit": "yarn test:ci && git-cz",
     "semantic-release": "semantic-release",
     "travis-deploy-once": "travis-deploy-once",
