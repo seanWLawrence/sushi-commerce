@@ -5,9 +5,4 @@
   # This is the directory that you are publishing from (relative to root of your repo)
   publish = "public/"
   # This will be your default build command
-  command = "yarn build"
-
-# Production context: All deploys from the Production branch set in your site's deploy settings will inherit these settings.
-[context.production]
-  publish = "public/"
-  command = "yarn build"
+  command = "echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -pyarn build"
