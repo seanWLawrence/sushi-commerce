@@ -27,6 +27,7 @@ module.exports = {
         name: 'images',
       },
     },
+    'gatsby-plugin-netlify-cache',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {

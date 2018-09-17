@@ -18,6 +18,7 @@ module.exports = {
     sourceType: 'module',
   },
   parser: 'babel-eslint',
+  globals: { describe: true, test: true, __dirname: true },
   plugins: ['flowtype', 'jest', 'react', 'jsx-a11y'],
   rules: {
     'linebreak-style': ['error', 'unix'],
